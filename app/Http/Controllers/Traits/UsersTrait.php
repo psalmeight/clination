@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\Log;
 
 trait UsersTrait
 {
-
   public function func_saveUser($request)
   {
       $obj = new User;
@@ -40,6 +39,7 @@ trait UsersTrait
       $obj->email = $request->email;
       $obj->contact_no = $request->contact_no;
       $obj->dob = $request->dob;
+      $obj->role = $request->role;
 
       $obj->save();
 
