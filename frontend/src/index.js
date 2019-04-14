@@ -6,8 +6,6 @@ import Routes from 'routes'
 
 import registerServiceWorker from 'utils/registerServiceWorker'
 
-import 'styles/global-styles'
-
 render(
   <Provider store={configureStore()}>
     <Routes />
