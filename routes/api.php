@@ -22,8 +22,14 @@ Route::middleware('api')->group(function(){
 });
 
 Route::prefix('/v1')->middleware(['auth:api'])->group(function () {
+
     //Users API
     Route::get('/users', 'UsersController@getUsers');
     Route::get('/user/{id}', 'UsersController@getUser');
     Route::delete('/user/{id}', 'UsersController@deleteUser');
+
+    //Clinics API
+    Route::get('/clinics', 'ClinicController@getClinics');
+    Route::get('/clinic/{id}', 'ClinicController@getClinic');
+    Route::get('/clinics/{user}', 'ClinicController@getClinicsByUser');
 });
