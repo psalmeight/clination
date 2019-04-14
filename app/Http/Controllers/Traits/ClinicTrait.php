@@ -19,8 +19,8 @@ trait ClinicTrait
 
       $obj->user_id = $userAccount->getKey();
 
-      $obj->clinic_name = $request->payload['clinic_name'];
-      $obj->clinic_description = $request->payload['clinic_description'];
+      $obj->clinic_name = $request->clinic_name;
+      $obj->clinic_address = $request->clinic_address;
 
       $obj->save();
 
