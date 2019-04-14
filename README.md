@@ -35,7 +35,7 @@ php artisan migrate
 php artisan key:generate
 ```
 
-- Generate Application Key
+- Initialize Passport
 
 ```sh
 php artisan passport:install
