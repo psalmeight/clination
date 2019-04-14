@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 
 import {
-  AppBar, Toolbar, Typography, Button, IconButton
+  Modal, AppBar, Toolbar, Typography, Button, IconButton, Grid, Paper, TextField
 } from '@material-ui/core'
 
 const styles = {
@@ -13,34 +12,112 @@ const styles = {
   },
   grow: {
     flexGrow: 1,
-  },
-  menuButton: {
-    marginLeft: -12,
-    marginRight: 20,
-  },
+  }
 };
 
-function ButtonAppBar(props) {
-  const { classes } = props;
-  return (
-    <div className={classes.root}>
-      <AppBar color="primary">
-        <Toolbar>
-          <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            CLINation
-          </Typography>
-          <Button color="inherit">Login</Button>
-        </Toolbar>
-      </AppBar>
-    </div>
-  );
+class MainContainer extends React.Component {
+    state = {
+        showRegistration: false
+    }
+
+    constructor(props){
+        super(props)
+    }
+
+    showRegistration = (val) => {
+        this.setState({ showRegistration: val })
+    }
+
+    render(){
+    
+        return (
+            <div>
+                <AppBar color="primary" positionStatic>
+                    <Toolbar>
+                        <IconButton color="inherit" aria-label="Menu">
+                            <MenuIcon />
+                        </IconButton>
+                        <Typography variant="h6" color="inherit">
+                            CLINation
+                        </Typography>
+                        <Button color="inherit">Login</Button>
+                        <Button color="inherit" onClick={() => this.showRegistration(true)}>Register Clinic</Button>
+                    </Toolbar>
+                </AppBar>
+      
+                <Grid container style={{ marginTop: 80 }} spacing={8}>
+                    <Grid item md={6} xs={12}>
+                        <form noValidate autoComplete="off">
+                            <TextField
+                                id="username"
+                                label="Username/Email"
+                                placeholder="Enter Username/Email"
+                                fullWidth
+                                margin="dense"
+                                variant="outlined"
+                            />
+      
+                            <TextField
+                                id="password"
+                                label="Password"
+                                placeholder="Enter Password"
+                                fullWidth
+                                margin="dense"
+                                variant="outlined"
+                            />
+                        </form>
+                    </Grid>
+                    <Grid item md={6} xs={12}>
+            
+                    </Grid>
+                </Grid>
+            
+                <Modal open={this.state.showRegistration}>
+                    <form noValidate autoComplete="off">
+                        <TextField
+                            id="fullname"
+                            label="Fullname"
+                            placeholder="Enter Fullname"
+                            fullWidth
+                            margin="dense"
+                            variant="outlined"
+                        />
+      
+                        <TextField
+                            id="username"
+                            label="Username"
+                            placeholder="Enter Username"
+                            fullWidth
+                            margin="dense"
+                            variant="outlined"
+                        />
+      
+                        <TextField
+                            id="email"
+                            label="Email"
+                            placeholder="Enter Email"
+                            fullWidth
+                            margin="dense"
+                            variant="outlined"
+                        />
+      
+                        <TextField
+                            id="contact"
+                            label="Contact Number"
+                            placeholder="Enter Contact Number"
+                            fullWidth
+                            margin="dense"
+                            variant="outlined"
+                        />
+                    </form>
+
+                    <Button variant="contained" color="primary" onClick={() => this.showRegistration(false)}>
+                        Register Clinic
+                    </Button>
+                </Modal>
+            </div>
+        )
+    }
 }
 
-ButtonAppBar.propTypes = {
-  classes: PropTypes.object.isRequired,
-};
-
-export default withStyles(styles)(ButtonAppBar);
+export default withStyles(styles)(MainContainer);
