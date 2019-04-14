@@ -28,8 +28,11 @@ class CreateUsersTable extends Migration
             $table->string('contact_no')->nullable();
             $table->string('role')->nullable();
             $table->string('password');
+            
             $table->rememberToken();
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 
