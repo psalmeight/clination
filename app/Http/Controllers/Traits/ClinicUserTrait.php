@@ -7,15 +7,11 @@ use App\User;
 use App\Models\Clinic;
 use App\Models\ClinicUser;
 
-use App\Http\Controllers\Traits\UserTrait;
-use App\Http\Controllers\Traits\ClinicTrait;
-
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
-trait ClinicUserUserTrait
+trait ClinicUserTrait
 {
-    use UserTrait, ClinicTrait;
 
     public function func_saveClinicUser($request)
     {   

@@ -3,9 +3,6 @@
 namespace App\Http\Controllers\Traits;
 
 use App\User;
-use App\Models\Watcher;
-use App\Models\Event;
-use App\Models\Friend;
 use Auth;
 use Illuminate\Support\Facades\Log;
 
