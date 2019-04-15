@@ -6,6 +6,8 @@ import {
   Modal, AppBar, Toolbar, Typography, Button, IconButton, Grid, Paper, TextField
 } from '@material-ui/core'
 
+import CAppBar from './CAppBar'
+
 const styles = {
     root: {
       flexGrow: 1,
@@ -29,22 +31,12 @@ class MainContainer extends React.Component {
     }
 
     render(){
-    
+        const { classes } = this.props
         return (
-            <div>
-                <AppBar color="primary" position="static">
-                    <Toolbar>
-                        <IconButton color="inherit" aria-label="Menu">
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography variant="h6" color="inherit">
-                            CLINation
-                        </Typography>
-                        <Button color="inherit">Login</Button>
-                        <Button color="inherit" onClick={() => this.showRegistration(true)}>Register Clinic</Button>
-                    </Toolbar>
-                </AppBar>
-      
+            <div className={classes.root}>
+                
+                <CAppBar showRegistration={this.showRegistration} />
+
                 <Grid container style={{ marginTop: 150 }} spacing={8} justify="center" alignContent="center">
                     <Grid item>
                         <form noValidate autoComplete="off">
@@ -65,6 +57,7 @@ class MainContainer extends React.Component {
                                 label="Password"
                                 placeholder="Enter Password"
                                 fullWidth
+                                type="password"
                                 margin="dense"
                                 variant="outlined"
                                 InputLabelProps={{
@@ -79,7 +72,7 @@ class MainContainer extends React.Component {
                     </Grid>
                 </Grid>
             
-                <Modal open={this.state.showRegistration} style={{ marginTop: '10%' }}>
+                <Modal open={this.state.showRegistration} style={{ marginTop: '5%' }}>
                     <Grid 
                         container
                         direction="row"
@@ -88,7 +81,7 @@ class MainContainer extends React.Component {
                         <Grid item>
                             <Paper elevation={2} style={{ padding: 20 }}>
                                 <Typography variant="h6" style={{ marginBottom: 20 }}>
-                                    Clinic Registration Fields
+                                    User Registration Form
                                 </Typography>
                                 <form noValidate autoComplete="off">
                                     <TextField
@@ -102,7 +95,31 @@ class MainContainer extends React.Component {
                                             shrink: true,
                                         }}
                                     />
-                
+
+                                    <TextField
+                                        id="contact"
+                                        label="Contact Number"
+                                        placeholder="Enter Contact Number"
+                                        fullWidth
+                                        margin="dense"
+                                        variant="outlined"
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />
+
+                                    <TextField
+                                        id="email"
+                                        label="Email"
+                                        placeholder="Enter Email"
+                                        fullWidth
+                                        margin="dense"
+                                        variant="outlined"
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />
+
                                     <TextField
                                         id="username"
                                         label="Username"
@@ -116,39 +133,39 @@ class MainContainer extends React.Component {
                                     />
                 
                                     <TextField
-                                        id="email"
-                                        label="Email"
-                                        placeholder="Enter Email"
+                                        id="password"
+                                        label="Password"
+                                        placeholder="Enter Password"
                                         fullWidth
+                                        type="password"
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
                                     />
-                
+
                                     <TextField
-                                        id="contact"
-                                        label="Contact Number"
-                                        placeholder="Enter Contact Number"
+                                        id="confirm_password"
+                                        label="Confirm Password"
+                                        placeholder="Enter Confirm"
                                         fullWidth
+                                        type="password"
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
                                     />
-                                    
-                                    <Grid direction="row" container>
+
+                                    <Grid container>
                                         <Grid item md={6}>
                                             <Button variant="contained" color="primary" onClick={() => this.showRegistration(false)} style={{ marginTop: 20 }}>
-                                                Register Clinic
+                                                Register
                                             </Button>
                                         </Grid>
-                                        <Grid item md={6} alignContent="flex-end">
-                                            <Button variant="contained" color="primary" onClick={() => this.showRegistration(false)} style={{ marginTop: 20 }}>
-                                                Cancel
-                                            </Button>
+                                        <Grid item md={6}>
+
                                         </Grid>
                                     </Grid>
 
@@ -166,6 +183,4 @@ MainContainer.propTypes = {
     classes: PropTypes.object.isRequired,
 }
 
-const WrappedMainContainer = withStyles(styles)(MainContainer)
-
-export default WrappedMainContainer
+export default withStyles(styles)(MainContainer)
