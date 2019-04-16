@@ -40,7 +40,8 @@ class HomePage extends React.Component {
         let drawers = [
             { name: 'Manage Clinics', route: '/user/manage_clinics', icon: <InboxIcon /> },
             { name: 'Manage Users', route: '/user/manage_users', icon: <MailIcon /> },
-            { name: 'Settings', route: '/user/settings', icon: <InboxIcon /> }
+            { name: 'Settings', route: '/user/settings', icon: <InboxIcon /> },
+            { name: 'Logout', route: '/', icon: <MailIcon /> }
         ]
 
         return (

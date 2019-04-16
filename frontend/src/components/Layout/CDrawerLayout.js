@@ -55,7 +55,8 @@ const styles = theme => ({
 
 class CDrawerLayout extends React.Component {
    state = {
-      mobileOpen: false
+      mobileOpen: false,
+      pageTitle: 'CLINation'
    }
 
    handleDrawerToggle = () => {
@@ -63,6 +64,16 @@ class CDrawerLayout extends React.Component {
    }
 
    goTo = path => {
+
+      switch(path){
+         case '/user/manage_clinics': 
+            this.setState({ pageTitle: 'Manage Clinics' }); break
+         case '/user/manage_users': 
+            this.setState({ pageTitle: 'Manage Users' }); break
+         case '/user/settings': 
+            this.setState({ pageTitle: 'Settings' }); break     
+      }
+
       RouteTo(this.props, path)
    }
 
@@ -96,7 +107,7 @@ class CDrawerLayout extends React.Component {
          <div className={classes.root}>
             <CssBaseline />
 
-            <CAppBar handleDrawerToggle={this.handleDrawerToggle} />
+            <CAppBar handleDrawerToggle={this.handleDrawerToggle} setTitle={this.state.pageTitle} />
 
             <nav className={classes.drawer}>
                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
