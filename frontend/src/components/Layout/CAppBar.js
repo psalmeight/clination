@@ -47,7 +47,7 @@ function CAppBar(props) {
                      <MenuIcon />
                </IconButton>
                <Typography variant="h6" color="inherit" noWrap>
-                  {props.setTitle || 'CLINation'}
+                  {props.setTitle || 'Dashboard'}
                </Typography>
 
             {

@@ -10,7 +10,7 @@ function Routes() {
       <Switch>
         
         <Route exact path="/" component={MainContainer} />
-        <Route path="/user" render={props => <HomePage {...props} />} />
+        <Route path="/dashboard" render={props => <HomePage {...props} />} />
 
         <Route component={AccessDenied} />
       </Switch>

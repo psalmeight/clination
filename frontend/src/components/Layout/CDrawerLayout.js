@@ -56,7 +56,7 @@ const styles = theme => ({
 class CDrawerLayout extends React.Component {
    state = {
       mobileOpen: false,
-      pageTitle: 'CLINation'
+      pageTitle: 'Dashboard'
    }
 
    handleDrawerToggle = () => {
@@ -66,11 +66,13 @@ class CDrawerLayout extends React.Component {
    goTo = path => {
 
       switch(path){
-         case '/user/manage_clinics': 
+         case '/dashboard': 
+            this.setState({ pageTitle: 'Dashboard' }); break
+         case '/dashboard/manage_clinics': 
             this.setState({ pageTitle: 'Manage Clinics' }); break
-         case '/user/manage_users': 
+         case '/dashboard/manage_users': 
             this.setState({ pageTitle: 'Manage Users' }); break
-         case '/user/settings': 
+         case '/dashboard/settings': 
             this.setState({ pageTitle: 'Settings' }); break     
       }
 

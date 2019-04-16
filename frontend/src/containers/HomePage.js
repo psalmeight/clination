@@ -10,7 +10,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 
-import { CDrawerLayout, ManageClinics } from 'components'
+import { CDrawerLayout, ManageClinics, ManageUsers, Settings, Dashboard } from 'components'
 
 const styles = {
     root: {
@@ -38,9 +38,10 @@ class HomePage extends React.Component {
         const { classes } = this.props
         
         let drawers = [
-            { name: 'Manage Clinics', route: '/user/manage_clinics', icon: <InboxIcon /> },
-            { name: 'Manage Users', route: '/user/manage_users', icon: <MailIcon /> },
-            { name: 'Settings', route: '/user/settings', icon: <InboxIcon /> },
+            { name: 'Dashboard', route: '/dashboard', icon: <InboxIcon /> },
+            { name: 'Manage Clinics', route: '/dashboard/manage_clinics', icon: <InboxIcon /> },
+            { name: 'Manage Users', route: '/dashboard/manage_users', icon: <MailIcon /> },
+            { name: 'Settings', route: '/dashboard/settings', icon: <InboxIcon /> },
             { name: 'Logout', route: '/', icon: <MailIcon /> }
         ]
 
@@ -59,7 +60,11 @@ class HomePage extends React.Component {
                     ullamcorper morbi tincidunt. Lorem donec massa sapien faucibus et molestie ac.
                 </Typography>
 
-                <Route exact path="/user/manage_clinics" render={() => <ManageClinics />} />
+                <Route exact path="/dashboard" render={() => <Dashboard />} />
+                <Route exact path="/dashboard/manage_clinics" render={() => <ManageClinics />} />
+                <Route exact path="/dashboard/manage_users" render={() => <ManageUsers />} />
+                <Route exact path="/dashboard/settings" render={() => <Settings />} />
+
             </CDrawerLayout>
         )
     }
