@@ -5,6 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
+import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -16,6 +17,7 @@ import { withStyles } from "@material-ui/core/styles";
 import { RouteTo } from '../Utils/RouterAction'
 
 import _ from 'lodash'
+import CAppBar from "./CAppBar";
 
 const drawerWidth = 240;
 
@@ -93,22 +95,8 @@ class CDrawerLayout extends React.Component {
       return (
          <div className={classes.root}>
             <CssBaseline />
-            <AppBar className={classes.appBar}>
-               <Toolbar>
-                  <IconButton
-                  color="inherit"
-                  aria-label="Open drawer"
-                  onClick={this.handleDrawerToggle}
-                  className={classes.menuButton}
-                  >
-                     <MenuIcon />
-                  </IconButton>
-                  <Typography variant="h6" color="inherit" noWrap>
-                  CLINation
-                  </Typography>
-                  <Button color="inherit" onClick={props.showRegistration}>Logout</Button>
-               </Toolbar>
-            </AppBar>
+
+            <CAppBar handleDrawerToggle={this.handleDrawerToggle} />
 
             <nav className={classes.drawer}>
                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
