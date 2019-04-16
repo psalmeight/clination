@@ -35,7 +35,16 @@ class CMainLayout extends React.Component {
         return (
             <div className={classes.root}>
                 
-                <CAppBar showRegistration={this.showRegistration} />
+                <div style={{ marginBottom: 80 }} />
+
+                <AppBar positionStatic>
+                    <Toolbar>
+                    <Typography variant="h6" color="inherit" className={classes.grow}>
+                        CLINation
+                    </Typography>
+                    <Button color="inherit" onClick={this.showRegistration}>REGISTER</Button>
+                    </Toolbar>
+                </AppBar>
 
                 {this.props.children}
 

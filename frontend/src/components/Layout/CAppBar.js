@@ -22,7 +22,7 @@ const styles = theme => ({
     marginRight: 20,
     [theme.breakpoints.up("sm")]: {
        display: "none"
-    }
+    },
   },
   appBar: {
     marginLeft: drawerWidth,
@@ -50,12 +50,11 @@ function CAppBar(props) {
                   CLINation
                </Typography>
 
-          {
-            props.showRegistration ?
-            <Button color="inherit" onClick={props.showRegistration}>Register</Button>
-            : null
-          }
-          
+            {
+              props.showRegistration ?
+              <Button color="inherit" onClick={props.showRegistration}>Register</Button>
+              : null
+            }
         </Toolbar>
       </AppBar>
     </div>
