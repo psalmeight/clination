@@ -24,7 +24,7 @@ const styles = {
 function CAppBar(props) {
   const { classes } = props;
   return (
-    <div className={classes.root}>
+    <div className={props.className} style={{ marginBottom: 80 }}>
       <AppBar positionStatic>
         <Toolbar>
           <IconButton className={classes.menuButton} color="inherit" aria-label="Menu">

@@ -5,8 +5,8 @@ import { withStyles } from '@material-ui/core/styles'
 import {
   Modal, AppBar, Toolbar, Typography, Button, IconButton, Grid, Paper, TextField
 } from '@material-ui/core'
-
-import CAppBar from './CAppBar'
+import { CMainLayout } from 'components'
+import { RouteTo } from '../components/Utils/RouterAction'
 
 const styles = {
     root: {
@@ -30,14 +30,16 @@ class MainContainer extends React.Component {
         this.setState({ showRegistration: val })
     }
 
+    goTo = (path) => {
+        RouteTo(this.props, path)
+    }
+
     render(){
         const { classes } = this.props
         return (
-            <div className={classes.root}>
-                
-                <CAppBar showRegistration={this.showRegistration} />
+            <CMainLayout className={classes.root}>
 
-                <Grid container style={{ marginTop: 150 }} spacing={8} justify="center" alignContent="center">
+                <Grid container style={{ marginTop: 50 }} spacing={8} justify="center" alignContent="center">
                     <Grid item>
                         <form noValidate autoComplete="off">
                             <TextField
@@ -65,116 +67,14 @@ class MainContainer extends React.Component {
                                 }}
                             />
 
-                            <Button variant="contained" fullWidth color="primary" onClick={() => this.showRegistration(false)} style={{ marginTop: 10 }}>
+                            <Button variant="contained" fullWidth color="primary" onClick={() => this.goTo('/user')} style={{ marginTop: 10 }}>
                                 Login
                             </Button>
                         </form>
                     </Grid>
                 </Grid>
-            
-                <Modal open={this.state.showRegistration} style={{ marginTop: '5%' }}>
-                    <Grid 
-                        container
-                        direction="row"
-                        justify="center"
-                        alignItems="center">
-                        <Grid item>
-                            <Paper elevation={2} style={{ padding: 20 }}>
-                                <Typography variant="h6" style={{ marginBottom: 20 }}>
-                                    User Registration Form
-                                </Typography>
-                                <form noValidate autoComplete="off">
-                                    <TextField
-                                        id="fullname"
-                                        label="Fullname"
-                                        placeholder="Enter Fullname"
-                                        fullWidth
-                                        margin="dense"
-                                        variant="outlined"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                    />
-
-                                    <TextField
-                                        id="contact"
-                                        label="Contact Number"
-                                        placeholder="Enter Contact Number"
-                                        fullWidth
-                                        margin="dense"
-                                        variant="outlined"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                    />
-
-                                    <TextField
-                                        id="email"
-                                        label="Email"
-                                        placeholder="Enter Email"
-                                        fullWidth
-                                        margin="dense"
-                                        variant="outlined"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                    />
-
-                                    <TextField
-                                        id="username"
-                                        label="Username"
-                                        placeholder="Enter Username"
-                                        fullWidth
-                                        margin="dense"
-                                        variant="outlined"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                    />
-                
-                                    <TextField
-                                        id="password"
-                                        label="Password"
-                                        placeholder="Enter Password"
-                                        fullWidth
-                                        type="password"
-                                        margin="dense"
-                                        variant="outlined"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                    />
-
-                                    <TextField
-                                        id="confirm_password"
-                                        label="Confirm Password"
-                                        placeholder="Enter Confirm"
-                                        fullWidth
-                                        type="password"
-                                        margin="dense"
-                                        variant="outlined"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                    />
-
-                                    <Grid container>
-                                        <Grid item md={6}>
-                                            <Button variant="contained" color="primary" onClick={() => this.showRegistration(false)} style={{ marginTop: 20 }}>
-                                                Register
-                                            </Button>
-                                        </Grid>
-                                        <Grid item md={6}>
-
-                                        </Grid>
-                                    </Grid>
-
-                                </form>
-                            </Paper>
-                        </Grid>
-                    </Grid>
-                </Modal>
-            </div>
+        
+            </CMainLayout>
         )
     }
 }
