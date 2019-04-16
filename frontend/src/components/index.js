@@ -5,3 +5,5 @@ export { default as Dashboard } from './Pages/Dashboard'
 export { default as ManageClinics } from './Pages/ManageClinics'
 export { default as ManageUsers } from './Pages/ManageUsers'
 export { default as Settings } from './Pages/Settings'
+
+export { default as ClinicCard } from './Units/ClinicCard'

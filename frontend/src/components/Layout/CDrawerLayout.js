@@ -1,18 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
-import IconButton from "@material-ui/core/IconButton";
-import Button from "@material-ui/core/Button";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import MenuIcon from "@material-ui/icons/Menu";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import { withStyles } from "@material-ui/core/styles";
 import { RouteTo } from '../Utils/RouterAction'
 
@@ -90,13 +84,11 @@ class CDrawerLayout extends React.Component {
                   _.map(this.props.drawers, data => {
                      return (
                         <ListItem button key={data.name} onClick={() => this.goTo(data.route)}>
-                     
                            <ListItemIcon>
                               {data.icon}
                            </ListItemIcon>
                            
                            <ListItemText primary={data.name} />
-      
                         </ListItem>
                      )
                   })
