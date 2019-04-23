@@ -50,7 +50,24 @@ const styles = theme => ({
 class CDrawerLayout extends React.Component {
    state = {
       mobileOpen: false,
-      pageTitle: 'Dashboard'
+      pageTitle: ''
+   }
+   
+   componentDidMount(){
+      this.validateShouldTitle(this.props.location.pathname)
+   }
+
+   validateShouldTitle = path => {
+      switch(path){
+         case '/dashboard': 
+            this.setState({ pageTitle: 'Dashboard' }); break
+         case '/dashboard/manage_clinics': 
+            this.setState({ pageTitle: 'Manage Clinics' }); break
+         case '/dashboard/manage_users': 
+            this.setState({ pageTitle: 'Manage Users' }); break
+         case '/dashboard/settings': 
+            this.setState({ pageTitle: 'Settings' }); break     
+      }
    }
 
    handleDrawerToggle = () => {
@@ -58,7 +75,6 @@ class CDrawerLayout extends React.Component {
    }
 
    goTo = path => {
-
       switch(path){
          case '/dashboard': 
             this.setState({ pageTitle: 'Dashboard' }); break
@@ -104,7 +120,6 @@ class CDrawerLayout extends React.Component {
             <CAppBar handleDrawerToggle={this.handleDrawerToggle} setTitle={this.state.pageTitle} />
 
             <nav className={classes.drawer}>
-               {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                <Hidden smUp implementation="css">
                   <Drawer
                   container={this.props.container}

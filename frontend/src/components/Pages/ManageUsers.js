@@ -127,9 +127,9 @@ class ManageUsers extends React.Component {
                         </Table>
                      </ExpansionPanelDetails>
                      <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
-                        <Button size="small" color="primary">Edit</Button>
+                        <Button size="small" color="primary">EDIT</Button>
                         <Button size="small" color="secondary">
-                           Delete
+                           REMOVE
                         </Button>
                      </ExpansionPanelActions>
                   </ExpansionPanel>

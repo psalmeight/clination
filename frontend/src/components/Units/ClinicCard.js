@@ -8,13 +8,15 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import NavigationIcon from '@material-ui/icons/Navigation';
+import EditIcon from '@material-ui/icons/Edit';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 const styles = {
   card: {
     width: '99%',
     padding: 5,
-    margin: 5,
+    marginLeft: 5,
+    marginBottom: 5,
     marginRight: 5
   },
   media: {
@@ -46,10 +48,9 @@ function ClinicCard(props) {
       </CardActionArea>
       <CardActions>
         <Button size="small" color="primary">
-            <NavigationIcon className={classes.extendedIcon} />
           EDIT
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small" color="secondary">
           REMOVE
         </Button>
       </CardActions>
