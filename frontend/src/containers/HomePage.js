@@ -27,13 +27,14 @@ class HomePage extends React.Component {
     }
 
     state = {
-        showRegistration: false
+        showClinicForm: false
     }
 
-    showRegistration = val => {
-        this.setState({ showRegistration: val })
+    showClinicForm = val => {
+        this.setState({ showClinicForm: val })
     }
 
+    
     render(){
         const { classes } = this.props
         

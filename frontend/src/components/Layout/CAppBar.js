@@ -32,29 +32,51 @@ const styles = theme => ({
  },
 })
 
+function addNewClinic(){
+
+}
+
 function CAppBar(props) {
-   const { classes } = props;
+    const { classes } = props
 
    return (
       <div className={props.className} style={{ marginBottom: 80 }}>
          <AppBar positionStatic className={classes.appBar}>
             <Toolbar>
-               <IconButton
-                  color="inherit"
-                  aria-label="Open drawer"
-                  onClick={() => props.handleDrawerToggle()}
-                  className={classes.menuButton}>
-                     <MenuIcon />
-               </IconButton>
-               <Typography variant="h6" color="inherit" noWrap>
-                  {props.setTitle || 'Dashboard'}
-               </Typography>
+              <IconButton
+                color="inherit"
+                aria-label="Open drawer"
+                onClick={() => props.handleDrawerToggle()}
+                className={classes.menuButton}>
+                    <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" color="inherit" noWrap>
+                {props.setTitle || 'Dashboard'}
+              </Typography>
 
-            {
-              props.showRegistration ?
-              <Button color="inherit" onClick={props.showRegistration}>Register</Button>
-              : null
-            }
+              {
+                props.routePath === '/dashboard/manage_clinics' ? 
+                (<div style={{ position: 'absolute', right: 10, marginRight: 10 }}>
+                  <Button color="inherit" onClick={addNewClinic()}>Add Clinic</Button>
+                </div>)
+                :
+                null
+              }
+              
+              {
+                props.routePath === '/dashboard/manage_users' ? 
+                (<div style={{ position: 'absolute', right: 10, marginRight: 10 }}>
+                  <Button color="inherit" onClick={addNewClinic()}>Add Users</Button>
+                </div>)
+                :
+                null
+              }
+              
+              {
+                props.showRegistration ?
+                <Button color="inherit" onClick={props.showRegistration}>Register</Button>
+                : null
+              }
         </Toolbar>
       </AppBar>
     </div>

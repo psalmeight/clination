@@ -117,7 +117,11 @@ class CDrawerLayout extends React.Component {
          <div className={classes.root}>
             <CssBaseline />
 
-            <CAppBar handleDrawerToggle={this.handleDrawerToggle} setTitle={this.state.pageTitle} />
+            <CAppBar 
+               handleDrawerToggle={this.handleDrawerToggle} 
+               setTitle={this.state.pageTitle} 
+               routePath={this.props.location.pathname}   
+            />
 
             <nav className={classes.drawer}>
                <Hidden smUp implementation="css">
