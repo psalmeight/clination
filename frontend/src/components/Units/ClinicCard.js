@@ -12,9 +12,10 @@ import NavigationIcon from '@material-ui/icons/Navigation';
 
 const styles = {
   card: {
-    maxWidth: 310,
-    marginLeft: 5,
-    marginBottom: 5
+    width: '99%',
+    padding: 5,
+    margin: 5,
+    marginRight: 5
   },
   media: {
     objectFit: 'cover',

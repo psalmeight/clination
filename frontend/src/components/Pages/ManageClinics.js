@@ -22,6 +22,9 @@ class ManageClinics extends React.Component {
          { id: 1, clinic_name: 'Ace Medical Center', address: 'Lizards are a widespread group of squamate reptiles' },
          { id: 2, clinic_name: 'Ace Dermatology Center', address: 'Lizards are a widespread group of squamate reptiles' },
          { id: 3, clinic_name: 'Ace Dental Center', address: 'Lizards are a widespread group of squamate reptiles' },
+         { id: 4, clinic_name: 'Ace Medical Center', address: 'Lizards are a widespread group of squamate reptiles' },
+         { id: 5, clinic_name: 'Ace Dermatology Center', address: 'Lizards are a widespread group of squamate reptiles' },
+         { id: 6, clinic_name: 'Ace Dental Center', address: 'Lizards are a widespread group of squamate reptiles' },
       ]
 
       return (
@@ -30,7 +33,7 @@ class ManageClinics extends React.Component {
                {
                   _.map(data, item => {
                      return (
-                        <Grid item>
+                        <Grid item md={4}>
                            <ClinicCard data={item} />
                         </Grid>
                      )
