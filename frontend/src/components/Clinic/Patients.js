@@ -20,7 +20,11 @@ import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
+import SearchIcon from '@material-ui/icons/Search';
+import IconButton from '@material-ui/core/IconButton'
 
+import Paper from '@material-ui/core/Paper';
+import InputBase from '@material-ui/core/InputBase'
 
 import _ from 'lodash'
 
@@ -31,9 +35,23 @@ const styles = theme => ({
    grow: {
       flexGrow: 1,
    },
+   searchRoot: {
+      padding: '2px 4px',
+      display: 'flex',
+      alignItems: 'center',
+      width: '100%',
+   },
    chip: {
      margin: theme.spacing.unit,
-   }
+   },
+   input: {
+      marginLeft: 8,
+      flex: 1,
+      width: '100%'
+   },
+   iconButton: {
+      padding: 10,
+   },
 })
 
 class Patients extends React.Component {
@@ -101,6 +119,14 @@ class Patients extends React.Component {
 
       return (
          <div className={classes.root}>
+
+            <Paper className={classes.searchRoot} style={{ marginBottom: 10, paddingLeft: 10 }}>
+               <InputBase className={classes.input} placeholder="Search patients" />
+               <IconButton className={classes.iconButton} aria-label="Search">
+                  <SearchIcon />
+               </IconButton>
+            </Paper>
+
             {
                _.map(this.state.data, (record, idx) => {
                   return <ExpansionPanel>
