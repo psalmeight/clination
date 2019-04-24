@@ -15,9 +15,15 @@ const styles = {
 }
 
 class ManageClinics extends React.Component {
-   render() {
-      const { classes, theme } = this.props;
 
+   state = {
+      data: []
+   }
+   componentDidMount(){
+      this.fetchData()
+   }
+
+   fetchData = () => {
       let data = [
          { id: 1, clinic_name: 'Ace Medical Center', address: 'Lizards are a widespread group of squamate reptiles' },
          { id: 2, clinic_name: 'Ace Dermatology Center', address: 'Lizards are a widespread group of squamate reptiles' },
@@ -27,11 +33,20 @@ class ManageClinics extends React.Component {
          { id: 6, clinic_name: 'Ace Dental Center', address: 'Lizards are a widespread group of squamate reptiles' },
       ]
 
+      this.setState({
+         data
+      })
+   }
+
+   render() {
+      const { classes, theme } = this.props;
+
+
       return (
          <div>
             <Grid style={{ flexDirection: 'row' }} container justify={'center'}>
                {
-                  _.map(data, item => {
+                  _.map(this.state.data, item => {
                      return (
                         <Grid item md={4}>
                            <ClinicCard data={item} />

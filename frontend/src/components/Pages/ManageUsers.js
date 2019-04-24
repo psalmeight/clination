@@ -39,23 +39,15 @@ const styles = theme => ({
 class ManageUsers extends React.Component {
    state = {
       expanded: 0,
-   }
-  
-   handleChange = panel => (event, expanded) => {
-      this.setState({
-        expanded: expanded ? panel : false,
-      })
+      data: []
    }
 
-   handleDelete = () => {
-      alert('You clicked the delete icon.')
+   componentDidMount(){
+      this.fetchData()
    }
 
-   render() {
-      const { classes, theme } = this.props
-      const { expanded } = this.state
-
-      const data = [
+   fetchData = () => {
+      let data = [
          { id: 1, 
             employee_name: 'Ace Jordan Lumaad', 
             email: 'acelumaad@gmail.com', 
@@ -88,10 +80,29 @@ class ManageUsers extends React.Component {
                { id: 2, clinic_name: 'Ace Dental Clinic', role: 'SF' },
          ]}
       ]
+
+      this.setState({
+         data
+      })
+   }
+   handleChange = panel => (event, expanded) => {
+      this.setState({
+        expanded: expanded ? panel : false,
+      })
+   }
+
+   handleDelete = () => {
+      alert('You clicked the delete icon.')
+   }
+
+   render() {
+      const { classes, theme } = this.props
+      const { expanded } = this.state
+
       return (
          <div className={classes.root}>
             {
-               _.map(data, (record, idx) => {
+               _.map(this.state.data, (record, idx) => {
                   return <ExpansionPanel>
                      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                         <Typography className={classes.heading}><strong>{record.employee_name}</strong></Typography>

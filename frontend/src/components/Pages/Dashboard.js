@@ -18,35 +18,41 @@ const styles = theme => ({
 })
 
 class Dashboard extends React.Component {
+   state = {
+      dashboardData: []
+   }
+
+   componentDidMount(){
+      this.fetchData()
+   }
+
+   fetchData = () => {
+      this.setState({
+         dashboardData: [
+            { key: 'Clinics', value: 2 },
+            { key: 'Employees', value: 3 },
+            { key: 'Patients', value: 35 },
+         ]
+      })
+   }
+
    render() {
       const { classes, theme } = this.props;
 
       return (
          <div className={classes.root}>
-            <Paper className={classes.root} elevation={1} style={{ marginBottom: 5 }}>
-               <Typography variant="h5" component="h3">
-                  <strong>2</strong>
-               </Typography>
-               <Typography component="p">
-                  Clinics
-               </Typography>
-            </Paper>
-            <Paper className={classes.root} elevation={1} style={{ marginBottom: 5 }}>
-               <Typography variant="h5" component="h3">
-                  <strong>3</strong>
-               </Typography>
-               <Typography component="p">
-                  Employees
-               </Typography>
-            </Paper>
-            <Paper className={classes.root} elevation={1}>
-               <Typography variant="h5" component="h3">
-                  <strong>35</strong>
-               </Typography>
-               <Typography component="p">
-                  Patients
-               </Typography>
-            </Paper>
+            {
+               _.map(this.state.dashboardData, data => {
+                  return <Paper className={classes.root} elevation={1} style={{ marginBottom: 5 }}>
+                     <Typography variant="h5" component="h3">
+                        <strong>{data.value}</strong>
+                     </Typography>
+                     <Typography component="p">
+                     {data.key}
+                     </Typography>
+                  </Paper>
+               })
+            }
          </div>
       )
    }
