@@ -51,8 +51,7 @@ class PatientInformation extends React.Component {
    }
 
    render() {
-      const { classes, theme } = this.props
-      const { expanded } = this.state
+      const { classes } = this.props
 
       return (
          <div className={classes.root}>

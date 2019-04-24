@@ -5,7 +5,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import { Appointments, Patients } from 'components'
+import { PatientInformation, PatientHistory } from 'components'
 
 function TabContainer(props) {
   return (
@@ -26,7 +26,7 @@ const styles = theme => ({
   }
 })
 
-class ClinicDashboard extends React.Component {
+class PatientDashboard extends React.Component {
   state = {
     value: 0
   }
@@ -43,23 +43,23 @@ class ClinicDashboard extends React.Component {
       <div className={classes.root}>
         <AppBar position="static">
           <Tabs value={value} onChange={this.handleChange}>
-            <Tab label="Patients" />
-            <Tab label="Appointments" />
+            <Tab label="Information" />
+            <Tab label="History" />
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer>
-            <Patients {...this.props} />
+            <PatientInformation {...this.props} />
         </TabContainer>}
         {value === 1 && <TabContainer>
-            <Appointments {...this.props} />
+            <PatientHistory {...this.props} />
         </TabContainer>}
       </div>
     );
   }
 }
 
-ClinicDashboard.propTypes = {
+PatientDashboard.propTypes = {
   classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles)(ClinicDashboard)
+export default withStyles(styles)(PatientDashboard)

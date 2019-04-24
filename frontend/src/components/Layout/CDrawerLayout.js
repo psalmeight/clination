@@ -121,8 +121,6 @@ class CDrawerLayout extends React.Component {
          </div>
       )
 
-      console.log(this.props)
-
       return (
          <div className={classes.root}>
             <CssBaseline />

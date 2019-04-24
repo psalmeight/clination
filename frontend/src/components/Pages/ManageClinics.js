@@ -40,7 +40,6 @@ class ManageClinics extends React.Component {
    }
 
    onCardClick = item => {
-      console.log(item)
       this.goTo('/clinic/' + item.id)
    }
    

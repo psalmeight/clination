@@ -61,8 +61,6 @@ class ClinicContainer extends React.Component {
       return (
          <CDrawerLayout unPad backType {...this.props}>
             <Route exact path={`/clinic/${this.state.clinicID}`} render={() => <ClinicDashboard {...this.props} />} />
-            {/* <Route exact path={`/clinic/${this.state.clinicID}/patients`} render={() => <Patients />} />
-            <Route exact path={`/clinic/${this.state.clinicID}/appointments`} render={() => <Appointments />} /> */}
          </CDrawerLayout>
       )
    }

@@ -10,7 +10,7 @@ import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
 
-import { CDrawerLayout, PatientInformation, PatientHistory } from 'components'
+import { CDrawerLayout, PatientDashboard } from 'components'
 
 const styles = {
     root: {
@@ -48,9 +48,8 @@ class PatientContainer extends React.Component {
         ]
 
         return (
-            <CDrawerLayout drawers={drawers} {...this.props}>
-                <Route exact path={`/patient/${this.state.patientID}`} render={() => <PatientInformation />} />
-                <Route exact path={`/patient/${this.state.patientID}/history`} render={() => <PatientHistory />} />
+            <CDrawerLayout unPad backType {...this.props}>
+                <Route exact path={`/patient/${this.state.patientID}`} render={() => <PatientDashboard />} />
             </CDrawerLayout>
         )
     }

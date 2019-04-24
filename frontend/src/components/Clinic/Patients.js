@@ -37,6 +37,8 @@ import DraftsIcon from '@material-ui/icons/Drafts';
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 
+import { RouteTo } from '../Utils/RouterAction'
+
 import _ from 'lodash'
 
 const styles = theme => ({
@@ -138,6 +140,14 @@ class Patients extends React.Component {
       alert('You clicked the delete icon.')
    }
 
+   patientSelect = record => {
+      this.goTo('/patient/' + record.id)
+   }
+
+   goTo = path => {
+      RouteTo(this.props, path)
+   }
+
    render() {
       const { classes, theme } = this.props
       const { expanded } = this.state
@@ -156,10 +166,9 @@ class Patients extends React.Component {
 
                {
                   _.map(this.state.data, (record, idx) => {
-
                      let avatarClass = record.gender === 'M' ? classes.purpleAvatar : classes.orangeAvatar
                      
-                     return <ListItem button style={{ paddingLeft: 0 }}>
+                     return <ListItem button style={{ paddingLeft: 0 }} onClick={() => this.patientSelect(record)}>
                         <ListItemIcon>
                            <Avatar className={avatarClass}>{record.gender}</Avatar>
                         </ListItemIcon>
@@ -170,52 +179,6 @@ class Patients extends React.Component {
 
                
             </List>
-
-            {/* {
-               _.map(this.state.data, (record, idx) => {
-                  return <ExpansionPanel>
-                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography className={classes.heading}><strong>{record.employee_name}</strong></Typography>
-                     </ExpansionPanelSummary>
-                     <ExpansionPanelDetails style={{ padding: 0 }}>
-                        <Table>
-                           <TableBody>
-                              <TableRow>
-                                 <TableCell>
-                                    <strong>Email</strong>
-                                 </TableCell>
-                                 <TableCell>{record.email}</TableCell>
-                              </TableRow>
-                              <TableRow>
-                                 <TableCell>
-                                 <strong>Birthdate</strong>
-                                 </TableCell>
-                                 <TableCell>{record.dob}</TableCell>
-                              </TableRow>
-                              <TableRow>
-                                 <TableCell>
-                                 <strong>Gender</strong>
-                                 </TableCell>
-                                 <TableCell>{record.gender}</TableCell>
-                              </TableRow>
-                              <TableRow>
-                                 <TableCell>
-                                 <strong>Contact</strong>
-                                 </TableCell>
-                                 <TableCell>{record.contact}</TableCell>
-                              </TableRow>
-                           </TableBody>
-                        </Table>
-                     </ExpansionPanelDetails>
-                     <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
-                        <Button size="small" color="primary">EDIT</Button>
-                        <Button size="small" color="secondary">
-                           REMOVE
-                        </Button>
-                     </ExpansionPanelActions>
-                  </ExpansionPanel>
-               })
-            } */}
             
          </div>
       )
