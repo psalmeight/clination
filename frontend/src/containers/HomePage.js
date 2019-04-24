@@ -34,7 +34,6 @@ class HomePage extends React.Component {
         this.setState({ showClinicForm: val })
     }
 
-    
     render(){
         const { classes } = this.props
         
@@ -49,8 +48,8 @@ class HomePage extends React.Component {
         return (
             <CDrawerLayout drawers={drawers} {...this.props}>
                 <Route exact path="/dashboard" render={() => <Dashboard />} />
-                <Route exact path="/dashboard/manage_clinics" render={() => <ManageClinics />} />
-                <Route exact path="/dashboard/manage_users" render={() => <ManageUsers />} />
+                <Route exact path="/dashboard/manage_clinics" render={() => <ManageClinics {...this.props} />} />
+                <Route exact path="/dashboard/manage_users" render={() => <ManageUsers {...this.props} />} />
                 <Route exact path="/dashboard/settings" render={() => <Settings />} />
             </CDrawerLayout>
         )

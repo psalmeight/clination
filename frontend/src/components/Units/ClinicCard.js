@@ -34,7 +34,7 @@ function ClinicCard(props) {
   return (
     <div>
     <Card className={classes.card}>
-      <CardActionArea>
+      <CardActionArea onClick={() => props.onClick()}>
          <CardMedia
             component="img"
             alt="Contemplative Reptile"

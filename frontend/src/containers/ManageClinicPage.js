@@ -1,8 +1,15 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles'
-import { Typography, Grid, Button } from '@material-ui/core'
-import { ClinicCard } from 'components'
+import {
+  Modal, AppBar, Toolbar, Typography, Button, IconButton, Grid, Paper, TextField
+} from '@material-ui/core'
+
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
+import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+
+import { CDrawerLayout, Patients, Appointments, ClinicDashboard  } from 'components'
 import _ from 'lodash'
 
 const styles = {
@@ -21,6 +28,7 @@ class ManageClinicPage extends React.Component {
    }
 
    componentDidMount(){
+      this.setState({ clinicID: this.props.match.params.clinicID })
       this.fetchData()
    }
 

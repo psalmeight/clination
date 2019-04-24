@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { Typography, Grid, Button } from '@material-ui/core'
 import { ClinicCard } from 'components'
 import _ from 'lodash'
+import { RouteTo } from '../Utils/RouterAction'
 
 const styles = {
    root: {
@@ -38,6 +39,15 @@ class ManageClinics extends React.Component {
       })
    }
 
+   onCardClick = item => {
+      console.log(item)
+      this.goTo('/clinic/' + item.id)
+   }
+   
+   goTo = path => {
+      RouteTo(this.props, path)
+   }
+
    render() {
       const { classes, theme } = this.props;
 
@@ -49,7 +59,7 @@ class ManageClinics extends React.Component {
                   _.map(this.state.data, item => {
                      return (
                         <Grid item md={4}>
-                           <ClinicCard data={item} />
+                           <ClinicCard data={item} onClick={() => this.onCardClick(item)} />
                         </Grid>
                      )
                   })
