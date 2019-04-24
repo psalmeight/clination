@@ -7,4 +7,8 @@ export { default as ManageClinics } from './Pages/ManageClinics'
 export { default as ManageUsers } from './Pages/ManageUsers'
 export { default as Settings } from './Pages/Settings'
 
+export { default as ClinicDashboard } from './Clinic/Dashboard'
+export { default as Patients } from './Clinic/Patients'
+export { default as Appointments } from './Clinic/Appointments'
+
 export { default as ClinicCard } from './Units/ClinicCard'
