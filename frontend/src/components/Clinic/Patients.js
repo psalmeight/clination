@@ -26,6 +26,17 @@ import IconButton from '@material-ui/core/IconButton'
 import Paper from '@material-ui/core/Paper';
 import InputBase from '@material-ui/core/InputBase'
 
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import InboxIcon from '@material-ui/icons/Inbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
+
+import deepOrange from '@material-ui/core/colors/deepOrange';
+import deepPurple from '@material-ui/core/colors/deepPurple';
+
 import _ from 'lodash'
 
 const styles = theme => ({
@@ -52,8 +63,22 @@ const styles = theme => ({
    iconButton: {
       padding: 10,
    },
+   avatar: {
+      margin: 10,
+   },
+   orangeAvatar: {
+      color: '#fff',
+      backgroundColor: deepOrange[500],
+   },
+   purpleAvatar: {
+      color: '#fff',
+      backgroundColor: deepPurple[500],
+   },
 })
-
+function ListItemLink(props) {
+   return <ListItem button component="a" {...props} />;
+ }
+ 
 class Patients extends React.Component {
    state = {
       expanded: 0,
@@ -70,7 +95,7 @@ class Patients extends React.Component {
             employee_name: 'Ace Jordan Lumaad', 
             email: 'acelumaad@gmail.com', 
             dob: '03/13/1990', 
-            gender: 'male',
+            gender: 'M',
             contact: '+639255055519',
             clinics: [
                { id: 1, clinic_name: 'Ace Dermatology', role: 'OR' },
@@ -81,7 +106,7 @@ class Patients extends React.Component {
             employee_name: 'Gwen Lumaad', 
             email: 'gwenlumaad@gmail.com', 
             dob: '01/13/1990', 
-            gender: 'female', 
+            gender: 'F', 
             contact: '+639255055519',
             clinics: [
                { id: 1, clinic_name: 'Ace Dermatology', role: 'DR' },
@@ -91,7 +116,7 @@ class Patients extends React.Component {
             employee_name: 'Micah Lumaad', 
             email: 'micahlumaad@gmail.com', 
             dob: '05/13/1990', 
-            gender: 'male', 
+            gender: 'M', 
             contact: '+639255055519',
             clinics: [
                { id: 1, clinic_name: 'Ace Dermatology', role: 'SF' },
@@ -116,7 +141,7 @@ class Patients extends React.Component {
    render() {
       const { classes, theme } = this.props
       const { expanded } = this.state
-
+      
       return (
          <div className={classes.root}>
 
@@ -127,7 +152,26 @@ class Patients extends React.Component {
                </IconButton>
             </Paper>
 
-            {
+            <List component="nav">
+
+               {
+                  _.map(this.state.data, (record, idx) => {
+
+                     let avatarClass = record.gender === 'M' ? classes.purpleAvatar : classes.orangeAvatar
+                     
+                     return <ListItem button style={{ paddingLeft: 0 }}>
+                        <ListItemIcon>
+                           <Avatar className={avatarClass}>{record.gender}</Avatar>
+                        </ListItemIcon>
+                        <ListItemText primary={record.employee_name} />
+                     </ListItem>
+                  })
+               }
+
+               
+            </List>
+
+            {/* {
                _.map(this.state.data, (record, idx) => {
                   return <ExpansionPanel>
                      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -171,7 +215,7 @@ class Patients extends React.Component {
                      </ExpansionPanelActions>
                   </ExpansionPanel>
                })
-            }
+            } */}
             
          </div>
       )
