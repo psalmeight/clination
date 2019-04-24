@@ -21,7 +21,7 @@ const styles = {
    }
 }
 
-class ManageClinicPage extends React.Component {
+class ClinicContainer extends React.Component {
    state = {
       data: {},
       clinicID: 0
@@ -69,4 +69,4 @@ class ManageClinicPage extends React.Component {
 }
 
 
-export default withStyles(styles, { withTheme: true })(ManageClinicPage)
+export default withStyles(styles, { withTheme: true })(ClinicContainer)

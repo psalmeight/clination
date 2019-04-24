@@ -146,7 +146,7 @@ class Patients extends React.Component {
          <div className={classes.root}>
 
             <Paper className={classes.searchRoot} style={{ marginBottom: 10, paddingLeft: 10 }}>
-               <InputBase className={classes.input} placeholder="Search patients" />
+               <InputBase className={classes.input} placeholder="Search patient" />
                <IconButton className={classes.iconButton} aria-label="Search">
                   <SearchIcon />
                </IconButton>
