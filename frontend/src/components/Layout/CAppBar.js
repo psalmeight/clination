@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import _ from 'lodash'
 
 const drawerWidth = 240;
@@ -28,8 +29,14 @@ const styles = theme => ({
     marginLeft: drawerWidth,
     [theme.breakpoints.up("sm")]: {
        width: `calc(100% - ${drawerWidth}px)`
-    }
- },
+    },
+  },
+  appBarBackType: {
+    marginLeft: 0,
+  },
+  menuButtonBackType: {
+    marginRight: 0,
+  },
 })
 
 function addNewClinic(){
@@ -38,21 +45,39 @@ function addNewClinic(){
 
 function CAppBar(props) {
     const { classes } = props
+    
+    let classAppBar = props.backType ? classes.appBarBackType : classes.appBar
 
    return (
       <div className={props.className} style={{ marginBottom: 80 }}>
-         <AppBar positionStatic className={classes.appBar}>
+         <AppBar positionStatic className={classAppBar}>
             <Toolbar>
-              <IconButton
-                color="inherit"
-                aria-label="Open drawer"
-                onClick={() => props.handleDrawerToggle()}
-                className={classes.menuButton}>
-                    <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" color="inherit" noWrap>
-                {props.setTitle || 'Dashboard'}
-              </Typography>
+              {
+                !props.backType ? (
+                  [<IconButton
+                    color="inherit"
+                    aria-label="Open drawer"
+                    onClick={() => props.handleDrawerToggle()}
+                    className={classes.menuButton}>
+                        <MenuIcon />
+                  </IconButton>,
+                  <Typography variant="h6" color="inherit" noWrap>
+                    {props.setTitle || 'Dashboard'}
+                  </Typography>]
+                ) : (
+                    [<IconButton
+                      color="inherit"
+                      aria-label="Open drawer"
+                      onClick={() => props.goBack()}
+                      className={classes.menuButtonBackType}>
+                          <ArrowBackIcon />
+                    </IconButton>,
+                    <Typography variant="h6" color="inherit" noWrap>
+                      {props.setTitle || 'Dashboard'}
+                    </Typography>]
+                )
+              }
+
 
               {
                 props.routePath === '/dashboard/manage_clinics' ? 

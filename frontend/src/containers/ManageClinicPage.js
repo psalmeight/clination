@@ -58,18 +58,11 @@ class ManageClinicPage extends React.Component {
    render() {
       const { classes, theme } = this.props;
 
-      let drawers = [
-         { name: 'Dashboard', route: `/clinic/${this.state.clinicID}`, icon: <InboxIcon /> },
-         { name: 'Patients', route: `/clinic/${this.state.clinicID}/patients`, icon: <InboxIcon /> },
-         { name: 'Appointments', route: `/clinic/${this.state.clinicID}/appointments`, icon: <MailIcon /> },
-         { name: 'Logout', route: '/', icon: <MailIcon /> }
-      ]
-
       return (
-         <CDrawerLayout drawers={drawers} {...this.props}>
-            <Route exact path={`/clinic/${this.state.clinicID}`} render={() => <ClinicDashboard />} />
-            <Route exact path={`/clinic/${this.state.clinicID}/patients`} render={() => <Patients />} />
-            <Route exact path={`/clinic/${this.state.clinicID}/appointments`} render={() => <Appointments />} />
+         <CDrawerLayout unPad backType {...this.props}>
+            <Route exact path={`/clinic/${this.state.clinicID}`} render={() => <ClinicDashboard {...this.props} />} />
+            {/* <Route exact path={`/clinic/${this.state.clinicID}/patients`} render={() => <Patients />} />
+            <Route exact path={`/clinic/${this.state.clinicID}/appointments`} render={() => <Appointments />} /> */}
          </CDrawerLayout>
       )
    }

@@ -44,6 +44,10 @@ const styles = theme => ({
    content: {
       flexGrow: 1,
       padding: theme.spacing.unit * 3
+   },
+   contentNoPads: {
+      flexGrow: 1,
+      padding: 0
    }
 })
 
@@ -66,7 +70,7 @@ class CDrawerLayout extends React.Component {
          case '/dashboard/manage_users': 
             this.setState({ pageTitle: 'Manage Users' }); break
          case '/dashboard/settings': 
-            this.setState({ pageTitle: 'Settings' }); break     
+            this.setState({ pageTitle: 'Settings' }); break 
       }
    }
 
@@ -91,6 +95,10 @@ class CDrawerLayout extends React.Component {
 
    render() {
       const { classes, theme } = this.props;
+      let contentClass = classes.content
+
+      if(this.props.unPad)
+         contentClass = classes.contentNoPads
 
       const drawer = (
          <div>
@@ -113,44 +121,63 @@ class CDrawerLayout extends React.Component {
          </div>
       )
 
+      console.log(this.props)
+
       return (
          <div className={classes.root}>
             <CssBaseline />
+            
+            {
+               !this.props.backType ? (
+                  <div>
+                     <CAppBar 
+                        handleDrawerToggle={this.handleDrawerToggle} 
+                        setTitle={this.state.pageTitle} 
+                        routePath={this.props.location.pathname}
+                        {...this.props}  
+                     />
+      
+                     <nav className={classes.drawer}>
+                        <Hidden smUp implementation="css">
+                           <Drawer
+                           container={this.props.container}
+                           variant="temporary"
+                           anchor={theme.direction === "rtl" ? "right" : "left"}
+                           open={this.state.mobileOpen}
+                           onClose={this.handleDrawerToggle}
+                           classes={{
+                              paper: classes.drawerPaper
+                           }}
+                           >
+                           {drawer}
+                           </Drawer>
+                        </Hidden>
+                        <Hidden xsDown implementation="css">
+                           <Drawer
+                           classes={{
+                              paper: classes.drawerPaper
+                           }}
+                           variant="permanent"
+                           open
+                           >
+                           {drawer}
+                           </Drawer>
+                        </Hidden>
+                     </nav>
+                  </div>
+               ) : (
+                  <div>
+                      <CAppBar 
+                        backType
+                        goBack={() => this.props.history.goBack()}
+                        setTitle={this.state.pageTitle} 
+                        routePath={this.props.location.pathname}   
+                     />
+                  </div>
+               )
+            }
 
-            <CAppBar 
-               handleDrawerToggle={this.handleDrawerToggle} 
-               setTitle={this.state.pageTitle} 
-               routePath={this.props.location.pathname}   
-            />
-
-            <nav className={classes.drawer}>
-               <Hidden smUp implementation="css">
-                  <Drawer
-                  container={this.props.container}
-                  variant="temporary"
-                  anchor={theme.direction === "rtl" ? "right" : "left"}
-                  open={this.state.mobileOpen}
-                  onClose={this.handleDrawerToggle}
-                  classes={{
-                     paper: classes.drawerPaper
-                  }}
-                  >
-                  {drawer}
-                  </Drawer>
-               </Hidden>
-               <Hidden xsDown implementation="css">
-                  <Drawer
-                  classes={{
-                     paper: classes.drawerPaper
-                  }}
-                  variant="permanent"
-                  open
-                  >
-                  {drawer}
-                  </Drawer>
-               </Hidden>
-            </nav>
-            <main className={classes.content}>
+            <main className={contentClass}>
                <div className={classes.toolbar} />
                {this.props.children}
             </main>

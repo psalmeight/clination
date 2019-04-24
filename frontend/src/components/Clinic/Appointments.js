@@ -48,6 +48,16 @@ class Appointments extends React.Component {
 
    fetchData = () => {
       let data = [
+         { id: 3, 
+            employee_name: 'Micah Lumaad', 
+            email: 'micahlumaad@gmail.com', 
+            dob: '05/13/1990', 
+            gender: 'male', 
+            contact: '+639255055519',
+            clinics: [
+               { id: 1, clinic_name: 'Ace Dermatology', role: 'SF' },
+               { id: 2, clinic_name: 'Ace Dental Clinic', role: 'SF' },
+         ]},
          { id: 1, 
             employee_name: 'Ace Jordan Lumaad', 
             email: 'acelumaad@gmail.com', 
@@ -69,16 +79,7 @@ class Appointments extends React.Component {
                { id: 1, clinic_name: 'Ace Dermatology', role: 'DR' },
                { id: 2, clinic_name: 'Ace Dental Clinic', role: 'DR' },
          ]},
-         { id: 3, 
-            employee_name: 'Micah Lumaad', 
-            email: 'micahlumaad@gmail.com', 
-            dob: '05/13/1990', 
-            gender: 'male', 
-            contact: '+639255055519',
-            clinics: [
-               { id: 1, clinic_name: 'Ace Dermatology', role: 'SF' },
-               { id: 2, clinic_name: 'Ace Dental Clinic', role: 'SF' },
-         ]}
+
       ]
 
       this.setState({
