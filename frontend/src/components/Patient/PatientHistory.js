@@ -10,17 +10,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-
-import Avatar from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
-import DoneIcon from '@material-ui/icons/Done';
-
+import { TextField } from '@material-ui/core'
 
 import _ from 'lodash'
 
@@ -47,7 +37,36 @@ class PatientHistory extends React.Component {
    }
 
    fetchData = () => {
+      let data = [
+         { 
+            date: '03/13/1990',
+            id: 1, 
+            chief_complaint: 'Fever, cough', 
+            hpi: 'The quick little brown fox jumps over the back of the lazy dog', 
+            physical_exam: 'The quick little brown fox jumps over the back of the lazy dog', 
+            diagnosis: 'The quick little brown fox jumps over the back of the lazy dog',
+         },
+         { 
+            date: '03/11/1990',
+            id: 2, 
+            chief_complaint: 'Fever, cough', 
+            hpi: 'The quick little brown fox jumps over the back of the lazy dog', 
+            physical_exam: 'The quick little brown fox jumps over the back of the lazy dog', 
+            diagnosis: 'The quick little brown fox jumps over the back of the lazy dog',
+         },
+         { 
+            date: '03/08/1990',
+            id: 3, 
+            chief_complaint: 'Fever, cough', 
+            hpi: 'The quick little brown fox jumps over the back of the lazy dog', 
+            physical_exam: 'The quick little brown fox jumps over the back of the lazy dog', 
+            diagnosis: 'The quick little brown fox jumps over the back of the lazy dog',
+         },
+      ]
 
+      this.setState({
+         data
+      })
    }
 
    render() {
@@ -55,7 +74,76 @@ class PatientHistory extends React.Component {
 
       return (
          <div className={classes.root}>
+            {
+               _.map(this.state.data, (record, idx) => {
+                  return <ExpansionPanel expanded={idx === 0 ? true : null}>
+                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography className={classes.heading}><strong>{record.date}</strong></Typography>
+                     </ExpansionPanelSummary>
+                     <ExpansionPanelDetails>
+                        <form noValidate autoComplete="off">
+                           <TextField
+                              label={'Chief Complaint'}
+                              multiline
+                              rowsMax="4"
+                              value={record.chief_complaint}
+                              fullWidth
+                              margin="dense"
+                              variant="outlined"
+                              InputLabelProps={{
+                                  shrink: true,
+                              }}
+                           />
 
+                           <TextField
+                              label={'Short History'}
+                              multiline
+                              rowsMax="4"
+                              value={record.hpi}
+                              fullWidth
+                              margin="dense"
+                              variant="outlined"
+                              InputLabelProps={{
+                                 shrink: true,
+                              }}
+                           />
+                           
+                           <TextField
+                              label={'Physical Exam'}
+                              multiline
+                              rowsMax="4"
+                              value={record.physical_exam}
+                              fullWidth
+                              margin="dense"
+                              variant="outlined"
+                              InputLabelProps={{
+                                 shrink: true,
+                              }}
+                           />
+
+                           <TextField
+                              label={'Diagnosis'}
+                              multiline
+                              rowsMax="4"
+                              value={record.diagnosis}
+                              fullWidth
+                              margin="dense"
+                              variant="outlined"
+                              InputLabelProps={{
+                                 shrink: true,
+                              }}
+                           />                                              
+                        </form>
+                     </ExpansionPanelDetails>
+                     <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
+                        <Button size="small" color="primary">EDIT</Button>
+                        <Button size="small" color="secondary">
+                           REMOVE
+                        </Button>
+                     </ExpansionPanelActions>
+                  </ExpansionPanel>
+               })
+            }
          </div>
       )
    }

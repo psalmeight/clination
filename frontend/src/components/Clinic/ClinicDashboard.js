@@ -9,7 +9,7 @@ import { Appointments, Patients } from 'components'
 
 function TabContainer(props) {
   return (
-    <Typography component="div" style={{ padding: 8 * 3 }}>
+    <Typography component="div" style={{ padding: 15 }}>
       {props.children}
     </Typography>
   )
