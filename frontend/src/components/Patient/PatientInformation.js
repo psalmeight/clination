@@ -21,6 +21,13 @@ import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
 
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+
+import { TextField } from '@material-ui/core'
 
 import _ from 'lodash'
 
@@ -54,8 +61,125 @@ class PatientInformation extends React.Component {
       const { classes } = this.props
 
       return (
-         <div className={classes.root}>
+         <div className={classes.root} style={{ padding: 15 }}>
+            <form noValidate autoComplete="off">
+               <TextField
+                  label={'Firstname'}
+                  value={this.state.data.chief_complaint}
+                  fullWidth
+                  margin="dense"
+                  variant="outlined"
+                  InputLabelProps={{
+                        shrink: true,
+                  }}
+               />
 
+               <TextField
+                  label={'Middlename'}
+                  value={this.state.data.chief_complaint}
+                  fullWidth
+                  margin="dense"
+                  variant="outlined"
+                  InputLabelProps={{
+                        shrink: true,
+                  }}
+               />
+               
+               <TextField
+                  label={'Lastname'}
+                  value={this.state.data.chief_complaint}
+                  fullWidth
+                  margin="dense"
+                  variant="outlined"
+                  InputLabelProps={{
+                        shrink: true,
+                  }}
+               />
+
+               <Grid container fullWidth>
+                  <Grid item md={6} xs={6} style={{ paddingRight: 5 }}>
+                     <TextField
+                        label={'Birthdate'}
+                        value={this.state.data.dob}
+                        type="date"
+                        defaultValue="03/13/1990"
+                        fullWidth
+                        margin="dense"
+                        variant="outlined"
+                        InputLabelProps={{
+                              shrink: true,
+                        }}
+                     /> 
+                     </Grid>
+                  <Grid item md={6} xs={6} style={{ paddingLeft: 5 }}>
+                     <TextField
+                        label={'Age'}
+                        value={this.state.data.age}
+                        fullWidth
+                        margin="dense"
+                        variant="outlined"
+                        InputLabelProps={{
+                           shrink: true,
+                        }}
+                     />
+                  </Grid>
+               </Grid>
+
+               <TextField
+                  select
+                  label="Gender"
+                  className={classes.textField}
+                  value={this.state.currency}
+                  onChange={() => console.log('This')}
+                  SelectProps={{
+                     MenuProps: {
+                     className: classes.menu,
+                     },
+                  }}
+                  fullWidth
+                  margin="dense"
+                  variant="outlined"
+                  InputLabelProps={{
+                        shrink: true,
+                  }}>
+                  <MenuItem value={'MALE'}>MALE</MenuItem>
+                  <MenuItem value={'FEMALE'}>FEMALE</MenuItem>
+               </TextField>
+
+               <TextField
+                  label={'Blood Type'}
+                  value={this.state.data.blood_type}
+                  fullWidth
+                  margin="dense"
+                  variant="outlined"
+                  InputLabelProps={{
+                        shrink: true,
+                  }}
+               />
+
+               <TextField
+                  label={'Contact No'}
+                  value={this.state.data.contact_no}
+                  fullWidth
+                  margin="dense"
+                  variant="outlined"
+                  InputLabelProps={{
+                        shrink: true,
+                  }}
+               />
+
+               <TextField
+                  label={'Email Address'}
+                  value={this.state.data.email_address}
+                  fullWidth
+                  margin="dense"
+                  variant="outlined"
+                  InputLabelProps={{
+                        shrink: true,
+                  }}
+               />
+
+            </form>
          </div>
       )
    }

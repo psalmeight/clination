@@ -10,6 +10,10 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+
+import InputAdornment from '@material-ui/core/InputAdornment'
 import { TextField } from '@material-ui/core'
 
 import _ from 'lodash'
@@ -22,8 +26,14 @@ const styles = theme => ({
       flexGrow: 1,
    },
    chip: {
-     margin: theme.spacing.unit,
-   }
+      margin: theme.spacing.unit,
+   },
+   card: {
+      minWidth: 275,
+   },
+   title: {
+      fontSize: 14,
+   },
 })
 
 class PatientHistory extends React.Component {
@@ -37,32 +47,14 @@ class PatientHistory extends React.Component {
    }
 
    fetchData = () => {
-      let data = [
-         { 
-            date: '03/13/1990',
-            id: 1, 
-            chief_complaint: 'Fever, cough', 
-            hpi: 'The quick little brown fox jumps over the back of the lazy dog', 
-            physical_exam: 'The quick little brown fox jumps over the back of the lazy dog', 
-            diagnosis: 'The quick little brown fox jumps over the back of the lazy dog',
-         },
-         { 
-            date: '03/11/1990',
-            id: 2, 
-            chief_complaint: 'Fever, cough', 
-            hpi: 'The quick little brown fox jumps over the back of the lazy dog', 
-            physical_exam: 'The quick little brown fox jumps over the back of the lazy dog', 
-            diagnosis: 'The quick little brown fox jumps over the back of the lazy dog',
-         },
-         { 
-            date: '03/08/1990',
-            id: 3, 
-            chief_complaint: 'Fever, cough', 
-            hpi: 'The quick little brown fox jumps over the back of the lazy dog', 
-            physical_exam: 'The quick little brown fox jumps over the back of the lazy dog', 
-            diagnosis: 'The quick little brown fox jumps over the back of the lazy dog',
-         },
-      ]
+      let data = { 
+         date: '03/13/1990',
+         id: 1, 
+         chief_complaint: 'Fever, cough', 
+         hpi: 'The quick little brown fox jumps over the back of the lazy dog', 
+         physical_exam: 'The quick little brown fox jumps over the back of the lazy dog', 
+         diagnosis: 'The quick little brown fox jumps over the back of the lazy dog',
+      }
 
       this.setState({
          data
@@ -73,25 +65,26 @@ class PatientHistory extends React.Component {
       const { classes } = this.props
 
       return (
-         <div className={classes.root}>
-            {
-               _.map(this.state.data, (record, idx) => {
-                  return <ExpansionPanel expanded={idx === 0 ? true : null}>
-                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography className={classes.heading}><strong>{record.date}</strong></Typography>
-                     </ExpansionPanelSummary>
-                     <ExpansionPanelDetails>
-                        <form noValidate autoComplete="off">
+         <div className={classes.root} style={{ padding: 15 }}>
+            <form noValidate autoComplete="off">
+               <Grid container fullWidth>
+                  <Grid item md={6}>
+                     <Card className={classes.card}>
+                        <CardContent>
+                           <Typography className={classes.title} color="textSecondary" gutterBottom>
+                              History Records
+                           </Typography>
+                           
                            <TextField
                               label={'Chief Complaint'}
                               multiline
                               rowsMax="4"
-                              value={record.chief_complaint}
+                              value={this.state.data.chief_complaint}
                               fullWidth
                               margin="dense"
                               variant="outlined"
                               InputLabelProps={{
-                                  shrink: true,
+                                    shrink: true,
                               }}
                            />
 
@@ -99,7 +92,7 @@ class PatientHistory extends React.Component {
                               label={'Short History'}
                               multiline
                               rowsMax="4"
-                              value={record.hpi}
+                              value={this.state.data.hpi}
                               fullWidth
                               margin="dense"
                               variant="outlined"
@@ -107,12 +100,12 @@ class PatientHistory extends React.Component {
                                  shrink: true,
                               }}
                            />
-                           
+                                       
                            <TextField
                               label={'Physical Exam'}
                               multiline
                               rowsMax="4"
-                              value={record.physical_exam}
+                              value={this.state.data.physical_exam}
                               fullWidth
                               margin="dense"
                               variant="outlined"
@@ -125,25 +118,134 @@ class PatientHistory extends React.Component {
                               label={'Diagnosis'}
                               multiline
                               rowsMax="4"
-                              value={record.diagnosis}
+                              value={this.state.data.diagnosis}
                               fullWidth
                               margin="dense"
                               variant="outlined"
                               InputLabelProps={{
                                  shrink: true,
                               }}
-                           />                                              
-                        </form>
-                     </ExpansionPanelDetails>
-                     <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
-                        <Button size="small" color="primary">EDIT</Button>
-                        <Button size="small" color="secondary">
-                           REMOVE
-                        </Button>
-                     </ExpansionPanelActions>
-                  </ExpansionPanel>
-               })
-            }
+                           />     
+                        </CardContent>
+                     </Card>
+                  </Grid>
+                  <Grid item md={6} xs={12}>
+                     <Card className={classes.card} fullWidth>
+                        <CardContent>
+                           <Typography className={classes.title} color="textSecondary" gutterBottom>
+                              Recent Vitals
+                           </Typography>
+                           
+                           <Grid container fullWidth>
+                              <Grid item md={6} xs={6} style={{ paddingRight: 5 }}>
+                                 <TextField
+                                    label={'Weight'}
+                                    value={this.state.data.weight}
+                                    fullWidth
+                                    margin="dense"
+                                    variant="outlined"
+                                    InputProps={{
+                                       endAdornment: <InputAdornment position="end">kg</InputAdornment>,
+                                    }}
+                                    InputLabelProps={{
+                                       shrink: true,
+                                    }}
+                                 />
+                              </Grid>
+                              <Grid item md={6} xs={6} style={{ paddingLeft: 5 }}>
+                                 <TextField
+                                    label={'Height'}
+                                    value={this.state.data.height}
+                                    fullWidth
+                                    margin="dense"
+                                    variant="outlined"
+                                    InputProps={{
+                                       endAdornment: <InputAdornment position="end">cm</InputAdornment>,
+                                    }}
+                                    InputLabelProps={{
+                                       shrink: true,
+                                    }}
+                                 />
+                              </Grid>
+                           </Grid>
+                           <Grid container fullWidth>
+                              <Grid item md={6} xs={6} style={{ paddingRight: 5 }}>
+                                 <TextField
+                                    label={'Blood Pressure'}
+                                    value={this.state.data.height}
+                                    fullWidth
+                                    margin="dense"
+                                    variant="outlined"
+                                    InputProps={{
+                                       endAdornment: <InputAdornment position="end">mmHg</InputAdornment>,
+                                    }}
+                                    InputLabelProps={{
+                                       shrink: true,
+                                    }}
+                                 />
+                              </Grid>
+                              <Grid item md={6} xs={6} style={{ paddingLeft: 5 }}>
+                                 <TextField
+                                    label={'Pulse Rate'}
+                                    value={this.state.data.pulse_rate}
+                                    fullWidth
+                                    margin="dense"
+                                    variant="outlined"
+                                    InputProps={{
+                                       endAdornment: <InputAdornment position="end">bpm</InputAdornment>,
+                                    }}
+                                    InputLabelProps={{
+                                       shrink: true,
+                                    }}
+                                 />
+                              </Grid>
+                           </Grid>
+
+                           <Grid container fullWidth>
+                              <Grid item md={6} xs={6} style={{ paddingRight: 5 }}>
+                                 <TextField
+                                    label={'Respiratory Rate'}
+                                    value={this.state.data.respiratory_rate}
+                                    fullWidth
+                                    margin="dense"
+                                    variant="outlined"
+                                    InputProps={{
+                                       endAdornment: <InputAdornment position="end">bpm</InputAdornment>,
+                                    }}
+                                    InputLabelProps={{
+                                       shrink: true,
+                                    }}
+                                 />
+                              </Grid>
+                              <Grid item md={6} xs={6} style={{ paddingLeft: 5 }}>
+                                 <TextField
+                                    label={'Temperature'}
+                                    value={this.state.data.temperature}
+                                    fullWidth
+                                    margin="dense"
+                                    variant="outlined"
+                                    InputProps={{
+                                       endAdornment: <InputAdornment position="end">C</InputAdornment>,
+                                    }}
+                                    InputLabelProps={{
+                                       shrink: true,
+                                    }}
+                                 />
+                              </Grid>
+                           </Grid>
+                        </CardContent>
+                     </Card>
+                  </Grid>
+               </Grid>
+               <Grid container fullWidth>
+                  <Grid item md={6} xs={12}>
+     
+                  </Grid>
+                  <Grid item md={6} xs={12}>
+
+                  </Grid>
+               </Grid>
+            </form>
          </div>
       )
    }
