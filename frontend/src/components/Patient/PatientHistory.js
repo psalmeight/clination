@@ -67,8 +67,8 @@ class PatientHistory extends React.Component {
       return (
          <div className={classes.root} style={{ padding: 15 }}>
             <form noValidate autoComplete="off">
-               <Grid container fullWidth>
-                  <Grid item md={6}>
+               <Grid container spacing={16}>
+                  <Grid item md={6} xs={12}>
                      <Card className={classes.card}>
                         <CardContent>
                            <Typography className={classes.title} color="textSecondary" gutterBottom>
@@ -89,7 +89,7 @@ class PatientHistory extends React.Component {
                            />
 
                            <TextField
-                              label={'Short History'}
+                              label={'History of Present Illness'}
                               multiline
                               rowsMax="4"
                               value={this.state.data.hpi}
@@ -235,14 +235,41 @@ class PatientHistory extends React.Component {
                            </Grid>
                         </CardContent>
                      </Card>
-                  </Grid>
-               </Grid>
-               <Grid container fullWidth>
-                  <Grid item md={6} xs={12}>
-     
-                  </Grid>
-                  <Grid item md={6} xs={12}>
 
+                     <Card className={classes.card} fullWidth style={{ marginTop: 16 }}>
+                        <CardContent>
+                           <Typography className={classes.title} color="textSecondary" gutterBottom>
+                              Allergies
+                           </Typography>
+                           
+                           <Grid container fullWidth>
+                              <Grid item md={6} xs={6} style={{ paddingRight: 5 }}>
+                                 <TextField
+                                    label={'Food Allergy'}
+                                    value={this.state.data.respiratory_rate}
+                                    fullWidth
+                                    margin="dense"
+                                    variant="outlined"
+                                    InputLabelProps={{
+                                       shrink: true,
+                                    }}
+                                 />
+                              </Grid>
+                              <Grid item md={6} xs={6} style={{ paddingLeft: 5 }}>
+                                 <TextField
+                                    label={'Drug Allergy'}
+                                    value={this.state.data.temperature}
+                                    fullWidth
+                                    margin="dense"
+                                    variant="outlined"
+                                    InputLabelProps={{
+                                       shrink: true,
+                                    }}
+                                 />
+                              </Grid>
+                           </Grid>
+                        </CardContent>
+                     </Card>
                   </Grid>
                </Grid>
             </form>
