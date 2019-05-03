@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -8,41 +8,45 @@ import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import { ClinicForm } from 'components'
+
 import _ from 'lodash'
 
 const drawerWidth = 240;
 
 const styles = theme => ({
-  root: {
-    flexGrow: 1,
-  },
-  grow: {
-    flexGrow: 1,
-  },
-  menuButton: {
-    marginRight: 20,
-    [theme.breakpoints.up("sm")]: {
-       display: "none"
-    },
-  },
-  appBar: {
-    marginLeft: drawerWidth,
-    [theme.breakpoints.up("sm")]: {
-       width: `calc(100% - ${drawerWidth}px)`
-    },
-  },
-  appBarBackType: {
-    marginLeft: 0,
-  },
-  menuButtonBackType: {
-    marginRight: 0,
-  },
+   root: {
+      flexGrow: 1,
+   },
+   grow: {
+      flexGrow: 1,
+   },
+   menuButton: {
+      marginRight: 20,
+      [theme.breakpoints.up("sm")]: {
+         display: "none"
+      },
+   },
+   appBar: {
+      marginLeft: drawerWidth,
+      [theme.breakpoints.up("sm")]: {
+         width: `calc(100% - ${drawerWidth}px)`
+      },
+   },
+   appBarBackType: {
+      marginLeft: 0,
+   },
+   menuButtonBackType: {
+      marginRight: 0,
+   },
 })
 
 function CAppBar(props) {
-    const { classes } = props
+   const { classes } = props
     
-    let classAppBar = props.backType ? classes.appBarBackType : classes.appBar
+   let classAppBar = props.backType ? classes.appBarBackType : classes.appBar
+
+   const [clinicForm, openClinicForm] = useState(false)
 
    return (
       <div className={props.className} style={{ marginBottom: 80 }}>
@@ -78,9 +82,7 @@ function CAppBar(props) {
               {
                 props.routePath === '/dashboard/manage_clinics' ? 
                 (<div style={{ position: 'absolute', right: 10, marginRight: 10 }}>
-                  <Button color="inherit" onClick={props.addNewClinic}>Add Clinic</Button>
-
-                  
+                  <Button color="inherit" onClick={() => openClinicForm(true)}>Add Clinic</Button>
                 </div>)
                 :
                 null
@@ -89,7 +91,8 @@ function CAppBar(props) {
               {
                 props.routePath === '/dashboard/manage_users' ? 
                 (<div style={{ position: 'absolute', right: 10, marginRight: 10 }}>
-                  <Button color="inherit" onClick={addNewClinic()}>Add Users</Button>
+                  <Button color="inherit" onClick={props.addNewClinic}>Add Users</Button>
+                  
                 </div>)
                 :
                 null
@@ -97,11 +100,14 @@ function CAppBar(props) {
               
               {
                 props.showRegistration ?
-                <Button color="inherit" onClick={props.showRegistration}>Register</Button>
+                  <Button color="inherit" onClick={props.showRegistration}>Register</Button>
                 : null
               }
         </Toolbar>
       </AppBar>
+
+      <ClinicForm open={clinicForm} closeForm={() => openClinicForm(false)} />
+      
     </div>
   );
 }

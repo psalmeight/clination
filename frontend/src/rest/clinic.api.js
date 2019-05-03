@@ -13,7 +13,7 @@ export let _getClinics = (callback = null) => {
 
 export let _createClinic = (data, callback = null) => {
   console.log('_createClinic called')
-  post('/api/clinic', data)
+  post('/api/v1/clinic', data)
     .then(response => {
       if (callback) callback(response.data)
     })

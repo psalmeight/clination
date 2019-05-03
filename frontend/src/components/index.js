@@ -17,3 +17,4 @@ export { default as PatientHistory } from './Patient/PatientHistory'
 export { default as PatientMedications } from './Patient/PatientMedications'
 
 export { default as ClinicCard } from './Units/ClinicCard'
+export { default as ClinicForm } from './Units/ClinicForm'

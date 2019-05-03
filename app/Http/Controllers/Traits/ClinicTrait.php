@@ -21,6 +21,8 @@ trait ClinicTrait
 
       $obj->clinic_name = $request->clinic_name;
       $obj->clinic_address = $request->clinic_address;
+      $obj->clinic_contact = $request->clinic_address;
+      $obj->clinic_address = $request->clinic_address;
 
       $obj->save();
 

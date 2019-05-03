@@ -47,12 +47,17 @@ class ManageClinics extends React.Component {
       RouteTo(this.props, path)
    }
 
+   openClinic = () => {
+
+   }
+   
    render() {
       const { classes, theme } = this.props;
 
 
       return (
          <div>
+            <Button onClick={() => this.openClinic()}></Button>
             <Grid style={{ flexDirection: 'row' }} container justify={'center'}>
                {
                   _.map(this.state.data, item => {
