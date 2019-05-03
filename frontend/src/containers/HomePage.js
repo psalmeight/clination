@@ -12,6 +12,9 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 
 import { CDrawerLayout, ManageClinics, ManageUsers, Settings, Dashboard } from 'components'
 
+import { tryLogout } from '../rest/users.api'
+import { ActOnBranch } from '../components/Utils/RouterAction';
+
 const styles = {
     root: {
       flexGrow: 1
@@ -41,8 +44,7 @@ class HomePage extends React.Component {
             { name: 'Dashboard', route: '/dashboard', icon: <InboxIcon /> },
             { name: 'Manage Clinics', route: '/dashboard/manage_clinics', icon: <InboxIcon /> },
             { name: 'Manage Users', route: '/dashboard/manage_users', icon: <MailIcon /> },
-            { name: 'Settings', route: '/dashboard/settings', icon: <InboxIcon /> },
-            { name: 'Logout', route: '/', icon: <MailIcon /> }
+            { name: 'Settings', route: '/dashboard/settings', icon: <InboxIcon /> }
         ]
 
         return (

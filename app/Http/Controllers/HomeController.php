@@ -17,6 +17,7 @@ class HomeController extends Controller
       if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
         $user = User::find(Auth::id());
         $token = $user->createToken($user->email)->accessToken;
+
         return json_encode([
           'status' => 200,
           'access_token' => $token,

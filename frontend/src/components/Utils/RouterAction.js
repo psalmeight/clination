@@ -10,6 +10,7 @@ const RouteTo = (props, path) => {
 
 const CheckAuthentication = (Component, AllowedRoles) => {
   if (!_.isEmpty(localStorage.getItem('rx'))) {
+    
     let uxRx = localStorage.getItem('rx')
 
     if (_.indexOf(AllowedRoles, uxRx) == -1) {
@@ -17,7 +18,7 @@ const CheckAuthentication = (Component, AllowedRoles) => {
     }
   }
 
-  return checkAuth ? Component : <Redirect to="/login" />
+  return checkAuth ? Component : <Redirect to="/" />
 }
 
 const ActOnBranch = (method, name = null, value = null) => {

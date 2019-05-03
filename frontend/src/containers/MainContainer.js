@@ -7,6 +7,9 @@ import {
 } from '@material-ui/core'
 import { CMainLayout } from 'components'
 import { RouteTo } from '../components/Utils/RouterAction'
+import { _tryLogin } from '../rest/users.api'
+
+import _ from 'lodash'
 
 const styles = {
     root: {
@@ -23,7 +26,19 @@ class MainContainer extends React.Component {
     }
 
     state = {
-        showRegistration: false
+        showRegistration: false,
+        email: '',
+        password: ''
+    }
+
+    componentDidMount(){
+        this.validateAuth()
+    }
+
+    validateAuth = () => {
+        if(!_.isEmpty(localStorage.getItem("access_token"))){
+           this.goTo('/dashboard')
+        }
     }
 
     showRegistration = val => {
@@ -32,6 +47,23 @@ class MainContainer extends React.Component {
 
     goTo = (path) => {
         RouteTo(this.props, path)
+    }
+
+    tryLogin = () => {
+        _tryLogin({
+            email: this.state.email,
+            password: this.state.password
+        }, data => {
+            if(data.status == 200 && !_.isEmpty(data.access_token)){
+                this.validateAuth()
+            }
+        })
+    }
+
+    handleChange = (field, e) => {
+        this.setState({
+            [field]: e.target.value
+        })
     }
 
     render(){
@@ -48,6 +80,8 @@ class MainContainer extends React.Component {
                                 placeholder="Enter Username/Email"
                                 fullWidth
                                 margin="dense"
+                                required
+                                onChange={val => this.handleChange('email', val)}
                                 variant="outlined"
                                 InputLabelProps={{
                                     shrink: true,
@@ -59,15 +93,17 @@ class MainContainer extends React.Component {
                                 label="Password"
                                 placeholder="Enter Password"
                                 fullWidth
+                                onChange={val => this.handleChange('password', val)}
                                 type="password"
                                 margin="dense"
+                                required
                                 variant="outlined"
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
                             />
 
-                            <Button variant="contained" fullWidth color="primary" onClick={() => this.goTo('/dashboard')} style={{ marginTop: 10 }}>
+                            <Button variant="contained" fullWidth color="primary" onClick={() => this.tryLogin()} style={{ marginTop: 10 }}>
                                 Login
                             </Button>
 

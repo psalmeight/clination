@@ -36,7 +36,7 @@ trait UsersTrait
       $obj->email = $request->email;
       $obj->contact_no = $request->contact_no;
       $obj->dob = $request->dob;
-      $obj->role = $request->role;
+      $obj->role = $request->role ? $request->role : "owner";
 
       $obj->save();
 

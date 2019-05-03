@@ -39,10 +39,6 @@ const styles = theme => ({
   },
 })
 
-function addNewClinic(){
-
-}
-
 function CAppBar(props) {
     const { classes } = props
     
@@ -82,7 +78,9 @@ function CAppBar(props) {
               {
                 props.routePath === '/dashboard/manage_clinics' ? 
                 (<div style={{ position: 'absolute', right: 10, marginRight: 10 }}>
-                  <Button color="inherit" onClick={addNewClinic()}>Add Clinic</Button>
+                  <Button color="inherit" onClick={props.addNewClinic}>Add Clinic</Button>
+
+                  
                 </div>)
                 :
                 null

@@ -8,10 +8,13 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import { withStyles } from "@material-ui/core/styles";
-import { RouteTo } from '../Utils/RouterAction'
+import InboxIcon from "@material-ui/icons/MoveToInbox";
+import MailIcon from "@material-ui/icons/Mail";
 
+import { RouteTo, ActOnBranch } from '../Utils/RouterAction'
 import _ from 'lodash'
 import CAppBar from "./CAppBar";
+import { _tryLogout } from '../../rest/users.api'
 
 const drawerWidth = 240;
 
@@ -93,6 +96,13 @@ class CDrawerLayout extends React.Component {
       RouteTo(this.props, path)
    }
 
+   tryLogout = () => {
+      _tryLogout({}, data => {
+         ActOnBranch('clear')
+         this.goTo('/')
+      })
+   }
+
    render() {
       const { classes, theme } = this.props;
       let contentClass = classes.content
@@ -117,6 +127,14 @@ class CDrawerLayout extends React.Component {
                      )
                   })
                }
+
+               <ListItem button key={'Logout'} onClick={() => this.tryLogout()}>
+                  <ListItemIcon>
+                     <MailIcon />
+                  </ListItemIcon>
+                  
+                  <ListItemText primary={'Logout'} />
+               </ListItem>
             </List>
          </div>
       )
@@ -138,14 +156,14 @@ class CDrawerLayout extends React.Component {
                      <nav className={classes.drawer}>
                         <Hidden smUp implementation="css">
                            <Drawer
-                           container={this.props.container}
-                           variant="temporary"
-                           anchor={theme.direction === "rtl" ? "right" : "left"}
-                           open={this.state.mobileOpen}
-                           onClose={this.handleDrawerToggle}
-                           classes={{
-                              paper: classes.drawerPaper
-                           }}
+                              container={this.props.container}
+                              variant="temporary"
+                              anchor={theme.direction === "rtl" ? "right" : "left"}
+                              open={this.state.mobileOpen}
+                              onClose={this.handleDrawerToggle}
+                              classes={{
+                                 paper: classes.drawerPaper
+                              }}
                            >
                            {drawer}
                            </Drawer>
