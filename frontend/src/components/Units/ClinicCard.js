@@ -44,7 +44,7 @@ class ClinicCard extends React.Component {
    render(){
 
       const { classes } = this.props
-      
+
       return (
          <div>
             <Card className={classes.card}>
@@ -67,9 +67,9 @@ class ClinicCard extends React.Component {
                </CardContent>
             </CardActionArea>
             <CardActions>
-               <Button size="small" color="primary">
+               {/* <Button size="small" color="primary">
                   EDIT
-               </Button>
+               </Button> */}
                <Button size="small" color="secondary" onClick={() => this.deleteCardOpen(true)}>
                   REMOVE
                </Button>

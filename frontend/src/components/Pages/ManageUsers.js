@@ -21,6 +21,8 @@ import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
 
+import { ActionBar, UserForm } from 'components'
+import { _createUser, _getUsers, _deleteUser } from '../../rest/users.api'
 
 import _ from 'lodash'
 
@@ -39,7 +41,8 @@ const styles = theme => ({
 class ManageUsers extends React.Component {
    state = {
       expanded: 0,
-      data: []
+      data: [],
+      showRegistration: false,
    }
 
    componentDidMount(){
@@ -47,44 +50,13 @@ class ManageUsers extends React.Component {
    }
 
    fetchData = () => {
-      let data = [
-         { id: 1, 
-            employee_name: 'Ace Jordan Lumaad', 
-            email: 'acelumaad@gmail.com', 
-            dob: '03/13/1990', 
-            gender: 'male',
-            contact: '+639255055519',
-            clinics: [
-               { id: 1, clinic_name: 'Ace Dermatology', role: 'OR' },
-               { id: 2, clinic_name: 'Ace Dermatology', role: 'DR' },
-               { id: 3, clinic_name: 'Ace Dental Clinic', role: 'SF' },
-         ]},
-         { id: 2, 
-            employee_name: 'Gwen Lumaad', 
-            email: 'gwenlumaad@gmail.com', 
-            dob: '01/13/1990', 
-            gender: 'female', 
-            contact: '+639255055519',
-            clinics: [
-               { id: 1, clinic_name: 'Ace Dermatology', role: 'DR' },
-               { id: 2, clinic_name: 'Ace Dental Clinic', role: 'DR' },
-         ]},
-         { id: 3, 
-            employee_name: 'Micah Lumaad', 
-            email: 'micahlumaad@gmail.com', 
-            dob: '05/13/1990', 
-            gender: 'male', 
-            contact: '+639255055519',
-            clinics: [
-               { id: 1, clinic_name: 'Ace Dermatology', role: 'SF' },
-               { id: 2, clinic_name: 'Ace Dental Clinic', role: 'SF' },
-         ]}
-      ]
-
-      this.setState({
-         data
+      _getUsers(data => {
+         this.setState({
+            data
+         })
       })
    }
+
    handleChange = panel => (event, expanded) => {
       this.setState({
         expanded: expanded ? panel : false,
@@ -95,17 +67,28 @@ class ManageUsers extends React.Component {
       alert('You clicked the delete icon.')
    }
 
+   showRegistration = val => {
+      this.setState({ showRegistration: val })
+   }
+
    render() {
       const { classes, theme } = this.props
       const { expanded } = this.state
 
       return (
          <div className={classes.root}>
+
+            <ActionBar>
+               <Button color="primary" onClick={() => this.showRegistration(true)}>
+                  Register a User
+               </Button>
+            </ActionBar>
+
             {
                _.map(this.state.data, (record, idx) => {
                   return <ExpansionPanel>
                      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography className={classes.heading}><strong>{record.employee_name}</strong></Typography>
+                        <Typography className={classes.heading}><strong>{record.lastname}, {record.firstname} {record.middlename}</strong></Typography>
                      </ExpansionPanelSummary>
                      <ExpansionPanelDetails style={{ padding: 0 }}>
                         <Table>
@@ -132,7 +115,7 @@ class ManageUsers extends React.Component {
                                  <TableCell>
                                  <strong>Contact</strong>
                                  </TableCell>
-                                 <TableCell>{record.contact}</TableCell>
+                                 <TableCell>{record.contact_no}</TableCell>
                               </TableRow>
                            </TableBody>
                         </Table>
@@ -147,6 +130,11 @@ class ManageUsers extends React.Component {
                })
             }
             
+            <UserForm 
+               open={this.state.showRegistration} 
+               closeForm={() => this.showRegistration(false)} 
+               refreshList={() => this.fetchData()}   
+            />
          </div>
       )
    }
