@@ -23,6 +23,7 @@ import DoneIcon from '@material-ui/icons/Done';
 
 import { ActionBar, UserForm } from 'components'
 import { _createUser, _getUsers, _deleteUser } from '../../rest/users.api'
+import { CConfirm } from 'components'
 
 import _ from 'lodash'
 
@@ -43,6 +44,7 @@ class ManageUsers extends React.Component {
       expanded: 0,
       data: [],
       showRegistration: false,
+      deleteOpen: false
    }
 
    componentDidMount(){
@@ -69,6 +71,15 @@ class ManageUsers extends React.Component {
 
    showRegistration = val => {
       this.setState({ showRegistration: val })
+   }
+
+   deleteCardOpen = val => {
+      this.setState({ deleteOpen: val })
+   }
+
+   onDelete = () => {
+      this.props.onDelete()
+      this.deleteCardOpen(false)
    }
 
    render() {
@@ -121,8 +132,7 @@ class ManageUsers extends React.Component {
                         </Table>
                      </ExpansionPanelDetails>
                      <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
-                        <Button size="small" color="primary">EDIT</Button>
-                        <Button size="small" color="secondary">
+                        <Button size="small" color="secondary" onClick={() => this.onDelete}>
                            REMOVE
                         </Button>
                      </ExpansionPanelActions>
@@ -134,6 +144,18 @@ class ManageUsers extends React.Component {
                open={this.state.showRegistration} 
                closeForm={() => this.showRegistration(false)} 
                refreshList={() => this.fetchData()}   
+            />
+
+            <CConfirm
+               open={this.state.deleteOpen}
+               onClose={() => this.deleteCardOpen(false)}
+               onOk={() => this.deleteCardOpen(false)}
+               title={'Delete Confirmation'}
+               message={`Are you sure you want to delete this record?`}
+               actions={[
+                  { actionTitle: 'Yes', action: () => this.onDelete(), actionType: 'primary' },
+                  { actionTitle: 'Cancel', action: () => this.deleteCardOpen(false), actionType: 'secondary' }
+               ]}
             />
          </div>
       )
