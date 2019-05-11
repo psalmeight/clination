@@ -26,6 +26,18 @@ class HomeController extends Controller
           'message' => 'Successful'
         ]);
       }
+      if(Auth::attempt(['username' => $request->email, 'password' => $request->password])){
+        $user = User::find(Auth::id());
+        $token = $user->createToken($user->email)->accessToken;
+
+        return json_encode([
+          'status' => 200,
+          'access_token' => $token,
+          'user_id' => $user->id,
+          'user' => $user,
+          'message' => 'Successful'
+        ]);
+      }
       else{
         return json_encode([
           'status' => 401,

@@ -31,6 +31,8 @@ Route::prefix('/v1')->middleware(['auth:api'])->group(function () {
     //Clinics API
     Route::post('/clinic', 'ClinicController@saveClinic');
     Route::get('/clinics', 'ClinicController@getClinics');
+    Route::get('/clinics/own', 'ClinicController@getClinicsByLoggedUser');
+
     Route::get('/clinic/{id}', 'ClinicController@getClinic');
     Route::delete('/clinic/{id}', 'ClinicController@deleteClinic');
     Route::get('/clinics/{user}', 'ClinicController@getClinicsByUser');

@@ -39,7 +39,7 @@ trait ClinicTrait
       $objList = Clinic::orderBy('created_at')->get();
       return $objList;
   }
-
+  
   public function func_getClinicsByUser($userID)
   {
     $objList = Clinic::where('user_id', $userID)->with('user')->get();

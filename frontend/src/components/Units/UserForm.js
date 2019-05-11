@@ -214,7 +214,7 @@ class UserForm extends React.Component {
                                             </Button>
                                         </Grid>
                                         <Grid item md={6} style={{ textAlign: 'right' }}>
-                                            <Button variant="contained" color="primary" onClick={() => this.closeForm()} style={{ marginTop: 20 }}>
+                                            <Button variant="contained" color="primary" onClick={() => this.props.closeForm()} style={{ marginTop: 20 }}>
                                                 Cancel
                                             </Button>
                                         </Grid>

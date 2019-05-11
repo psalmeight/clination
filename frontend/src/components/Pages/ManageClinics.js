@@ -5,7 +5,7 @@ import { Typography, Grid, Button } from '@material-ui/core'
 import { ClinicCard, ActionBar, ClinicForm } from 'components'
 import _ from 'lodash'
 import { RouteTo } from '../Utils/RouterAction'
-import { _getClinics, _deleteClinic } from '../../rest/clinic.api'
+import { _getClinicsOwn, _deleteClinic } from '../../rest/clinic.api'
 
 const styles = {
    root: {
@@ -28,7 +28,7 @@ class ManageClinics extends React.Component {
    }
 
    fetchData = () => {
-      _getClinics(data => {
+      _getClinicsOwn(data => {
          this.setState({
             data
          })

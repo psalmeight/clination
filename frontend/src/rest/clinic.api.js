@@ -11,6 +11,17 @@ export let _getClinics = (callback = null) => {
     })
 }
 
+export let _getClinicsOwn = (callback = null) => {
+  console.log('_getClinics called')
+  get('/api/v1/clinics/own')
+    .then(response => {
+      if (callback) callback(response.data)
+    })
+    .catch(e => {
+      console.log('Error in _getClinicsOwn', e)
+    })
+}
+
 export let _createClinic = (data, callback = null) => {
   console.log('_createClinic called')
   post('/api/v1/clinic', data)

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\ClinicTrait;
 use Illuminate\Support\Facades\Log;
+use Auth;
 
 class ClinicController extends Controller
 {
@@ -26,6 +27,14 @@ class ClinicController extends Controller
   {
     $objResult = $this->func_getClinic($id);
     return response()->json($objResult);
+  }
+
+  public function getClinicsByLoggedUser()
+  {
+    Log::info(Auth::user()->id);
+
+    $objList = $this->func_getClinicsByUser(Auth::user()->id);
+    return response()->json($objList);
   }
 
   public function getClinicsByUser($user)
