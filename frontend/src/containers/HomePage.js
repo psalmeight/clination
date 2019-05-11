@@ -8,7 +8,7 @@ import {
 
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
-import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import { CDrawerLayout, ManageClinics, ManageUsers, Settings, Dashboard } from 'components'
 

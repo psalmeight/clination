@@ -18,3 +18,5 @@ export { default as PatientMedications } from './Patient/PatientMedications'
 
 export { default as ClinicCard } from './Units/ClinicCard'
 export { default as ClinicForm } from './Units/ClinicForm'
+
+export { default as ActionBar } from './Utils/ActionBar'

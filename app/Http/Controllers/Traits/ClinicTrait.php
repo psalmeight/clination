@@ -13,7 +13,7 @@ trait ClinicTrait
 
   public function func_saveClinic($request)
   {   
-      $userAccount = User::find($request->user_id);
+      $userAccount = User::find(Auth::user()->id);
 
       $obj = new Clinic;
 
@@ -22,7 +22,6 @@ trait ClinicTrait
       $obj->clinic_name = $request->clinic_name;
       $obj->clinic_address = $request->clinic_address;
       $obj->clinic_contact = $request->clinic_address;
-      $obj->clinic_address = $request->clinic_address;
 
       $obj->save();
 

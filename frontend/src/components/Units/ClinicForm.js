@@ -49,6 +49,7 @@ class ClinicForm extends React.Component {
         _createClinic(this.state.form, () => {
             this.showPopup(false)
             this.props.closeForm()
+            this.props.refreshList()
         })
     }
 

@@ -187,7 +187,7 @@ class CDrawerLayout extends React.Component {
                         backType
                         goBack={() => this.props.history.goBack()}
                         setTitle={this.state.pageTitle} 
-                        routePath={this.props.location.pathname}   
+                        routePath={this.props.location.pathname}
                      />
                   </div>
                )

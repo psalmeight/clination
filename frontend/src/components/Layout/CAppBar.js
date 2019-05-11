@@ -46,8 +46,6 @@ function CAppBar(props) {
     
    let classAppBar = props.backType ? classes.appBarBackType : classes.appBar
 
-   const [clinicForm, openClinicForm] = useState(false)
-
    return (
       <div className={props.className} style={{ marginBottom: 80 }}>
          <AppBar positionStatic className={classAppBar}>
@@ -78,26 +76,6 @@ function CAppBar(props) {
                 )
               }
 
-
-              {
-                props.routePath === '/dashboard/manage_clinics' ? 
-                (<div style={{ position: 'absolute', right: 10, marginRight: 10 }}>
-                  <Button color="inherit" onClick={() => openClinicForm(true)}>Add Clinic</Button>
-                </div>)
-                :
-                null
-              }
-              
-              {
-                props.routePath === '/dashboard/manage_users' ? 
-                (<div style={{ position: 'absolute', right: 10, marginRight: 10 }}>
-                  <Button color="inherit" onClick={props.addNewClinic}>Add Users</Button>
-                  
-                </div>)
-                :
-                null
-              }
-              
               {
                 props.showRegistration ?
                   <Button color="inherit" onClick={props.showRegistration}>Register</Button>
@@ -105,8 +83,6 @@ function CAppBar(props) {
               }
         </Toolbar>
       </AppBar>
-
-      <ClinicForm open={clinicForm} closeForm={() => openClinicForm(false)} />
       
     </div>
   );

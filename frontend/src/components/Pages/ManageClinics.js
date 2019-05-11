@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles'
 import { Typography, Grid, Button } from '@material-ui/core'
-import { ClinicCard } from 'components'
+import { ClinicCard, ActionBar, ClinicForm } from 'components'
 import _ from 'lodash'
 import { RouteTo } from '../Utils/RouterAction'
+import { _getClinics, _deleteClinic } from '../../rest/clinic.api'
 
 const styles = {
    root: {
@@ -18,24 +19,25 @@ const styles = {
 class ManageClinics extends React.Component {
 
    state = {
-      data: []
+      data: [],
+      openClinicForm: false
    }
+
    componentDidMount(){
       this.fetchData()
    }
 
    fetchData = () => {
-      let data = [
-         { id: 1, clinic_name: 'Ace Medical Center', address: 'Lizards are a widespread group of squamate reptiles' },
-         { id: 2, clinic_name: 'Ace Dermatology Center', address: 'Lizards are a widespread group of squamate reptiles' },
-         { id: 3, clinic_name: 'Ace Dental Center', address: 'Lizards are a widespread group of squamate reptiles' },
-         { id: 4, clinic_name: 'Ace Medical Center', address: 'Lizards are a widespread group of squamate reptiles' },
-         { id: 5, clinic_name: 'Ace Dermatology Center', address: 'Lizards are a widespread group of squamate reptiles' },
-         { id: 6, clinic_name: 'Ace Dental Center', address: 'Lizards are a widespread group of squamate reptiles' },
-      ]
+      _getClinics(data => {
+         this.setState({
+            data
+         })
+      })
+   }
 
-      this.setState({
-         data
+   deleteClinic = id => {
+      _deleteClinic(id, () => {
+         this.fetchData()
       })
    }
 
@@ -47,28 +49,39 @@ class ManageClinics extends React.Component {
       RouteTo(this.props, path)
    }
 
-   openClinic = () => {
-
+   addNewClinic = val => {
+      this.setState({ openClinicForm: val })
    }
    
    render() {
       const { classes, theme } = this.props;
 
-
       return (
          <div>
-            <Button onClick={() => this.openClinic()}></Button>
-            <Grid style={{ flexDirection: 'row' }} container justify={'center'}>
+            <ActionBar>
+               <Button color="primary" onClick={() => this.addNewClinic(true)}>
+                  Register a new Clinic
+               </Button>
+            </ActionBar>
+
+            <Grid style={{ flexDirection: 'row' }} container>
                {
                   _.map(this.state.data, item => {
                      return (
                         <Grid item md={4}>
-                           <ClinicCard data={item} onClick={() => this.onCardClick(item)} />
+                           <ClinicCard data={item} onClick={() => this.onCardClick(item)} onDelete={() => this.deleteClinic(item.id)} />
                         </Grid>
                      )
                   })
                }     
             </Grid>
+
+            <ClinicForm 
+               open={this.state.openClinicForm} 
+               closeForm={() => this.addNewClinic(false)} 
+               refreshList={() => this.fetchData()}   
+            />
+         
          </div>
       )
    }

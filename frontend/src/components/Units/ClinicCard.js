@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -24,62 +24,76 @@ const styles = {
   media: {
     objectFit: 'cover',
   },
-};
+}
 
-function ClinicCard(props) {
+class ClinicCard extends React.Component {
    
-  const { classes } = props
-  const [deleteOpen, toggleDeleteOpen] = useState(false)
+   state = {
+      deleteOpen: false
+   }
 
-  return (
-    <div>
-    <Card className={classes.card}>
-      <CardActionArea onClick={() => props.onClick()}>
-         <CardMedia
-            component="img"
-            alt="Contemplative Reptile"
-            className={classes.media}
-            height="140"
-            image="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
-            title="Contemplative Reptile"
-         />
-         <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-               {props.data.clinic_name}
-            </Typography>
-            <Typography component="p">
-               {props.data.address}
-            </Typography>
-         </CardContent>
-      </CardActionArea>
-      <CardActions>
-         <Button size="small" color="primary">
-            EDIT
-         </Button>
-         <Button size="small" color="secondary" onClick={() => toggleDeleteOpen(true)}>
-            REMOVE
-         </Button>
-      </CardActions>
-   </Card>
+   deleteCardOpen = val => {
+      this.setState({ deleteOpen: val })
+   }
 
-   <CConfirm
-      open={deleteOpen}
-      onClose={() => toggleDeleteOpen(false)}
-      onOk={() => toggleDeleteOpen(false)}
-      title={'Delete Confirmation'}
-      message={`Are you sure you want to delete ${props.data.clinic_name}?`}
-      actions={[
-         { actionTitle: 'Yes', action: () => toggleDeleteOpen(false), actionType: 'primary' },
-         { actionTitle: 'Cancel', action: () => toggleDeleteOpen(false), actionType: 'secondary' }
-      ]}
-   />
+   onDelete = () => {
+      this.props.onDelete()
+      this.deleteCardOpen(false)
+   }
 
-   </div>
-  )
+   render(){
+
+      const { classes } = this.props
+      
+      return (
+         <div>
+            <Card className={classes.card}>
+            <CardActionArea onClick={() => this.props.onClick()}>
+               <CardMedia
+                  component="img"
+                  alt="Contemplative Reptile"
+                  className={classes.media}
+                  height="140"
+                  image="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
+                  title="Contemplative Reptile"
+               />
+               <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                     {this.props.data.clinic_name}
+                  </Typography>
+                  <Typography component="p">
+                     {this.props.data.clinic_address}
+                  </Typography>
+               </CardContent>
+            </CardActionArea>
+            <CardActions>
+               <Button size="small" color="primary">
+                  EDIT
+               </Button>
+               <Button size="small" color="secondary" onClick={() => this.deleteCardOpen(true)}>
+                  REMOVE
+               </Button>
+            </CardActions>
+            </Card>
+     
+            <CConfirm
+               open={this.state.deleteOpen}
+               onClose={() => this.deleteCardOpen(false)}
+               onOk={() => this.deleteCardOpen(false)}
+               title={'Delete Confirmation'}
+               message={`Are you sure you want to delete ${this.props.data.clinic_name}?`}
+               actions={[
+                  { actionTitle: 'Yes', action: () => this.onDelete(), actionType: 'primary' },
+                  { actionTitle: 'Cancel', action: () => this.deleteCardOpen(false), actionType: 'secondary' }
+               ]}
+            />
+         </div>
+      )
+   }
 }
 
 ClinicCard.propTypes = {
-  classes: PropTypes.object.isRequired,
+   classes: PropTypes.object.isRequired,
 }
 
 export default withStyles(styles)(ClinicCard)
