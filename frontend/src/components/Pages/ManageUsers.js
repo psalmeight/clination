@@ -121,7 +121,7 @@ class ManageUsers extends React.Component {
                      </ExpansionPanelSummary>
                      <ExpansionPanelDetails>
                         <Grid container spacing={8}>
-                           <Grid item md={6}>
+                           <Grid item md={6} style={{ width: '100%' }}>
                               <Paper>
                                  <Table>
                                     <TableBody>
@@ -139,12 +139,6 @@ class ManageUsers extends React.Component {
                                        </TableRow>
                                        <TableRow>
                                           <TableCell>
-                                          <strong>Gender</strong>
-                                          </TableCell>
-                                          <TableCell>{record.user.gender}</TableCell>
-                                       </TableRow>
-                                       <TableRow>
-                                          <TableCell>
                                           <strong>Contact</strong>
                                           </TableCell>
                                           <TableCell>{record.user.contact_no}</TableCell>
@@ -153,7 +147,7 @@ class ManageUsers extends React.Component {
                                  </Table>
                               </Paper>
                            </Grid>
-                           <Grid item md={6}>
+                           <Grid item md={6} style={{ width: '100%' }}>
                               <Paper>
                                  <Table>
                                     <TableBody>
