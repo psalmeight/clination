@@ -39,10 +39,16 @@ trait ClinicUserTrait
         $objList = ClinicUser::orderBy('created_at')->get();
         return $objList;
     }
+    
+    public function func_getClinicUsersByUser($userID)
+    {
+        $objList = ClinicUser::where('user_id', $userID)->with(['user', 'clinic'])->get();
+        return $objList;
+    }
 
     public function func_getClinicUsersByClinic($clinicID)
     {
-        $objList = ClinicUser::where('clinic_id', $clinicID)->with(['user', 'clinic'])->get();
+        $objList = ClinicUser::where('clinic_id', $clinicID)->with(['clinic'])->get();
         return $objList;
     }
 

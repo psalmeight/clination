@@ -15,17 +15,19 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
 
-import { ActionBar, UserForm } from 'components'
+import { ActionBar, UserForm, ClinicUserForm } from 'components'
 import { _createUser, _getUsers, _deleteUser } from '../../rest/users.api'
 import { CConfirm } from 'components'
 
 import _ from 'lodash'
+import { truncateSync } from "fs";
 
 const styles = theme => ({
    root: {
@@ -44,7 +46,9 @@ class ManageUsers extends React.Component {
       expanded: 0,
       data: [],
       showRegistration: false,
-      deleteOpen: false
+      showUserRole: false,
+      deleteOpen: false,
+      selectedID: ''
    }
 
    componentDidMount(){
@@ -73,6 +77,10 @@ class ManageUsers extends React.Component {
       this.setState({ showRegistration: val })
    }
 
+   showUserRole = (val, id) => {
+      this.setState({ showUserRole: val, selectedID: id })
+   }
+
    deleteCardOpen = val => {
       this.setState({ deleteOpen: val })
    }
@@ -89,7 +97,7 @@ class ManageUsers extends React.Component {
       return (
          <div className={classes.root}>
 
-            <ActionBar>
+            <ActionBar style={{ marginBottom: 10 }}>
                <Button color="primary" onClick={() => this.showRegistration(true)}>
                   Register a User
                </Button>
@@ -97,43 +105,75 @@ class ManageUsers extends React.Component {
 
             {
                _.map(this.state.data, (record, idx) => {
+
+                  console.log(record)
                   return <ExpansionPanel>
                      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography className={classes.heading}><strong>{record.lastname}, {record.firstname} {record.middlename}</strong></Typography>
+                        <Typography className={classes.heading}><strong>{record.user.lastname}, {record.user.firstname} {record.user.middlename}</strong></Typography>
                      </ExpansionPanelSummary>
-                     <ExpansionPanelDetails style={{ padding: 0 }}>
-                        <Table>
-                           <TableBody>
-                              <TableRow>
-                                 <TableCell>
-                                    <strong>Email</strong>
-                                 </TableCell>
-                                 <TableCell>{record.email}</TableCell>
-                              </TableRow>
-                              <TableRow>
-                                 <TableCell>
-                                 <strong>Birthdate</strong>
-                                 </TableCell>
-                                 <TableCell>{record.dob}</TableCell>
-                              </TableRow>
-                              <TableRow>
-                                 <TableCell>
-                                 <strong>Gender</strong>
-                                 </TableCell>
-                                 <TableCell>{record.gender}</TableCell>
-                              </TableRow>
-                              <TableRow>
-                                 <TableCell>
-                                 <strong>Contact</strong>
-                                 </TableCell>
-                                 <TableCell>{record.contact_no}</TableCell>
-                              </TableRow>
-                           </TableBody>
-                        </Table>
+                     <ExpansionPanelDetails>
+                        <Grid container>
+                           <Grid item md={6}>
+                              <Paper>
+                                 <Table>
+                                    <TableBody>
+                                       <TableRow>
+                                          <TableCell>
+                                             <strong>Email</strong>
+                                          </TableCell>
+                                          <TableCell>{record.user.email}</TableCell>
+                                       </TableRow>
+                                       <TableRow>
+                                          <TableCell>
+                                          <strong>Birthdate</strong>
+                                          </TableCell>
+                                          <TableCell>{record.user.dob}</TableCell>
+                                       </TableRow>
+                                       <TableRow>
+                                          <TableCell>
+                                          <strong>Gender</strong>
+                                          </TableCell>
+                                          <TableCell>{record.user.gender}</TableCell>
+                                       </TableRow>
+                                       <TableRow>
+                                          <TableCell>
+                                          <strong>Contact</strong>
+                                          </TableCell>
+                                          <TableCell>{record.user.contact_no}</TableCell>
+                                       </TableRow>
+                                    </TableBody>
+                                 </Table>
+                              </Paper>
+                           </Grid>
+                           <Grid item md={6}>
+                              <Paper>
+                                 <Table>
+                                    <TableBody>
+
+                                       {
+                                          _.map(record.roles, role => {
+                                             return <TableRow>
+                                             <TableCell>
+                                                <strong>{role.clinic.clinic_name}</strong>
+                                             </TableCell>
+                                          </TableRow>
+                                          })
+                                       }
+                                       
+                                    </TableBody>
+                                 </Table>
+                              </Paper>
+                           </Grid>
+                        </Grid>
+
                      </ExpansionPanelDetails>
                      <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
                         <Button size="small" color="secondary" onClick={() => this.onDelete}>
                            REMOVE
+                        </Button>
+
+                        <Button size="small" color="primary" onClick={() => this.showUserRole(true, record.user.id)}>
+                           ADD A ROLE
                         </Button>
                      </ExpansionPanelActions>
                   </ExpansionPanel>
@@ -143,6 +183,13 @@ class ManageUsers extends React.Component {
             <UserForm 
                open={this.state.showRegistration} 
                closeForm={() => this.showRegistration(false)} 
+               refreshList={() => this.fetchData()}   
+            />
+
+            <ClinicUserForm 
+               open={this.state.showUserRole} 
+               closeForm={() => this.showUserRole(false)}
+               userID={this.state.selectedID}
                refreshList={() => this.fetchData()}   
             />
 

@@ -5,9 +5,13 @@ namespace App\Http\Controllers\Traits;
 use App\User;
 use Auth;
 use Illuminate\Support\Facades\Log;
+use App\Http\Controllers\Traits\ClinicUserTrait;
 
 trait UsersTrait
 {
+
+  use ClinicUserTrait;
+  
   public function func_saveUser($request)
   {
       $obj = new User;
@@ -49,8 +53,18 @@ trait UsersTrait
 
   public function func_getUsers()
   {
+      $usersList = [];
       $objectList = User::orderBy('created_at')->get();
-      return $objectList;
+
+      foreach($objectList as $obj){
+        $clinicUsers = $this->func_getClinicUsersByUser($obj->id);
+        array_push($usersList, array(
+          "user" => $obj,
+          "roles" => $clinicUsers
+        ));
+      }
+
+      return $usersList;
   }
 
   public function func_getUser($id)

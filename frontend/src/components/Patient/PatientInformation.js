@@ -129,7 +129,7 @@ class PatientInformation extends React.Component {
                   select
                   label="Gender"
                   className={classes.textField}
-                  value={this.state.currency}
+                  value={this.state.gender}
                   onChange={() => console.log('This')}
                   SelectProps={{
                      MenuProps: {
