@@ -40,6 +40,9 @@ const styles = theme => ({
    },
    chip: {
      margin: theme.spacing.unit,
+   },
+   heading: {
+      textTransform: 'uppercase'
    }
 })
 
@@ -113,11 +116,9 @@ class ManageUsers extends React.Component {
 
             {
                _.map(this.state.data, (record, idx) => {
-
-                  console.log(record)
                   return <ExpansionPanel>
                      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography className={classes.heading}><strong>{record.user.lastname}, {record.user.firstname} {record.user.middlename}</strong></Typography>
+                        <Typography className={classes.heading}><strong>{record.user.lastname}, {record.user.firstname} {record.user.middlename} ({record.user.role})</strong></Typography>
                      </ExpansionPanelSummary>
                      <ExpansionPanelDetails>
                         <Grid container spacing={8}>

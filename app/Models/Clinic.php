@@ -12,4 +12,16 @@ class Clinic extends Model
     public function user(){
         return $this->belongsTo('App\User');
     }
+
+    public function clinic_users(){
+        return $this->hasMany('App\Models\ClinicUser');
+    }
+
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($user) {
+             $user->clinic_users()->delete();
+        });
+    }
 }
