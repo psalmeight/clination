@@ -24,6 +24,8 @@ import DoneIcon from '@material-ui/icons/Done';
 
 import { ActionBar, UserForm, ClinicUserForm } from 'components'
 import { _createUser, _getUsers, _deleteUser } from '../../rest/users.api'
+import { _deleteClinicUser } from '../../rest/clinic_user.api'
+
 import { CConfirm } from 'components'
 
 import _ from 'lodash'
@@ -90,6 +92,12 @@ class ManageUsers extends React.Component {
       this.deleteCardOpen(false)
    }
 
+   onDeleteRole = id => {
+      _deleteClinicUser(id, () => {
+         this.fetchData()
+      })
+   }
+
    render() {
       const { classes, theme } = this.props
       const { expanded } = this.state
@@ -112,7 +120,7 @@ class ManageUsers extends React.Component {
                         <Typography className={classes.heading}><strong>{record.user.lastname}, {record.user.firstname} {record.user.middlename}</strong></Typography>
                      </ExpansionPanelSummary>
                      <ExpansionPanelDetails>
-                        <Grid container>
+                        <Grid container spacing={8}>
                            <Grid item md={6}>
                               <Paper>
                                  <Table>
@@ -155,6 +163,11 @@ class ManageUsers extends React.Component {
                                              return <TableRow>
                                              <TableCell>
                                                 <strong>{role.clinic.clinic_name}</strong>
+                                             </TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}>
+                                                <Button size="small" color="secondary" onClick={() => this.onDeleteRole(role.id)}>
+                                                   REMOVE
+                                                </Button>
                                              </TableCell>
                                           </TableRow>
                                           })
