@@ -1,6 +1,8 @@
 import _ from 'lodash'
 
 export const REGISTER_CLINIC = ['MAIN_OWNER', 'OWNER']
+export const VIEW_DASHBOARD = ['MAIN_OWNER', 'OWNER']
+
 export const CLINIC_LIST = ['MAIN_OWNER', 'OWNER', 'DOCTOR', 'STAFF']
 export const DELETE_CLINIC = ['MAIN_OWNER']
 

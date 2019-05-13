@@ -13,7 +13,7 @@ function Routes() {
       <Switch>
         <Route exact path="/" component={MainContainer} />
         <Route path="/dashboard" render={props => CheckAuthentication(<HomePage {...props} />, ['OWNER','ADMIN','MAIN_OWNER'])} />
-        <Route path="/clinics" render={props => <ClinicListPage {...props} />} />
+        <Route path="/clinics" render={props => CheckAuthentication(<ClinicListPage {...props} />, ['OWNER','ADMIN','MAIN_OWNER','STAFF', 'DOCTOR'])} />
         <Route path="/clinic/:clinicID" render={props => <ClinicContainer {...props} />} />
         <Route path="/patient/:patientID" render={props => <PatientContainer {...props} />} />
         <Route component={AccessDenied} />

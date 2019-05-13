@@ -235,6 +235,7 @@ class CMainLayout extends React.Component {
                 </Modal>
 
                 <CConfirm
+                    key={1}
                     open={this.state.confirm}
                     onClose={() => this.showConfirm(false)}
                     onOk={() => this.submitForm()}

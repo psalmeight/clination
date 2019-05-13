@@ -8,6 +8,7 @@ import {
 import { CMainLayout } from 'components'
 import { RouteTo } from '../components/Utils/RouterAction'
 import { _tryLogin } from '../rest/users.api'
+import * as rule from '../components/Utils/RoleAccessConfig'
 
 import _ from 'lodash'
 
@@ -37,7 +38,10 @@ class MainContainer extends React.Component {
 
     validateAuth = () => {
         if(!_.isEmpty(localStorage.getItem("access_token"))){
-           this.goTo('/dashboard')
+            if(rule.roleQualified(rule.VIEW_DASHBOARD))
+                this.goTo('/dashboard')
+            else
+                this.goTo('/clinics')
         }
     }
 
