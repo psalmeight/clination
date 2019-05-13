@@ -79,7 +79,7 @@ function CAppBar(props) {
               {
                 props.showRegistration ?
                   <Button color="inherit" onClick={props.showRegistration}>Register</Button>
-                : null
+                : <Button color="inherit" onClick={() => props.logout()} style={{ position: 'absolute', right: 20 }}>Logout</Button>
               }
         </Toolbar>
       </AppBar>

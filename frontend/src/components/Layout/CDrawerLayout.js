@@ -128,13 +128,13 @@ class CDrawerLayout extends React.Component {
                   })
                }
 
-               <ListItem button key={'Logout'} onClick={() => this.tryLogout()}>
+               {/* <ListItem button key={'Logout'} onClick={() => this.tryLogout()}>
                   <ListItemIcon>
                      <MailIcon />
                   </ListItemIcon>
                   
                   <ListItemText primary={'Logout'} />
-               </ListItem>
+               </ListItem> */}
             </List>
          </div>
       )
@@ -150,6 +150,7 @@ class CDrawerLayout extends React.Component {
                         handleDrawerToggle={this.handleDrawerToggle} 
                         setTitle={this.state.pageTitle} 
                         routePath={this.props.location.pathname}
+                        logout={this.tryLogout}
                         {...this.props}  
                      />
       
@@ -186,8 +187,9 @@ class CDrawerLayout extends React.Component {
                       <CAppBar 
                         backType
                         goBack={() => this.props.history.goBack()}
-                        setTitle={this.state.pageTitle} 
+                        setTitle={this.state.pageTitle}
                         routePath={this.props.location.pathname}
+                        logout={this.tryLogout}
                      />
                   </div>
                )

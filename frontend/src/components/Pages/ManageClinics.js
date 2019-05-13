@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles'
 import { Typography, Grid, Button } from '@material-ui/core'
 import { ClinicCard, ActionBar, ClinicForm } from 'components'
+import * as rule from '../Utils/RoleAccessConfig'
+
 import _ from 'lodash'
 import { RouteTo } from '../Utils/RouterAction'
 import { _getClinicsOwn, _deleteClinic } from '../../rest/clinic.api'
@@ -58,12 +60,15 @@ class ManageClinics extends React.Component {
 
       return (
          <div>
-            <ActionBar style={{ marginBottom: 10 }}>
-               <Button color="primary" onClick={() => this.addNewClinic(true)}>
-                  Register a new Clinic
-               </Button>
-            </ActionBar>
 
+            {
+               rule.roleQualified(rule.REGISTER_CLINIC) ? <ActionBar style={{ marginBottom: 10 }}>
+                  <Button color="primary" onClick={() => this.addNewClinic(true)}>
+                     Register a new Clinic
+                  </Button>
+               </ActionBar> : null
+            }
+            
             <Grid style={{ flexDirection: 'row' }} container>
                {
                   !_.isEmpty(this.state.data) ? (
@@ -78,12 +83,14 @@ class ManageClinics extends React.Component {
                }   
             </Grid>
 
-            <ClinicForm 
-               open={this.state.openClinicForm} 
-               closeForm={() => this.addNewClinic(false)} 
-               refreshList={() => this.fetchData()}   
-            />
-         
+            {
+               rule.roleQualified(rule.REGISTER_CLINIC) ? <ClinicForm 
+                  open={this.state.openClinicForm} 
+                  closeForm={() => this.addNewClinic(false)} 
+                  refreshList={() => this.fetchData()}   
+               /> : null
+            }
+
          </div>
       )
    }

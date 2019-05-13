@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import { DecideWhere } from '../components/Utils/RouterAction'
 import PatientContainer from '../containers/PatientContainer';
 import ClinicContainer from '../containers/ClinicContainer';
+import { ClinicListPage } from '../containers';
 
 function Routes() {
   return (
@@ -12,6 +13,7 @@ function Routes() {
       <Switch>
         <Route exact path="/" component={MainContainer} />
         <Route path="/dashboard" render={props => CheckAuthentication(<HomePage {...props} />, ['OWNER','ADMIN','MAIN_OWNER'])} />
+        <Route path="/clinics" render={props => <ClinicListPage {...props} />} />
         <Route path="/clinic/:clinicID" render={props => <ClinicContainer {...props} />} />
         <Route path="/patient/:patientID" render={props => <PatientContainer {...props} />} />
         <Route component={AccessDenied} />
