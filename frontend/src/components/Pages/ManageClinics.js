@@ -66,14 +66,16 @@ class ManageClinics extends React.Component {
 
             <Grid style={{ flexDirection: 'row' }} container>
                {
-                  _.map(this.state.data, item => {
-                     return (
-                        <Grid item md={4}>
-                           <ClinicCard data={item} onClick={() => this.onCardClick(item)} onDelete={() => this.deleteClinic(item.id)} />
-                        </Grid>
-                     )
-                  })
-               }     
+                  !_.isEmpty(this.state.data) ? (
+                     _.map(this.state.data, item => {
+                        return (
+                           <Grid item md={4}>
+                              <ClinicCard data={item} onClick={() => this.onCardClick(item)} onDelete={() => this.deleteClinic(item.id)} />
+                           </Grid>
+                        )
+                     })
+                  ) : <Typography style={{ fontSize: 30, color: 'gray' }}>No clinic(s)</Typography>
+               }   
             </Grid>
 
             <ClinicForm 

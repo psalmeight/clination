@@ -52,10 +52,13 @@ class ClinicCard extends React.Component {
 
                <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
-                     {this.props.data.clinic_name}
+                     {this.props.data.clinic_name || 'No clinic name'}
                   </Typography>
                   <Typography component="p">
-                     {this.props.data.clinic_address}
+                     {this.props.data.clinic_address || 'Address not specified'}
+                  </Typography>
+                  <Typography component="p">
+                     {this.props.data.clinic_contact || 'No contact number specified'}
                   </Typography>
                </CardContent>
             </CardActionArea>

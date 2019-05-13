@@ -16,8 +16,9 @@ class CreateClinicsTable extends Migration
         Schema::create('clinics', function (Blueprint $table) {
             $table->bigIncrements('id');
 
-            $table->string('clinic_name')->unique();
+            $table->string('clinic_name')->nullable();
             $table->string('clinic_address')->nullable();
+            $table->string('clinic_contact')->nullable();
 
             $table->integer('user_id')->unsigned()->nullable();
             $table->foreign('user_id')
