@@ -99,12 +99,14 @@ class ManageUsers extends React.Component {
    deleteRoleSuccess = () => {
       _deleteClinicUser(this.state.selectedRoleID, () => {
          this.fetchData()
+         this.onDeleteRole(false, '')
       })
    }
 
    deleteUserSuccess = () => {
       _deleteUser(this.state.selectedUserID, () => {
          this.fetchData()
+         this.onDeleteUser(false, '')
       })
    }
 

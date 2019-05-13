@@ -58,7 +58,7 @@ class UserForm extends React.Component {
     handleChange = (field, e) => {
         let form = this.state.form
         form[field] = e.target.value
-
+        
         this.setState({
             form
         })
@@ -150,7 +150,6 @@ class UserForm extends React.Component {
                                         placeholder="Enter Contact Number"
                                         onChange={value => this.handleChange('contact_no', value)}
                                         fullWidth
-
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
@@ -203,11 +202,11 @@ class UserForm extends React.Component {
                                     />
                                     
                                     <TextField
+                                        id="role"
                                         select
                                         label="Role"
-                                        className={classes.textField}
-                                        value={this.state.role}
                                         onChange={value => this.handleChange('role', value)}
+                                        value={this.state.form.role}
                                         SelectProps={{
                                             MenuProps: {
                                             className: classes.menu,
@@ -251,7 +250,7 @@ class UserForm extends React.Component {
                     title={'New User Confirmation'}
                     message={'Are sure you want to save this user information?'}
                     actions={[
-                        { actionTitle: 'Yes', action: () => this.submitForm(), actionType: 'primary' },
+                        { actionTitle: 'Confirm', action: () => this.submitForm(), actionType: 'primary' },
                         { actionTitle: 'Cancel', action: () => this.showPopup(false), actionType: 'secondary' }
                     ]}
                 />
