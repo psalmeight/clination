@@ -53,17 +53,17 @@ function CAppBar(props) {
 
                {
                   props.backType ? (
-                        [<IconButton
-                           color="inherit"
-                           aria-label="Open drawer"
-                           onClick={() => props.goBack()}
-                           className={classes.menuButtonBackType}>
-                              <ArrowBackIcon />
-                        </IconButton>,
-                        <Typography variant="h6" color="inherit" noWrap>
-                           {props.setTitle || 'Dashboard'}
-                        </Typography>]
-                     ) : null
+                     [<IconButton
+                        color="inherit"
+                        aria-label="Open drawer"
+                        onClick={() => props.goBack()}
+                        className={classes.menuButtonBackType}>
+                           <ArrowBackIcon />
+                     </IconButton>,
+                     <Typography variant="h6" color="inherit" noWrap>
+                        {props.setTitle || 'Dashboard'}
+                     </Typography>]
+                  ) : null
                }
 
                {

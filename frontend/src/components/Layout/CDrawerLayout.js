@@ -144,7 +144,7 @@ class CDrawerLayout extends React.Component {
             <CssBaseline />
             
             {
-               !this.props.backType ? (
+               !this.props.backType && !this.props.firstPage ? (
                   <div>
                      <CAppBar 
                         handleDrawerToggle={this.handleDrawerToggle} 

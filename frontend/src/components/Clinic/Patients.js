@@ -38,7 +38,7 @@ import deepOrange from '@material-ui/core/colors/deepOrange';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 
 import { RouteTo } from '../Utils/RouterAction'
-
+import { PatientForm, CConfirm } from 'components'
 import _ from 'lodash'
 
 const styles = theme => ({
@@ -79,12 +79,13 @@ const styles = theme => ({
 })
 function ListItemLink(props) {
    return <ListItem button component="a" {...props} />;
- }
+}
  
 class Patients extends React.Component {
    state = {
       expanded: 0,
-      data: []
+      data: [],
+      openPatientForm: false
    }
 
    componentDidMount(){
@@ -92,44 +93,17 @@ class Patients extends React.Component {
    }
 
    fetchData = () => {
-      let data = [
-         { id: 1, 
-            employee_name: 'Ace Jordan Lumaad', 
-            email: 'acelumaad@gmail.com', 
-            dob: '03/13/1990', 
-            gender: 'M',
-            contact: '+639255055519',
-            clinics: [
-               { id: 1, clinic_name: 'Ace Dermatology', role: 'OR' },
-               { id: 2, clinic_name: 'Ace Dermatology', role: 'DR' },
-               { id: 3, clinic_name: 'Ace Dental Clinic', role: 'SF' },
-         ]},
-         { id: 2, 
-            employee_name: 'Gwen Lumaad', 
-            email: 'gwenlumaad@gmail.com', 
-            dob: '01/13/1990', 
-            gender: 'F', 
-            contact: '+639255055519',
-            clinics: [
-               { id: 1, clinic_name: 'Ace Dermatology', role: 'DR' },
-               { id: 2, clinic_name: 'Ace Dental Clinic', role: 'DR' },
-         ]},
-         { id: 3, 
-            employee_name: 'Micah Lumaad', 
-            email: 'micahlumaad@gmail.com', 
-            dob: '05/13/1990', 
-            gender: 'M', 
-            contact: '+639255055519',
-            clinics: [
-               { id: 1, clinic_name: 'Ace Dermatology', role: 'SF' },
-               { id: 2, clinic_name: 'Ace Dental Clinic', role: 'SF' },
-         ]}
-      ]
+      let data = []
 
       this.setState({
          data
       })
    }
+
+   openPatientForm = val => {
+      this.setState({ openPatientForm: val })
+   }
+
    handleChange = panel => (event, expanded) => {
       this.setState({
         expanded: expanded ? panel : false,
@@ -155,15 +129,18 @@ class Patients extends React.Component {
       return (
          <div className={classes.root}>
 
-            <Paper className={classes.searchRoot} style={{ marginBottom: 10, paddingLeft: 10 }}>
-               <InputBase className={classes.input} placeholder="Search patient" />
-               <IconButton className={classes.iconButton} aria-label="Search">
-                  <SearchIcon />
-               </IconButton>
-            </Paper>
+               <Grid container>
+                  <Grid item md={10} xs={8}>
+                     <Paper className={classes.searchRoot} style={{ marginBottom: 10, paddingLeft: 10 }}>
+                        <InputBase className={classes.input} placeholder="Search patient" />
+                     </Paper>
+                  </Grid>
+                  <Grid item md={2} xs={4} style={{ paddingLeft: 10 }}>
+                     <Button variant="contained" color="primary" style={{ width: '100%' }} onClick={() => this.openPatientForm(true)}>ADD PATIENT</Button>
+                  </Grid>
+               </Grid>
 
             <List component="nav">
-
                {
                   _.map(this.state.data, (record, idx) => {
                      let avatarClass = record.gender === 'M' ? classes.purpleAvatar : classes.orangeAvatar
@@ -176,9 +153,13 @@ class Patients extends React.Component {
                      </ListItem>
                   })
                }
-
-               
             </List>
+
+            <PatientForm 
+               open={this.state.openPatientForm} 
+               closeForm={() => this.openPatientForm(false)} 
+               refreshList={() => this.fetchData()}   
+            />
             
          </div>
       )

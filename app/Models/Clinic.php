@@ -17,6 +17,10 @@ class Clinic extends Model
         return $this->hasMany('App\Models\ClinicUser');
     }
 
+    public function patients(){
+        return $this->hasMany('App\Models\Patient');
+    }
+
     public static function boot() {
         parent::boot();
 
