@@ -59,7 +59,10 @@ class MainContainer extends React.Component {
             password: this.state.password
         }, data => {
             if(data.status == 200 && !_.isEmpty(data.access_token)){
-                this.validateAuth()
+                if(rule.roleQualified(rule.VIEW_DASHBOARD))
+                    this.goTo('/dashboard')
+                else
+                    this.goTo('/clinics')
             }
         })
     }

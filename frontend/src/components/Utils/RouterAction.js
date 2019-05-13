@@ -4,11 +4,13 @@ import _ from 'lodash'
 import { AccessDenied } from 'containers'
 
 let checkAuth = !_.isEmpty(localStorage.getItem('access_token')) ? true : false
+
 const RouteTo = (props, path) => {
   props.history.push(path)
 }
 
 const CheckAuthentication = (Component, AllowedRoles) => {
+
   if (!_.isEmpty(localStorage.getItem('rx'))) {
     
     let uxRx = localStorage.getItem('rx')
@@ -18,7 +20,7 @@ const CheckAuthentication = (Component, AllowedRoles) => {
     }
   }
 
-  return checkAuth ? Component : <Redirect to="/" />
+  return !_.isEmpty(localStorage.getItem('access_token')) ? Component : <Redirect to="/" />
 }
 
 const ActOnBranch = (method, name = null, value = null) => {
