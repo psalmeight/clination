@@ -108,6 +108,13 @@ class MainContainer extends React.Component {
                                 InputLabelProps={{
                                     shrink: true,
                                 }}
+                                onKeyPress={ev => {
+
+                                    if (ev.key === 'Enter') {
+                                        this.tryLogin()
+                                        ev.preventDefault();
+                                    }
+                                }}
                             />
 
                             <Button variant="contained" fullWidth color="primary" onClick={() => this.tryLogin()} style={{ marginTop: 10 }}>
