@@ -6,6 +6,7 @@ import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
+import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import { CConfirm } from 'components'
 import { _createUser, _getUsers, _deleteUser } from '../../rest/users.api'
@@ -103,6 +104,7 @@ class UserForm extends React.Component {
                                                 label="Firstname"
                                                 placeholder="Enter Firstname"
                                                 fullWidth
+                                                required={true}
                                                 margin="dense"
                                                 onChange={value => this.handleChange('firstname', value)}
                                                 variant="outlined"
@@ -118,6 +120,7 @@ class UserForm extends React.Component {
                                                 placeholder="Enter Middlename"
                                                 onChange={value => this.handleChange('middlename', value)}
                                                 fullWidth
+                                                required={true}
                                                 margin="dense"
                                                 variant="outlined"
                                                 InputLabelProps={{
@@ -133,6 +136,7 @@ class UserForm extends React.Component {
                                         type="date"
                                         defaultValue="03/13/1990"
                                         fullWidth
+                                        required={true}
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
@@ -146,6 +150,7 @@ class UserForm extends React.Component {
                                         placeholder="Enter Contact Number"
                                         onChange={value => this.handleChange('contact_no', value)}
                                         fullWidth
+
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
@@ -159,6 +164,7 @@ class UserForm extends React.Component {
                                         placeholder="Enter Email"
                                         onChange={value => this.handleChange('email', value)}
                                         fullWidth
+                                        required={true}
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
@@ -167,25 +173,13 @@ class UserForm extends React.Component {
                                     />
 
                                     <TextField
-                                        id="username"
-                                        label="Username"
-                                        placeholder="Enter Username"
-                                        onChange={value => this.handleChange('username', value)}
-                                        fullWidth
-                                        margin="dense"
-                                        variant="outlined"
-                                        InputLabelProps={{
-                                            shrink: true,
-                                        }}
-                                    />
-                
-                                    <TextField
                                         id="password"
                                         label="Password"
                                         placeholder="Enter Password"
                                         onChange={value => this.handleChange('password', value)}
                                         fullWidth
                                         type="password"
+                                        required={true}
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
@@ -200,12 +194,36 @@ class UserForm extends React.Component {
                                         onChange={value => this.handleChange('confirm', value)}
                                         fullWidth
                                         type="password"
+                                        required={true}
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
                                     />
+                                    
+                                    <TextField
+                                        select
+                                        label="Role"
+                                        className={classes.textField}
+                                        value={this.state.role}
+                                        onChange={value => this.handleChange('role', value)}
+                                        SelectProps={{
+                                            MenuProps: {
+                                            className: classes.menu,
+                                            },
+                                        }}
+                                        fullWidth
+                                        required={true}
+                                        margin="dense"
+                                        variant="outlined"
+                                        InputLabelProps={{
+                                                shrink: true,
+                                        }}>
+                                        <MenuItem value={'OWNER'}>OWNER</MenuItem>
+                                        <MenuItem value={'DOCTOR'}>DOCTOR</MenuItem>
+                                        <MenuItem value={'STAFF'}>STAFF</MenuItem>
+                                    </TextField>
 
                                     <Grid container>
                                         <Grid item md={6}>

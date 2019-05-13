@@ -96,7 +96,7 @@ class ClinicUserForm extends React.Component {
                         justify="center"
                         alignItems="center">
                         <Grid item>
-                            <Paper elevation={2} style={{ padding: 20 }}>
+                            <Paper elevation={2} style={{ padding: 20, width: 300 }}>
                                 <Typography variant="h6" style={{ marginBottom: 20 }}>
                                     Clinic User
                                 </Typography>
@@ -130,7 +130,7 @@ class ClinicUserForm extends React.Component {
                                     <Grid container>
                                         <Grid item md={6}>
                                             <Button variant="contained" color="primary" onClick={() => this.showPopup(true)} style={{ marginTop: 20 }}>
-                                                Save User Role
+                                                Submit Form
                                             </Button>
                                         </Grid>
                                         <Grid item md={6} style={{ textAlign: 'right' }}>
@@ -150,10 +150,10 @@ class ClinicUserForm extends React.Component {
                     open={this.state.confirm}
                     onClose={() => this.showPopup(false)}
                     onOk={() => this.showPopup(false)}
-                    title={'New User Confirmation'}
-                    message={'Are sure you want to save this user information?'}
+                    title={'Confirm Clinic Assignment'}
+                    message={'Are sure you want to assign user to this clinic?'}
                     actions={[
-                        { actionTitle: 'Yes', action: () => this.submitForm(), actionType: 'primary' },
+                        { actionTitle: 'Confirm', action: () => this.submitForm(), actionType: 'primary' },
                         { actionTitle: 'Cancel', action: () => this.showPopup(false), actionType: 'secondary' }
                     ]}
                 />

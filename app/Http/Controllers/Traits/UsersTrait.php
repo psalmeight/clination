@@ -35,7 +35,7 @@ trait UsersTrait
       $obj->middlename = $request->middlename;
       $obj->firstname = $request->firstname;
       $obj->lastname = $request->lastname;
-      $obj->username = $request->username;
+      //$obj->username = $request->username;
 
       $obj->email = $request->email;
       $obj->contact_no = $request->contact_no;

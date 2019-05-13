@@ -181,7 +181,7 @@ class ManageUsers extends React.Component {
                         </Button>
 
                         <Button size="small" color="primary" onClick={() => this.showUserRole(true, record.user.id)}>
-                           ADD A ROLE
+                           Assign to a clinic
                         </Button>
                      </ExpansionPanelActions>
                   </ExpansionPanel>
