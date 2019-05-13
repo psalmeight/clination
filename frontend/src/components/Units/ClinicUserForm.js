@@ -98,7 +98,7 @@ class ClinicUserForm extends React.Component {
                         <Grid item>
                             <Paper elevation={2} style={{ padding: 20, width: 300 }}>
                                 <Typography variant="h6" style={{ marginBottom: 20 }}>
-                                    Clinic User
+                                    User Clinic Assignment
                                 </Typography>
                                 <form noValidate autoComplete="off">
                                     <TextField

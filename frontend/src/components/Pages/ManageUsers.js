@@ -52,8 +52,10 @@ class ManageUsers extends React.Component {
       data: [],
       showRegistration: false,
       showUserRole: false,
-      deleteOpen: false,
-      selectedID: ''
+      deleteRoleOpen: false,
+      deleteUserOpen: false,
+      selectedUserID: '',
+      selectedRoleID: ''
    }
 
    componentDidMount(){
@@ -82,21 +84,26 @@ class ManageUsers extends React.Component {
       this.setState({ showRegistration: val })
    }
 
-   showUserRole = (val, id) => {
-      this.setState({ showUserRole: val, selectedID: id })
+   showUserRole = (val, userID) => {
+      this.setState({ showUserRole: val, selectedUserID: userID })
    }
 
-   deleteCardOpen = val => {
-      this.setState({ deleteOpen: val })
+   onDeleteRole = (val, roleID) => {
+      this.setState({ deleteRoleOpen: val, selectedRoleID: roleID })
    }
 
-   onDelete = () => {
-      this.props.onDelete()
-      this.deleteCardOpen(false)
+   onDeleteUser = (val, userID) => {
+      this.setState({ deleteUserOpen: val, selectedUserID: userID })
    }
 
-   onDeleteRole = id => {
-      _deleteClinicUser(id, () => {
+   deleteRoleSuccess = () => {
+      _deleteClinicUser(this.state.selectedRoleID, () => {
+         this.fetchData()
+      })
+   }
+
+   deleteUserSuccess = () => {
+      _deleteUser(this.state.selectedUserID, () => {
          this.fetchData()
       })
    }
@@ -160,7 +167,7 @@ class ManageUsers extends React.Component {
                                                 <strong>{role.clinic.clinic_name}</strong>
                                              </TableCell>
                                              <TableCell style={{ textAlign: 'right' }}>
-                                                <Button size="small" color="secondary" onClick={() => this.onDeleteRole(role.id)}>
+                                                <Button size="small" color="secondary" onClick={() => this.onDeleteRole(true, role.id)}>
                                                    REMOVE
                                                 </Button>
                                              </TableCell>
@@ -176,8 +183,8 @@ class ManageUsers extends React.Component {
 
                      </ExpansionPanelDetails>
                      <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
-                        <Button size="small" color="secondary" onClick={() => this.onDelete}>
-                           REMOVE
+                        <Button size="small" color="secondary" onClick={() => this.onDeleteUser(true, record.user.id)}>
+                           DELETE USER
                         </Button>
 
                         <Button size="small" color="primary" onClick={() => this.showUserRole(true, record.user.id)}>
@@ -197,19 +204,31 @@ class ManageUsers extends React.Component {
             <ClinicUserForm 
                open={this.state.showUserRole} 
                closeForm={() => this.showUserRole(false)}
-               userID={this.state.selectedID}
+               userID={this.state.selectedUserID}
                refreshList={() => this.fetchData()}   
             />
 
             <CConfirm
-               open={this.state.deleteOpen}
+               open={this.state.deleteRoleOpen}
+               onClose={() => this.onDeleteRole(false, '')}
+               onOk={() => this.onDeleteRole(false, '')}
+               title={'Delete Confirmation'}
+               message={`Are you sure you want to delete this record?`}
+               actions={[
+                  { actionTitle: 'Confirm', action: () => this.deleteRoleSuccess(), actionType: 'primary' },
+                  { actionTitle: 'Cancel', action: () => this.onDeleteRole(false, ''), actionType: 'secondary' }
+               ]}
+            />
+
+            <CConfirm
+               open={this.state.deleteUserOpen}
                onClose={() => this.deleteCardOpen(false)}
                onOk={() => this.deleteCardOpen(false)}
                title={'Delete Confirmation'}
                message={`Are you sure you want to delete this record?`}
                actions={[
-                  { actionTitle: 'Yes', action: () => this.onDelete(), actionType: 'primary' },
-                  { actionTitle: 'Cancel', action: () => this.deleteCardOpen(false), actionType: 'secondary' }
+                  { actionTitle: 'Confirm', action: () => this.deleteUserSuccess(), actionType: 'primary' },
+                  { actionTitle: 'Cancel', action: () => this.onDeleteUser(false, ''), actionType: 'secondary' }
                ]}
             />
          </div>

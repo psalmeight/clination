@@ -79,7 +79,7 @@ class ClinicCard extends React.Component {
                title={'Delete Confirmation'}
                message={`Are you sure you want to delete ${this.props.data.clinic_name}?`}
                actions={[
-                  { actionTitle: 'Yes', action: () => this.onDelete(), actionType: 'primary' },
+                  { actionTitle: 'Delete', action: () => this.onDelete(), actionType: 'primary' },
                   { actionTitle: 'Cancel', action: () => this.deleteCardOpen(false), actionType: 'secondary' }
                ]}
             />
