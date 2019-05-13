@@ -59,7 +59,7 @@ class ClinicListPage extends React.Component {
       const { classes, theme } = this.props;
 
       return (
-         <CDrawerLayout unPad backType {...this.props}>
+         <CDrawerLayout unPad firstPage {...this.props}>
             <Route exact path={`/clinics`} render={() => <ManageClinics {...this.props} />} />
          </CDrawerLayout>
       )

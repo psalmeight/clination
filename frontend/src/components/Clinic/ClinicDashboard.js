@@ -44,7 +44,7 @@ class ClinicDashboard extends React.Component {
         <AppBar position="static">
           <Tabs value={value} onChange={this.handleChange}>
             <Tab label="Patients" />
-            <Tab label="Appointments" />
+            {/* <Tab label="Appointments" /> */}
           </Tabs>
         </AppBar>
         {value === 0 && <TabContainer>

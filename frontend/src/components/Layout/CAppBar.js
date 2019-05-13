@@ -50,37 +50,50 @@ function CAppBar(props) {
       <div className={props.className} style={{ marginBottom: 80 }}>
          <AppBar positionStatic className={classAppBar}>
             <Toolbar>
-              {
-                !props.backType ? (
-                  [<IconButton
-                    color="inherit"
-                    aria-label="Open drawer"
-                    onClick={() => props.handleDrawerToggle()}
-                    className={classes.menuButton}>
-                        <MenuIcon />
-                  </IconButton>,
-                  <Typography variant="h6" color="inherit" noWrap>
-                    {props.setTitle || 'Dashboard'}
-                  </Typography>]
-                ) : (
-                    [<IconButton
-                      color="inherit"
-                      aria-label="Open drawer"
-                      onClick={() => props.goBack()}
-                      className={classes.menuButtonBackType}>
-                          <ArrowBackIcon />
-                    </IconButton>,
-                    <Typography variant="h6" color="inherit" noWrap>
-                      {props.setTitle || 'Dashboard'}
-                    </Typography>]
-                )
-              }
 
-              {
-                props.showRegistration ?
-                  <Button color="inherit" onClick={props.showRegistration}>Register</Button>
-                : <Button color="inherit" onClick={() => props.logout()} style={{ position: 'absolute', right: 20 }}>Logout</Button>
-              }
+               {
+                  props.backType ? (
+                        [<IconButton
+                           color="inherit"
+                           aria-label="Open drawer"
+                           onClick={() => props.goBack()}
+                           className={classes.menuButtonBackType}>
+                              <ArrowBackIcon />
+                        </IconButton>,
+                        <Typography variant="h6" color="inherit" noWrap>
+                           {props.setTitle || 'Dashboard'}
+                        </Typography>]
+                     ) : null
+               }
+
+               {
+                  props.drawers ? (
+                     [<IconButton
+                        color="inherit"
+                        aria-label="Open drawer"
+                        onClick={() => props.handleDrawerToggle()}
+                        className={classes.menuButton}>
+                            <MenuIcon />
+                      </IconButton>,
+                      <Typography variant="h6" color="inherit" noWrap>
+                        {props.setTitle || 'Dashboard'}
+                      </Typography>]
+                     ) : null
+               }
+
+               {
+                  !props.backType && !props.drawers ? (
+                        <Typography variant="h6" color="inherit" noWrap>
+                     {props.setTitle || 'Dashboard'}
+                  </Typography>
+                  ) : null
+               }
+               
+               {
+                  props.showRegistration ?
+                     <Button color="inherit" onClick={props.showRegistration}>Register</Button>
+                  : <Button color="inherit" onClick={() => props.logout()} style={{ position: 'absolute', right: 20 }}>Logout</Button>
+               }
         </Toolbar>
       </AppBar>
       
