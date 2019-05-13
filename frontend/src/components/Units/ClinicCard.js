@@ -49,14 +49,7 @@ class ClinicCard extends React.Component {
          <div>
             <Card className={classes.card}>
             <CardActionArea onClick={() => this.props.onClick()}>
-               <CardMedia
-                  component="img"
-                  alt="Contemplative Reptile"
-                  className={classes.media}
-                  height="140"
-                  image="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
-                  title="Contemplative Reptile"
-               />
+
                <CardContent>
                   <Typography gutterBottom variant="h5" component="h2">
                      {this.props.data.clinic_name}

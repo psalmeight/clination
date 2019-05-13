@@ -58,7 +58,7 @@ class ManageClinics extends React.Component {
 
       return (
          <div>
-            <ActionBar>
+            <ActionBar style={{ marginBottom: 10 }}>
                <Button color="primary" onClick={() => this.addNewClinic(true)}>
                   Register a new Clinic
                </Button>
