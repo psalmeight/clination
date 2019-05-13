@@ -31,8 +31,6 @@ class ClinicController extends Controller
 
   public function getClinicsByLoggedUser()
   {
-    Log::info(Auth::user()->id);
-
     $objList = $this->func_getClinicsByUser(Auth::user()->id);
     return response()->json($objList);
   }

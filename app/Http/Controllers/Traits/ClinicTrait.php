@@ -10,6 +10,7 @@ use Carbon\Carbon;
 
 trait ClinicTrait
 {
+  use ClinicUserTrait;
 
   public function func_saveClinic($request)
   {   
@@ -31,7 +32,7 @@ trait ClinicTrait
   public function func_getClinic($objID)
   {
     $obj = Clinic::find($objID);
-    return $obj->data;
+    return $obj;
   }
 
   public function func_getClinics()
@@ -42,7 +43,22 @@ trait ClinicTrait
   
   public function func_getClinicsByUser($userID)
   {
-    $objList = Clinic::where('user_id', $userID)->with('user')->get();
+    $objList = [];
+
+    if(Auth::user()->role === 'MAIN_OWNER' || Auth::user()->role === 'OWNER'){
+      $objList = Clinic::where('user_id', $userID)->with('user')->get();
+    }
+    else {
+      $cuList = $this->func_getClinicUsersByUser(Auth::user()->id);
+
+      if(count($cuList) > 0){
+        foreach($cuList as $cu){
+          $clinic = $this->func_getClinic($cu->clinic_id);
+          array_push($objList, $clinic);
+        }
+      }
+    }
+
     return $objList;
   }
 
