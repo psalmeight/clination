@@ -11,7 +11,7 @@ function Routes() {
     <Router>
       <Switch>
         <Route exact path="/" component={MainContainer} />
-        <Route path="/dashboard" render={props => CheckAuthentication(<HomePage {...props} />, ['owner','administrator'])} />
+        <Route path="/dashboard" render={props => CheckAuthentication(<HomePage {...props} />, ['OWNER','ADMIN'])} />
         <Route path="/clinic/:clinicID" render={props => <ClinicContainer {...props} />} />
         <Route path="/patient/:patientID" render={props => <PatientContainer {...props} />} />
         <Route component={AccessDenied} />
