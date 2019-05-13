@@ -222,7 +222,7 @@ class CMainLayout extends React.Component {
                                             </Button>
                                         </Grid>
                                         <Grid item md={6} style={{ textAlign: 'right' }}>
-                                            <Button variant="contained" color="primary" onClick={() => this.showRegistration(false)} style={{ marginTop: 20 }}>
+                                            <Button variant="contained" color="secondary" onClick={() => this.showRegistration(false)} style={{ marginTop: 20 }}>
                                                 Cancel
                                             </Button>
                                         </Grid>

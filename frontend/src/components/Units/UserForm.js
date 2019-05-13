@@ -225,13 +225,13 @@ class UserForm extends React.Component {
                                     </TextField>
 
                                     <Grid container>
-                                        <Grid item md={6}>
+                                        <Grid item md={6} xs={6}>
                                             <Button variant="contained" color="primary" onClick={() => this.showPopup(true)} style={{ marginTop: 20 }}>
                                                 Register
                                             </Button>
                                         </Grid>
-                                        <Grid item md={6} style={{ textAlign: 'right' }}>
-                                            <Button variant="contained" color="primary" onClick={() => this.props.closeForm()} style={{ marginTop: 20 }}>
+                                        <Grid item md={6} xs={6} style={{ textAlign: 'right' }}>
+                                            <Button variant="contained" color="secondary" onClick={() => this.props.closeForm()} style={{ marginTop: 20 }}>
                                                 Cancel
                                             </Button>
                                         </Grid>

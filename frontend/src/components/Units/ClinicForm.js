@@ -122,7 +122,7 @@ class ClinicForm extends React.Component {
                                 </Button>
                             </Grid>
                             <Grid item md={6} xs={6} style={{ textAlign: 'right' }}>
-                                <Button variant="contained" color="primary" onClick={() => this.props.closeForm()} style={{ marginTop: 20 }}>
+                                <Button variant="contained" color="secondary" onClick={() => this.props.closeForm()} style={{ marginTop: 20 }}>
                                     Cancel
                                 </Button>
                             </Grid>

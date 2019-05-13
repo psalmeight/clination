@@ -40,11 +40,17 @@ class HomePage extends React.Component {
     render(){
         const { classes } = this.props
         
+        // let drawers = [
+        //     { name: 'Dashboard', route: '/dashboard', icon: <InboxIcon /> },
+        //     { name: 'Manage Clinics', route: '/dashboard/manage_clinics', icon: <InboxIcon /> },
+        //     { name: 'Manage Users', route: '/dashboard/manage_users', icon: <MailIcon /> },
+        //     { name: 'Settings', route: '/dashboard/settings', icon: <InboxIcon /> }
+        // ]
+
         let drawers = [
             { name: 'Dashboard', route: '/dashboard', icon: <InboxIcon /> },
             { name: 'Manage Clinics', route: '/dashboard/manage_clinics', icon: <InboxIcon /> },
             { name: 'Manage Users', route: '/dashboard/manage_users', icon: <MailIcon /> },
-            { name: 'Settings', route: '/dashboard/settings', icon: <InboxIcon /> }
         ]
 
         return (

@@ -185,9 +185,12 @@ class ManageUsers extends React.Component {
 
                      </ExpansionPanelDetails>
                      <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
-                        <Button size="small" color="secondary" onClick={() => this.onDeleteUser(true, record.user.id)}>
-                           DELETE USER
-                        </Button>
+                        {
+                           record.user.role !== 'MAIN_OWNER' ? <Button size="small" color="secondary" onClick={() => this.onDeleteUser(true, record.user.id)}>
+                              DELETE USER
+                           </Button> : null
+                        }
+                        
 
                         <Button size="small" color="primary" onClick={() => this.showUserRole(true, record.user.id)}>
                            Assign to a clinic
