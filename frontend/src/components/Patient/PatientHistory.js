@@ -57,11 +57,11 @@ class PatientHistory extends React.Component {
    }
 
    fetchData = () => {
-      // _getPatientHistoriesByPatient(this.props.match.param.patientID, data => {
-      //    this.setState({
-      //       data
-      //    })
-      // })
+      _getPatientHistoriesByPatient(this.props.match.params.patientID, data => {
+         this.setState({
+            data
+         })
+      })
    }
 
    handleChange = panel => (event, expanded) => {
@@ -105,34 +105,40 @@ class PatientHistory extends React.Component {
                _.map(this.state.data, (record, idx) => {
                   return <ExpansionPanel>
                      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography className={classes.heading}><strong>{record.user.lastname}, {record.user.firstname} {record.user.middlename} ({record.user.role})</strong></Typography>
+                        <Typography className={classes.heading}><strong>{record.visit_datetime}</strong></Typography>
                      </ExpansionPanelSummary>
                      <ExpansionPanelDetails>
                         <Grid container spacing={8}>
                            <Grid item md={12} style={{ width: '100%' }}>
                               <Paper>
-                                 {/* <Table>
+                                 <Table>
                                     <TableBody>
                                        <TableRow>
                                           <TableCell>
-                                             <strong>Email</strong>
+                                             <strong>Chief Complaint</strong>
                                           </TableCell>
-                                          <TableCell>{record.user.email}</TableCell>
+                                          <TableCell>{record.chief_complaint}</TableCell>
                                        </TableRow>
                                        <TableRow>
                                           <TableCell>
-                                          <strong>Birthdate</strong>
+                                          <strong>History of Illness</strong>
                                           </TableCell>
-                                          <TableCell>{record.user.dob}</TableCell>
+                                          <TableCell>{record.history_present_illness}</TableCell>
                                        </TableRow>
                                        <TableRow>
                                           <TableCell>
-                                          <strong>Contact</strong>
+                                          <strong>Physical Exam</strong>
                                           </TableCell>
-                                          <TableCell>{record.user.contact_no}</TableCell>
+                                          <TableCell>{record.physical_exam}</TableCell>
+                                       </TableRow>
+                                       <TableRow>
+                                          <TableCell>
+                                          <strong>Diagnosis</strong>
+                                          </TableCell>
+                                          <TableCell>{record.diagnosis}</TableCell>
                                        </TableRow>
                                     </TableBody>
-                                 </Table> */}
+                                 </Table>
                               </Paper>
                            </Grid>
                         </Grid>
@@ -150,7 +156,8 @@ class PatientHistory extends React.Component {
             <PatientHistoryForm 
                open={this.state.openDataForm} 
                closeForm={() => this.openDataForm(false)} 
-               refreshList={() => this.fetchData()}   
+               refreshList={() => this.fetchData()}
+               dataID={this.props.match.params.patientID}
             />
 
             <CConfirm

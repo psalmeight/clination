@@ -52,7 +52,7 @@ class PatientHistoryForm extends React.Component {
     submitForm = () => {
         let form = this.state.form;
 
-        form['patient_id'] = this.props.match.params.clinicID;
+        form['patient'] = this.props.dataID;
 
         _createPatientHistory(form, () => {
             this.showPopup(false)
@@ -122,7 +122,7 @@ class PatientHistoryForm extends React.Component {
                                        fullWidth
                                        margin="dense"
                                        variant="outlined"
-                                       onChange={value => this.handleChange('chief_complaint', value)}
+                                       onChange={value => this.handleChange('history_present_illness', value)}
                                        required={true}
                                        InputLabelProps={{
                                              shrink: true,

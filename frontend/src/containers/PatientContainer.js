@@ -49,7 +49,7 @@ class PatientContainer extends React.Component {
 
         return (
             <CDrawerLayout unPad backType {...this.props}>
-                <Route exact path={`/patient/${this.state.patientID}`} render={() => <PatientDashboard />} />
+                <Route exact path={`/patient/${this.state.patientID}`} render={() => <PatientDashboard {...this.props} />} />
             </CDrawerLayout>
         )
     }

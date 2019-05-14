@@ -13,7 +13,7 @@ export let _getPatientHistories = (callback = null) => {
 
 export let _getPatientHistoriesByPatient = (patientID, callback = null) => {
   console.log('_getPatientHistories called')
-  get(`/api/v1/patient_histories/${patientID}`)
+  get(`/api/v1/patient_history/patient/${patientID}`)
     .then(response => {
       if (callback) callback(response.data)
     })
