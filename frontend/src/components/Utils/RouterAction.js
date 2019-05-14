@@ -33,6 +33,6 @@ const ActOnBranch = (method, name = null, value = null) => {
   }
 }
 
-const IP_ADDRESS = 'localhost:8000'
+const IP_ADDRESS = 'srv.hisd3.com:8090'
 
 export { RouteTo, CheckAuthentication, ActOnBranch, IP_ADDRESS }
