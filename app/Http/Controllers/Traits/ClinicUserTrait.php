@@ -48,7 +48,7 @@ trait ClinicUserTrait
 
     public function func_getClinicUsersByClinic($clinicID)
     {
-        $objList = ClinicUser::where('clinic_id', $clinicID)->with(['clinic'])->get();
+        $objList = ClinicUser::where('clinic_id', $clinicID)->with(['clinic','user'])->get();
         return $objList;
     }
 

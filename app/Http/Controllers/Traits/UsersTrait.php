@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Traits;
 
 use App\User;
+use App\Models\ClinicUser;
 use Auth;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Traits\ClinicUserTrait;
@@ -71,6 +72,24 @@ trait UsersTrait
   {
       $obj = User::find($id);
       return $obj;
+  }
+
+  public function func_getDoctorsByClinic($clinicID)
+  {
+      $resultList = [];
+      $objList = ClinicUser::where('clinic_id', $clinicID)->with(['clinic','user'])->get();
+
+      foreach($objList as $obj)
+      {
+          $user = $this->func_getUser($obj->user->id);
+
+          if($obj->user->role == 'DOCTOR')
+            array_push($resultList, $user);
+      } 
+
+      //Log::info($resultList);
+
+      return $resultList;
   }
 
   public function func_checkExistingUserValue($request)

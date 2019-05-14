@@ -9,7 +9,8 @@ import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import { CConfirm } from 'components'
-import { _createUser, _getUsers, _deleteUser } from '../../rest/users.api'
+import { _createUser, _getUsers, _deleteUser, _getDoctorsByClinic } from '../../rest/users.api'
+import _ from 'lodash'
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -40,11 +41,22 @@ const styles = theme => ({
 class PatientForm extends React.Component {
     state =  {
         form: {},
-        confirm: false
+        confirm: false,
+        doctors: []
+    }
+
+    componentDidMount(){
+        this.fetchDoctors()
     }
 
     showPopup = val => {
         this.setState({ confirm: val })
+    }
+
+    fetchDoctors = () => {
+        _getDoctorsByClinic(this.props.match.params.clinicID, doctors => {
+            this.setState({ doctors })
+        })
     }
 
     submitForm = () => {
@@ -166,10 +178,37 @@ class PatientForm extends React.Component {
                                         <MenuItem value={'FEMALE'}>FEMALE</MenuItem>
                                     </TextField>
 
+                                    <TextField
+                                        id="doctor"
+                                        select
+                                        label="Attending Physician"
+                                        onChange={value => this.handleChange('doctor', value)}
+                                        value={this.state.form.doctor}
+                                        SelectProps={{
+                                            MenuProps: {
+                                            className: classes.menu,
+                                            },
+                                        }}
+                                        fullWidth
+                                        required={true}
+                                        margin="dense"
+                                        variant="outlined"
+                                        InputLabelProps={{
+                                                shrink: true,
+                                        }}>
+                                        
+                                        {
+                                            _.map(this.state.doctors, doctor => {
+                                                return <MenuItem value={doctor.id}>Dr. {doctor.lastname}, {doctor.firstname}</MenuItem>
+                                            })
+                                        }
+                                        
+                                    </TextField>
+
                                     <Grid container>
                                         <Grid item md={6} xs={6}>
                                             <Button variant="contained" color="primary" onClick={() => this.showPopup(true)} style={{ marginTop: 20 }}>
-                                                Register
+                                                Save Patient
                                             </Button>
                                         </Grid>
                                         <Grid item md={6} xs={6} style={{ textAlign: 'right' }}>

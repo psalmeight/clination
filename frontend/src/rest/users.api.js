@@ -11,6 +11,17 @@ export let _getUsers = (callback = null) => {
     })
 }
 
+export let _getDoctorsByClinic = (clinicID, callback = null) => {
+  console.log('_getDoctorsByClinic called')
+  get(`/api/v1/users/clinic_doctors/${clinicID}`)
+    .then(response => {
+      if (callback) callback(response.data)
+    })
+    .catch(e => {
+      console.log('Error in _getDoctorsByClinic', e)
+    })
+}
+
 export let _createUser = (data, callback = null) => {
   console.log('_createUser called')
   post('/api/user', data)

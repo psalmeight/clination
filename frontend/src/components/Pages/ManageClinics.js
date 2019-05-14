@@ -72,10 +72,14 @@ class ManageClinics extends React.Component {
             <Grid style={{ flexDirection: 'row' }} container>
                {
                   !_.isEmpty(this.state.data) ? (
-                     _.map(this.state.data, item => {
+                     _.map(this.state.data, clinic => {
                         return (
                            <Grid item lg={4} md={6} xs={12}>
-                              <ClinicCard data={item} onClick={() => this.onCardClick(item)} onDelete={() => this.deleteClinic(item.id)} />
+                              <ClinicCard 
+                                 data={clinic} 
+                                 onClick={() => this.onCardClick(clinic)} 
+                                 onDelete={() => this.deleteClinic(clinic.id)} 
+                              />
                            </Grid>
                         )
                      })

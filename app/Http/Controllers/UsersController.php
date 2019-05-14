@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Traits\UsersTrait;
+use Log;
 
 class UsersController extends Controller
 {
@@ -39,15 +40,14 @@ class UsersController extends Controller
     return response()->json($obj);
   }
 
-  public function getMyFriends()
-  {
-    $objList = $this->func_getMyFriends();
-    return response()->json($objList);
-  }
-
   public function getUser($id){
     $userObj = $this->func_getUser($id);
     return response()->json($userObj);
+  }
+
+  public function getDoctorsByClinic($id){
+    $doctorsList = $this->func_getDoctorsByClinic($id);
+    return response()->json($doctorsList);
   }
 
   public function deleteUser($id)

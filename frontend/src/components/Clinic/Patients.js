@@ -157,8 +157,9 @@ class Patients extends React.Component {
 
             <PatientForm 
                open={this.state.openPatientForm} 
-               closeForm={() => this.openPatientForm(false)} 
-               refreshList={() => this.fetchData()}   
+               closeForm={() => this.openPatientForm(false)}
+               refreshList={() => this.fetchData()}
+               {...this.props}
             />
             
          </div>
