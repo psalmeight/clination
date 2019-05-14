@@ -49,6 +49,7 @@ class PatientHistory extends React.Component {
       expanded: 0,
       data: [],
       openDataForm: false,
+      selectedDataID: ''
    }
 
    componentDidMount(){
@@ -79,7 +80,7 @@ class PatientHistory extends React.Component {
    }
 
    onDeleteData = (val, dataID) => {
-      this.setState({ openDataForm: val, selectedDataID: dataID })
+      this.setState({ confirmDelete: val, selectedDataID: dataID })
    }
 
    deleteDataSuccess = () => {
@@ -105,7 +106,7 @@ class PatientHistory extends React.Component {
                _.map(this.state.data, (record, idx) => {
                   return <ExpansionPanel>
                      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography className={classes.heading}><strong>{record.visit_datetime}</strong></Typography>
+                        <Typography className={classes.heading}><strong>{record.visit_datetime} - {record.chief_complaint}</strong></Typography>
                      </ExpansionPanelSummary>
                      <ExpansionPanelDetails>
                         <Grid container spacing={8}>
@@ -161,14 +162,14 @@ class PatientHistory extends React.Component {
             />
 
             <CConfirm
-               open={this.state.deleteUserOpen}
-               onClose={() => this.deleteCardOpen(false)}
-               onOk={() => this.deleteCardOpen(false)}
+               open={this.state.confirmDelete}
+               onClose={() => this.onDeleteData(false, '')}
+               onOk={() => this.onDeleteData(false, '')}
                title={'Delete Confirmation'}
                message={`Are you sure you want to delete this record?`}
                actions={[
-                  { actionTitle: 'Confirm', action: () => this.deleteRecord(), actionType: 'primary' },
-                  { actionTitle: 'Cancel', action: () => this.onDeleteUser(false, ''), actionType: 'secondary' }
+                  { actionTitle: 'Confirm', action: () => this.deleteDataSuccess(), actionType: 'primary' },
+                  { actionTitle: 'Cancel', action: () => this.onDeleteData(false, ''), actionType: 'secondary' }
                ]}
             />
          </div>
