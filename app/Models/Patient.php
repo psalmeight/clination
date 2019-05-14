@@ -12,4 +12,12 @@ class Patient extends Model
     public function clinic(){
         return $this->belongsTo('App\Clinic');
     }
+
+    public function patient_histories(){
+        return $this->hasMany('App\Models\PatientHistory');
+    }
+
+    public function patient_vaccinations(){
+        return $this->hasMany('App\Models\PatientVaccination');
+    }
 }
