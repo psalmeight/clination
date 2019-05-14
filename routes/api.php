@@ -50,4 +50,18 @@ Route::prefix('/v1')->middleware(['auth:api'])->group(function () {
     Route::delete('/patient/{id}', 'PatientController@deletePatient');
     Route::get('/patients', 'PatientController@getPatients');
     Route::get('/patients/by_clinic/{clinic_id}', 'PatientController@getPatientsByClinic');
+
+    //Patient History API
+    Route::get('/patient_histories', 'PatientHistoryController@getPatientHistories');
+    Route::get('/patient_history/patient/{patient_id}', 'PatientHistoryController@getPatientHistoriesByPatient');
+    Route::get('/patient_history/{id}', 'PatientHistoryController@getPatientHistory');
+    Route::delete('/patient_history/{id}', 'PatientHistoryController@deletePatientHistory');
+    Route::post('/patient_history', 'PatientHistoryController@savePatientHistory');
+
+    //Patient Vaccination API
+    Route::get('/patient_vaccinations', 'PatientVaccinationController@getPatientVaccinations');
+    Route::get('/patient_vaccination/patient/{id}', 'PatientVaccinationController@getPatientVaccinationByPatient');
+    Route::get('/patient_vaccination/{id}', 'PatientVaccinationController@getPatientVaccination');
+    Route::delete('/patient_vaccination/{id}', 'PatientVaccinationController@deletePatientVaccination');
+    Route::post('/patient_vaccination', 'PatientVaccinationController@savePatientVaccination');
 });
