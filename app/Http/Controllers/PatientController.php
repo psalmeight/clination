@@ -29,11 +29,17 @@ class PatientController extends Controller
     return response()->json($objResult);
   }
 
-  public function getPatientsByClinic($user)
+  public function getPatientsByClinic($clinic_id)
   {
-    $objList = $this->func_getPatientsByClinic($user);
+    $objList = $this->func_getPatientsByClinic($clinic_id);
     return response()->json($objList);
   }
+
+  // public function getPatientsByAttendingPhysician($doctor_id)
+  // {
+  //   $objList = $this->func_getPatientsByAttendingPhysician($doctor_id);
+  //   return response()->json($objList);
+  // }
 
   public function deletePatient($id)
   {

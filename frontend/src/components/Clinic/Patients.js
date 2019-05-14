@@ -39,6 +39,8 @@ import deepPurple from '@material-ui/core/colors/deepPurple';
 
 import { RouteTo } from '../Utils/RouterAction'
 import { PatientForm, CConfirm } from 'components'
+import { _getPatientsByClinic } from '../../rest/patient.api'
+
 import _ from 'lodash'
 
 const styles = theme => ({
@@ -93,10 +95,8 @@ class Patients extends React.Component {
    }
 
    fetchData = () => {
-      let data = []
-
-      this.setState({
-         data
+      _getPatientsByClinic(this.props.match.params.clinicID, data => {
+         this.setState({ data })
       })
    }
 
@@ -147,9 +147,9 @@ class Patients extends React.Component {
                      
                      return <ListItem button style={{ paddingLeft: 0 }} onClick={() => this.patientSelect(record)}>
                         <ListItemIcon>
-                           <Avatar className={avatarClass}>{record.gender}</Avatar>
+                           <Avatar className={avatarClass}>{record.gender[0]}</Avatar>
                         </ListItemIcon>
-                        <ListItemText primary={record.employee_name} />
+                        <ListItemText primary={`${record.lastname}, ${record.firstname} ${record.middlename}`} />
                      </ListItem>
                   })
                }

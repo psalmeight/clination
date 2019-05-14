@@ -10,6 +10,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import { CConfirm } from 'components'
 import { _createUser, _getUsers, _deleteUser, _getDoctorsByClinic } from '../../rest/users.api'
+import { _createPatient } from '../../rest/patient.api'
+
 import _ from 'lodash'
 
 function rand() {
@@ -60,7 +62,11 @@ class PatientForm extends React.Component {
     }
 
     submitForm = () => {
-        _createUser(this.state.form, () => {
+        let form = this.state.form;
+
+        form['clinic'] = this.props.match.params.clinicID;
+
+        _createPatient(form, () => {
             this.showPopup(false)
             this.props.closeForm()
             this.props.refreshList()
@@ -90,7 +96,7 @@ class PatientForm extends React.Component {
                         <Grid item>
                             <Paper elevation={2} style={{ padding: 20 }}>
                                 <Typography variant="h6" style={{ marginBottom: 20 }}>
-                                    User Registration Form
+                                    New Patient Form
                                 </Typography>
                                 <form noValidate autoComplete="off">
                                     <Grid container spacing={16}>
@@ -177,6 +183,20 @@ class PatientForm extends React.Component {
                                         <MenuItem value={'MALE'}>MALE</MenuItem>
                                         <MenuItem value={'FEMALE'}>FEMALE</MenuItem>
                                     </TextField>
+                                    
+                                    <TextField
+                                        id="contact_no"
+                                        label="Contact Number"
+                                        placeholder="Enter Contact Number"
+                                        onChange={value => this.handleChange('contact_no', value)}
+                                        fullWidth
+                                        required={true}
+                                        margin="dense"
+                                        variant="outlined"
+                                        InputLabelProps={{
+                                            shrink: true,
+                                        }}
+                                    />
 
                                     <TextField
                                         id="doctor"
@@ -235,6 +255,7 @@ class PatientForm extends React.Component {
                         { actionTitle: 'Cancel', action: () => this.showPopup(false), actionType: 'secondary' }
                     ]}
                 />
+
             </div>
         )
     }

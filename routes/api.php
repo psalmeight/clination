@@ -49,5 +49,5 @@ Route::prefix('/v1')->middleware(['auth:api'])->group(function () {
     Route::get('/patient/{id}', 'PatientController@getPatient');
     Route::delete('/patient/{id}', 'PatientController@deletePatient');
     Route::get('/patients', 'PatientController@getPatients');
-    Route::get('/patient/{id}', 'PatientController@getPatientsByClinic');
+    Route::get('/patients/by_clinic/{clinic_id}', 'PatientController@getPatientsByClinic');
 });
