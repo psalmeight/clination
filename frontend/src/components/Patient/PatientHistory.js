@@ -10,11 +10,22 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 
-import Card from '@material-ui/core/Card'
-import CardContent from '@material-ui/core/CardContent'
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
 
-import InputAdornment from '@material-ui/core/InputAdornment'
-import { TextField } from '@material-ui/core'
+import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
+import FaceIcon from '@material-ui/icons/Face';
+import DoneIcon from '@material-ui/icons/Done';
+
+import { ActionBar, PatientHistoryForm } from 'components'
+import { _getPatientHistoriesByPatient, _deletePatientHistory } from '../../rest/patient_history.api'
+
+import { CConfirm } from 'components'
 
 import _ from 'lodash'
 
@@ -26,38 +37,55 @@ const styles = theme => ({
       flexGrow: 1,
    },
    chip: {
-      margin: theme.spacing.unit,
+     margin: theme.spacing.unit,
    },
-   card: {
-      minWidth: 275,
-   },
-   title: {
-      fontSize: 14,
-   },
+   heading: {
+      textTransform: 'uppercase'
+   }
 })
 
 class PatientHistory extends React.Component {
    state = {
       expanded: 0,
-      data: []
+      data: [],
+      openDataForm: false,
    }
 
    componentDidMount(){
       this.fetchData()
+      console.log(this.props)
    }
 
    fetchData = () => {
-      let data = { 
-         date: '03/13/1990',
-         id: 1, 
-         chief_complaint: 'Fever, cough', 
-         hpi: 'The quick little brown fox jumps over the back of the lazy dog', 
-         physical_exam: 'The quick little brown fox jumps over the back of the lazy dog', 
-         diagnosis: 'The quick little brown fox jumps over the back of the lazy dog',
-      }
+      // _getPatientHistoriesByPatient(this.props.match.param.patientID, data => {
+      //    this.setState({
+      //       data
+      //    })
+      // })
+   }
 
+   handleChange = panel => (event, expanded) => {
       this.setState({
-         data
+        expanded: expanded ? panel : false,
+      })
+   }
+
+   handleDelete = () => {
+      alert('You clicked the delete icon.')
+   }
+
+   openDataForm = val => {
+      this.setState({ openDataForm: val })
+   }
+
+   onDeleteData = (val, dataID) => {
+      this.setState({ openDataForm: val, selectedDataID: dataID })
+   }
+
+   deleteDataSuccess = () => {
+      _deletePatientHistory(this.state.selectedDataID, () => {
+         this.fetchData()
+         this.onDeleteData(false, '')
       })
    }
 
@@ -65,214 +93,77 @@ class PatientHistory extends React.Component {
       const { classes } = this.props
 
       return (
-         <div className={classes.root} style={{ padding: 15 }}>
-            <form noValidate autoComplete="off">
-               <Grid container spacing={16}>
-                  <Grid item md={6} xs={12}>
-                     <Card className={classes.card}>
-                        <CardContent>
-                           <Typography className={classes.title} color="textSecondary" gutterBottom>
-                              History Records
-                           </Typography>
-                           
-                           <TextField
-                              label={'Chief Complaint'}
-                              multiline
-                              rowsMax="4"
-                              value={this.state.data.chief_complaint}
-                              fullWidth
-                              margin="dense"
-                              variant="outlined"
-                              InputLabelProps={{
-                                    shrink: true,
-                              }}
-                           />
+         <div className={classes.root}>
 
-                           <TextField
-                              label={'History of Present Illness'}
-                              multiline
-                              rowsMax="4"
-                              value={this.state.data.hpi}
-                              fullWidth
-                              margin="dense"
-                              variant="outlined"
-                              InputLabelProps={{
-                                 shrink: true,
-                              }}
-                           />
-                                       
-                           <TextField
-                              label={'Physical Exam'}
-                              multiline
-                              rowsMax="4"
-                              value={this.state.data.physical_exam}
-                              fullWidth
-                              margin="dense"
-                              variant="outlined"
-                              InputLabelProps={{
-                                 shrink: true,
-                              }}
-                           />
+            <ActionBar style={{ marginBottom: 10 }}>
+               <Button color="primary" onClick={() => this.openDataForm(true)}>
+                  Add New Patient History Record
+               </Button>
+            </ActionBar>
 
-                           <TextField
-                              label={'Diagnosis'}
-                              multiline
-                              rowsMax="4"
-                              value={this.state.data.diagnosis}
-                              fullWidth
-                              margin="dense"
-                              variant="outlined"
-                              InputLabelProps={{
-                                 shrink: true,
-                              }}
-                           />     
-                        </CardContent>
-                     </Card>
-                  </Grid>
-                  <Grid item md={6} xs={12}>
-                     <Card className={classes.card} fullWidth>
-                        <CardContent>
-                           <Typography className={classes.title} color="textSecondary" gutterBottom>
-                              Recent Vitals
-                           </Typography>
-                           
-                           <Grid container fullWidth>
-                              <Grid item md={6} xs={6} style={{ paddingRight: 5 }}>
-                                 <TextField
-                                    label={'Weight'}
-                                    value={this.state.data.weight}
-                                    fullWidth
-                                    margin="dense"
-                                    variant="outlined"
-                                    InputProps={{
-                                       endAdornment: <InputAdornment position="end">kg</InputAdornment>,
-                                    }}
-                                    InputLabelProps={{
-                                       shrink: true,
-                                    }}
-                                 />
-                              </Grid>
-                              <Grid item md={6} xs={6} style={{ paddingLeft: 5 }}>
-                                 <TextField
-                                    label={'Height'}
-                                    value={this.state.data.height}
-                                    fullWidth
-                                    margin="dense"
-                                    variant="outlined"
-                                    InputProps={{
-                                       endAdornment: <InputAdornment position="end">cm</InputAdornment>,
-                                    }}
-                                    InputLabelProps={{
-                                       shrink: true,
-                                    }}
-                                 />
-                              </Grid>
+            {
+               _.map(this.state.data, (record, idx) => {
+                  return <ExpansionPanel>
+                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                        <Typography className={classes.heading}><strong>{record.user.lastname}, {record.user.firstname} {record.user.middlename} ({record.user.role})</strong></Typography>
+                     </ExpansionPanelSummary>
+                     <ExpansionPanelDetails>
+                        <Grid container spacing={8}>
+                           <Grid item md={12} style={{ width: '100%' }}>
+                              <Paper>
+                                 {/* <Table>
+                                    <TableBody>
+                                       <TableRow>
+                                          <TableCell>
+                                             <strong>Email</strong>
+                                          </TableCell>
+                                          <TableCell>{record.user.email}</TableCell>
+                                       </TableRow>
+                                       <TableRow>
+                                          <TableCell>
+                                          <strong>Birthdate</strong>
+                                          </TableCell>
+                                          <TableCell>{record.user.dob}</TableCell>
+                                       </TableRow>
+                                       <TableRow>
+                                          <TableCell>
+                                          <strong>Contact</strong>
+                                          </TableCell>
+                                          <TableCell>{record.user.contact_no}</TableCell>
+                                       </TableRow>
+                                    </TableBody>
+                                 </Table> */}
+                              </Paper>
                            </Grid>
-                           <Grid container fullWidth>
-                              <Grid item md={6} xs={6} style={{ paddingRight: 5 }}>
-                                 <TextField
-                                    label={'Blood Pressure'}
-                                    value={this.state.data.height}
-                                    fullWidth
-                                    margin="dense"
-                                    variant="outlined"
-                                    InputProps={{
-                                       endAdornment: <InputAdornment position="end">mmHg</InputAdornment>,
-                                    }}
-                                    InputLabelProps={{
-                                       shrink: true,
-                                    }}
-                                 />
-                              </Grid>
-                              <Grid item md={6} xs={6} style={{ paddingLeft: 5 }}>
-                                 <TextField
-                                    label={'Pulse Rate'}
-                                    value={this.state.data.pulse_rate}
-                                    fullWidth
-                                    margin="dense"
-                                    variant="outlined"
-                                    InputProps={{
-                                       endAdornment: <InputAdornment position="end">bpm</InputAdornment>,
-                                    }}
-                                    InputLabelProps={{
-                                       shrink: true,
-                                    }}
-                                 />
-                              </Grid>
-                           </Grid>
+                        </Grid>
 
-                           <Grid container fullWidth>
-                              <Grid item md={6} xs={6} style={{ paddingRight: 5 }}>
-                                 <TextField
-                                    label={'Respiratory Rate'}
-                                    value={this.state.data.respiratory_rate}
-                                    fullWidth
-                                    margin="dense"
-                                    variant="outlined"
-                                    InputProps={{
-                                       endAdornment: <InputAdornment position="end">bpm</InputAdornment>,
-                                    }}
-                                    InputLabelProps={{
-                                       shrink: true,
-                                    }}
-                                 />
-                              </Grid>
-                              <Grid item md={6} xs={6} style={{ paddingLeft: 5 }}>
-                                 <TextField
-                                    label={'Temperature'}
-                                    value={this.state.data.temperature}
-                                    fullWidth
-                                    margin="dense"
-                                    variant="outlined"
-                                    InputProps={{
-                                       endAdornment: <InputAdornment position="end">C</InputAdornment>,
-                                    }}
-                                    InputLabelProps={{
-                                       shrink: true,
-                                    }}
-                                 />
-                              </Grid>
-                           </Grid>
-                        </CardContent>
-                     </Card>
+                     </ExpansionPanelDetails>
+                     <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
+                        <Button size="small" color="secondary" onClick={() => this.onDeleteData(true, record.id)}>
+                           DELETE RECORD
+                        </Button>
+                     </ExpansionPanelActions>
+                  </ExpansionPanel>
+               })
+            }
+            
+            <PatientHistoryForm 
+               open={this.state.openDataForm} 
+               closeForm={() => this.openDataForm(false)} 
+               refreshList={() => this.fetchData()}   
+            />
 
-                     <Card className={classes.card} fullWidth style={{ marginTop: 16 }}>
-                        <CardContent>
-                           <Typography className={classes.title} color="textSecondary" gutterBottom>
-                              Allergies
-                           </Typography>
-                           
-                           <Grid container fullWidth>
-                              <Grid item md={6} xs={6} style={{ paddingRight: 5 }}>
-                                 <TextField
-                                    label={'Food Allergy'}
-                                    value={this.state.data.respiratory_rate}
-                                    fullWidth
-                                    margin="dense"
-                                    variant="outlined"
-                                    InputLabelProps={{
-                                       shrink: true,
-                                    }}
-                                 />
-                              </Grid>
-                              <Grid item md={6} xs={6} style={{ paddingLeft: 5 }}>
-                                 <TextField
-                                    label={'Drug Allergy'}
-                                    value={this.state.data.temperature}
-                                    fullWidth
-                                    margin="dense"
-                                    variant="outlined"
-                                    InputLabelProps={{
-                                       shrink: true,
-                                    }}
-                                 />
-                              </Grid>
-                           </Grid>
-                        </CardContent>
-                     </Card>
-                  </Grid>
-               </Grid>
-            </form>
+            <CConfirm
+               open={this.state.deleteUserOpen}
+               onClose={() => this.deleteCardOpen(false)}
+               onOk={() => this.deleteCardOpen(false)}
+               title={'Delete Confirmation'}
+               message={`Are you sure you want to delete this record?`}
+               actions={[
+                  { actionTitle: 'Confirm', action: () => this.deleteRecord(), actionType: 'primary' },
+                  { actionTitle: 'Cancel', action: () => this.onDeleteUser(false, ''), actionType: 'secondary' }
+               ]}
+            />
          </div>
       )
    }

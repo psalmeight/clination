@@ -21,5 +21,6 @@ export { default as ClinicForm } from './Units/ClinicForm'
 export { default as UserForm } from './Units/UserForm'
 export { default as PatientForm } from './Units/PatientForm'
 export { default as ClinicUserForm } from './Units/ClinicUserForm'
+export { default as PatientHistoryForm } from './Units/PatientHistoryForm'
 
 export { default as ActionBar } from './Utils/ActionBar'
