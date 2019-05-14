@@ -43,4 +43,9 @@ Route::prefix('/v1')->middleware(['auth:api'])->group(function () {
     Route::get('/clinic_user/{id}', 'ClinicUserController@getClinicUser');
     Route::get('/clinic_users/{clinic}', 'ClinicUserController@getClinicUsersByClinic');
     Route::delete('/clinic_user/{id}', 'ClinicUserController@deleteClinicUser');
+
+    Route::post('/patient', 'PatientController@savePatient');
+    Route::get('/patient/{id}', 'PatientController@getPatient');
+    Route::delete('/patient/{id}', 'PatientController@deletePatient');
+    Route::get('/patient/{id}', 'PatientController@getPatientsByClinic');
 });
