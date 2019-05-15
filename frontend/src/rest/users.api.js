@@ -11,6 +11,16 @@ export let _getUsers = (callback = null) => {
     })
 }
 
+export let _getOwnerDashboardData = (callback = null) => {
+  get('/api/v1/user/dashboard_data')
+    .then(response => {
+      if (callback) callback(response.data)
+    })
+    .catch(e => {
+      console.log('Error in _getUsers', e)
+    })
+}
+
 export let _getDoctorsByClinic = (clinicID, callback = null) => {
   get(`/api/v1/users/clinic_doctors/${clinicID}`)
     .then(response => {

@@ -4,6 +4,9 @@ import { withStyles } from '@material-ui/core/styles'
 import _ from 'lodash'
 import Paper from '@material-ui/core/Paper'
 import Typography from '@material-ui/core/Typography'
+import Grid from '@material-ui/core/Grid'
+import { _getOwnerDashboardData } from '../../rest/users.api'
+import { Avatar } from "@material-ui/core";
 
 const styles = theme => ({
    root: {
@@ -19,7 +22,10 @@ const styles = theme => ({
 
 class Dashboard extends React.Component {
    state = {
-      dashboardData: []
+      dashboardData: [],
+      clinic_count: 0,
+      staff_count: 0,
+      patient_count: 0
    }
 
    componentDidMount(){
@@ -27,12 +33,12 @@ class Dashboard extends React.Component {
    }
 
    fetchData = () => {
-      this.setState({
-         dashboardData: [
-            { key: 'Clinics', value: 2 },
-            { key: 'Employees', value: 3 },
-            { key: 'Patients', value: 35 },
-         ]
+      _getOwnerDashboardData(data => {
+         this.setState({
+            clinic_count: data.clinic_count,
+            staff_count: data.staff_count,
+            patient_count: data.patient_count
+         })
       })
    }
 
@@ -40,20 +46,38 @@ class Dashboard extends React.Component {
       const { classes, theme } = this.props;
 
       return (
-         <div className={classes.root}>
-            {
-               _.map(this.state.dashboardData, data => {
-                  return <Paper className={classes.root} elevation={1} style={{ marginBottom: 5 }}>
-                     <Typography variant="h5" component="h3">
-                        <strong>{data.value}</strong>
-                     </Typography>
-                     <Typography component="p">
-                     {data.key}
-                     </Typography>
-                  </Paper>
-               })
-            }
-         </div>
+         <Grid container>
+            <Grid item md={4} xs={12}>
+               <Paper className={classes.root} elevation={1} style={{ marginBottom: 5 }}>
+                  <Typography variant="h5" component="h3">
+                     <strong>{this.state.clinic_count}</strong>
+                  </Typography>
+                  <Typography component="p">
+                     Clinics
+                  </Typography>
+               </Paper>
+            </Grid>
+            <Grid item md={4} xs={12}>
+            <Paper className={classes.root} elevation={1} style={{ marginBottom: 5 }}>
+                  <Typography variant="h5" component="h3">
+                     <strong>{this.state.staff_count}</strong>
+                  </Typography>
+                  <Typography component="p">
+                     Personnels
+                  </Typography>
+               </Paper>
+            </Grid>
+            <Grid item md={4} xs={12}>
+            <Paper className={classes.root} elevation={1} style={{ marginBottom: 5 }}>
+                  <Typography variant="h5" component="h3">
+                     <strong>{this.state.patient_count}</strong>
+                  </Typography>
+                  <Typography component="p">
+                     Patients
+                  </Typography>
+               </Paper>
+            </Grid>
+         </Grid>
       )
    }
 }
