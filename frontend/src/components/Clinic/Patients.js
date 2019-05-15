@@ -133,17 +133,16 @@ class Patients extends React.Component {
       
       return (
          <div className={classes.root}>
-
-               <Grid container>
-                  <Grid item md={10} xs={8}>
-                     <Paper className={classes.searchRoot} style={{ marginBottom: 10, paddingLeft: 10 }}>
-                        <InputBase className={classes.input} placeholder="Search patient" onChange={val => this.searchPatient(val)} />
-                     </Paper>
-                  </Grid>
-                  <Grid item md={2} xs={4} style={{ paddingLeft: 10 }}>
-                     <Button variant="contained" color="primary" style={{ width: '100%' }} onClick={() => this.openPatientForm(true)}>ADD PATIENT</Button>
-                  </Grid>
+            <Grid container>
+               <Grid item md={10} xs={8}>
+                  <Paper className={classes.searchRoot} style={{ marginBottom: 10, paddingLeft: 10 }}>
+                     <InputBase className={classes.input} placeholder="Search patient" onChange={val => this.searchPatient(val)} />
+                  </Paper>
                </Grid>
+               <Grid item md={2} xs={4} style={{ paddingLeft: 10 }}>
+                  <Button variant="contained" color="primary" style={{ width: '100%' }} onClick={() => this.openPatientForm(true)}>ADD PATIENT</Button>
+               </Grid>
+            </Grid>
 
             <List component="nav">
                {

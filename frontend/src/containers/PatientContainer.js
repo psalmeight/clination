@@ -32,11 +32,6 @@ class PatientContainer extends React.Component {
 
     componentDidMount(){
         this.setState({ patientID: this.props.match.params.patientID })
-        this.fetchData()
-    }
-
-    fetchData = () => {
-
     }
 
     render(){

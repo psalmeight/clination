@@ -1,5 +1,16 @@
 import { get, post, destroy } from '../rest'
 
+export let _getPatient = (patientID, callback = null) => {
+  get('/api/v1/patient/' + patientID)
+    .then(response => {
+      console.log(response)
+      if (callback) callback(response.data)
+    })
+    .catch(e => {
+      console.log('Error in _getPatient', e)
+    })
+}
+
 export let _getPatients = (search = '', callback = null) => {
   get('/api/v1/patients', { search })
     .then(response => {
