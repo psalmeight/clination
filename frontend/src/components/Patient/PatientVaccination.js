@@ -100,9 +100,22 @@ class PatientVaccination extends React.Component {
 
             {
                _.map(this.state.data, (record, idx) => {
+
+                  let vaccinationRecord = record.vaccination_details ? JSON.parse(record.vaccination_details) : []
+                  let vaccineString = '';
+
+                  if(!_.isEmpty(vaccinationRecord)){   
+                     vaccinationRecord.forEach((vRec, i) => {
+                        if(i == 0)
+                           vaccineString = vaccineString + vRec.vaccine + '(' + vRec.route + ')'
+                        else
+                           vaccineString = vaccineString + ', ' + vRec.vaccine + '(' + vRec.route + ')'
+                     })
+                  }
+
                   return <ExpansionPanel>
                      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography className={classes.heading}><strong>{moment(record.vaccination_date).format("MM/DD/YYYY")} - {record.chief_complaint}</strong></Typography>
+                        <Typography className={classes.heading}><strong>{moment(record.vaccination_date).format("MM/DD/YYYY")} - {vaccineString}</strong></Typography>
                      </ExpansionPanelSummary>
                      <ExpansionPanelDetails>
                         <Grid container spacing={8}>
@@ -136,31 +149,30 @@ class PatientVaccination extends React.Component {
                                     </Grid>
                                     <Grid item md={6} xs={12} style={{ paddingLeft: 5 }}>
                                        <Paper>
-                                          {/* <Table>
-                                             <TableBody>
-                                                <TableRow>
-                                                   <TableCell>
-                                                      <strong>Vaccine</strong>
-                                                   </TableCell>
-                                                   <TableCell>
-                                                      <strong>Route</strong>
-                                                   </TableCell>
-                                                </TableRow>
-                                                <TableRow>
-                                                   <TableCell>
-                                                   <strong>Temperature</strong>
-                                                   </TableCell>
-                                                   <TableCell>{record.init_temp} C</TableCell>
-                                                </TableRow>
-                                                <TableRow>
-                                                   <TableCell>
-                                                   <strong>Pulse</strong>
-                                                   </TableCell>
-                                                   <TableCell>{record.init_pulse_rate} bpm</TableCell>
-                                                </TableRow>
-
-                                             </TableBody>
-                                          </Table> */}
+                                       <Table>
+                                                <TableBody>
+                                                    <TableRow>
+                                                        <TableCell>
+                                                            <strong>Vaccine</strong>
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            <strong>Route</strong>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                    {
+                                                        _.map(vaccinationRecord, data => {
+                                                            return <TableRow>
+                                                                <TableCell>
+                                                                    {data.vaccine}
+                                                                </TableCell>
+                                                                <TableCell>
+                                                                    {data.route}
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        })
+                                                    }
+                                                </TableBody>
+                                            </Table>
                                        </Paper>
                                     </Grid>
                                  </Grid>

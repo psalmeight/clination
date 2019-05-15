@@ -16,7 +16,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 
 import { CConfirm } from 'components'
-import { _createPatientHistory } from '../../rest/patient_history.api'
+import { _createPatientVaccination } from '../../rest/patient_vaccination.api'
 import { DatePicker } from "material-ui-pickers"
 import moment from 'moment'
 import _ from 'lodash'
@@ -69,12 +69,23 @@ class PatientVaccinationForm extends React.Component {
          form['visit_datetime'] = moment().format("MM/DD/YYYY")
       }
 
-      _createPatientHistory(form, () => {
+      if(_.isEmpty(this.state.form.vaccination_date)){
+            form['vaccination_date'] = moment().format("MM/DD/YYYY")
+        }
+
+        if(_.isEmpty(this.state.form.next_vaccination_schedule)){
+            form['next_vaccination_schedule'] = moment().format("MM/DD/YYYY")
+        }
+
+      form['vaccination_details'] = JSON.stringify(this.state.vaccList)
+
+      _createPatientVaccination(form, () => {
          this.showPopup(false)
          this.props.closeForm()
          this.props.refreshList()
       })
    }
+
    handleDateChange = (field, e) => {
       let form = this.state.form
       form[field] = moment(e).format("MM/DD/YYYY")
@@ -114,7 +125,8 @@ class PatientVaccinationForm extends React.Component {
    }
 
    removeVacc = (id) => {      
-       let vaccList = this.state.vaccList  
+        let vaccList = this.state.vaccList
+
         _.remove(vaccList, data => {
             return data.id == id
         })
@@ -188,7 +200,7 @@ class PatientVaccinationForm extends React.Component {
                                                 fullWidth
                                                 margin="dense"
                                                 variant="outlined"
-                                                onChange={value => this.handleChange('diagnosis', value)}
+                                                onChange={value => this.handleChange('vaccination_notes', value)}
                                                 
                                                 InputLabelProps={{
                                                         shrink: true,

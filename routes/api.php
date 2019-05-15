@@ -61,7 +61,7 @@ Route::prefix('/v1')->middleware(['auth:api'])->group(function () {
 
     //Patient Vaccination API
     Route::get('/patient_vaccinations', 'PatientVaccinationController@getPatientVaccinations');
-    Route::get('/patient_vaccination/patient/{id}', 'PatientVaccinationController@getPatientVaccinationByPatient');
+    Route::get('/patient_vaccination/patient/{id}', 'PatientVaccinationController@getPatientVaccinationsByPatient');
     Route::get('/patient_vaccination/{id}', 'PatientVaccinationController@getPatientVaccination');
     Route::delete('/patient_vaccination/{id}', 'PatientVaccinationController@deletePatientVaccination');
     Route::post('/patient_vaccination', 'PatientVaccinationController@savePatientVaccination');
