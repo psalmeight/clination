@@ -6,6 +6,8 @@ import Routes from 'routes'
 
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import registerServiceWorker from 'utils/registerServiceWorker'
+import MomentUtils from '@date-io/moment'
+import { MuiPickersUtilsProvider } from 'material-ui-pickers'
 
 const theme = createMuiTheme({
   palette: {
@@ -16,11 +18,13 @@ const theme = createMuiTheme({
 })
 
 render(
-  <MuiThemeProvider theme={theme}>
-    <Provider store={configureStore()}>
-      <Routes />
-    </Provider>
-  </MuiThemeProvider>,
+    <MuiPickersUtilsProvider utils={MomentUtils}>
+      <MuiThemeProvider theme={theme}>
+        <Provider store={configureStore()}>
+          <Routes />
+        </Provider>
+      </MuiThemeProvider>
+    </MuiPickersUtilsProvider>,
   document.getElementById('root')
 )
 

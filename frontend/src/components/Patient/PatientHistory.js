@@ -13,14 +13,8 @@ import Button from '@material-ui/core/Button';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-
-import Avatar from '@material-ui/core/Avatar';
-import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
-import DoneIcon from '@material-ui/icons/Done';
 
 import { ActionBar, PatientHistoryForm } from 'components'
 import { _getPatientHistoriesByPatient, _deletePatientHistory } from '../../rest/patient_history.api'
@@ -113,7 +107,6 @@ class PatientHistory extends React.Component {
                      <ExpansionPanelDetails>
                         <Grid container spacing={8}>
                            <Grid item md={12} style={{ width: '100%' }}>
-                              
                                  <Grid container>
                                     <Grid item md={6} xs={12} style={{ paddingRight: 5 }}>
                                        <Paper style={{ marginBottom: 10 }}>
@@ -182,7 +175,6 @@ class PatientHistory extends React.Component {
                                  </Grid>
                            </Grid>
                         </Grid>
-
                      </ExpansionPanelDetails>
                      <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
                         <Button size="small" color="secondary" onClick={() => this.onDeleteData(true, record.id)}>

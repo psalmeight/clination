@@ -10,6 +10,8 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import { CConfirm } from 'components'
 import { _createUser, _getUsers, _deleteUser } from '../../rest/users.api'
+import { DatePicker } from "material-ui-pickers"
+import moment from 'moment'
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -53,6 +55,14 @@ class UserForm extends React.Component {
             this.props.closeForm()
             this.props.refreshList()
         }, false)
+    }
+    handleDateChange = (field, e) => {
+        let form = this.state.form
+        form[field] = moment(e).format("MM/DD/YYYY")
+        
+        this.setState({
+           form
+        })
     }
 
     handleChange = (field, e) => {
@@ -130,19 +140,24 @@ class UserForm extends React.Component {
                                         </Grid>
                                     </Grid>
 
-                                    <TextField
-                                        label={'Birthdate'}
-                                        onChange={value => this.handleChange('dob', value)}
-                                        type="date"
-                                        defaultValue="03/13/1990"
+                                    <DatePicker
+                                        keyboard
+                                        label="Birthdate"
+                                        format={"MM/DD/YYYY"}
+                                        placeholder={moment().format("MM/DD/YYYY")}
+                                        mask={value =>
+                                        // handle clearing outside if value can be changed outside of the component
+                                        value ? [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/] : []
+                                        }
+                                        value={this.state.form.visit_datetime}
+                                        onChange={value => this.handleDateChange('visit_datetime', value)}
                                         fullWidth
-                                        required={true}
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
-                                            shrink: true,
+                                        shrink: true,
                                         }}
-                                    /> 
+                                    />
 
                                     <TextField
                                         id="contact"

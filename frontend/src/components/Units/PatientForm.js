@@ -11,6 +11,8 @@ import Paper from '@material-ui/core/Paper';
 import { CConfirm } from 'components'
 import { _createUser, _getUsers, _deleteUser, _getDoctorsByClinic } from '../../rest/users.api'
 import { _createPatient } from '../../rest/patient.api'
+import { DatePicker } from "material-ui-pickers"
+import moment from 'moment'
 
 import _ from 'lodash'
 
@@ -72,6 +74,15 @@ class PatientForm extends React.Component {
             this.props.refreshList()
         })
     }
+    
+    handleDateChange = (field, e) => {
+        let form = this.state.form
+        form[field] = moment(e).format("MM/DD/YYYY")
+        
+        this.setState({
+           form
+        })
+    }
 
     handleChange = (field, e) => {
         let form = this.state.form
@@ -81,6 +92,7 @@ class PatientForm extends React.Component {
             form
         })
     }
+    
     render() {
 
         const { classes } = this.props;
@@ -148,19 +160,24 @@ class PatientForm extends React.Component {
                                         </Grid>
                                     </Grid>
 
-                                    <TextField
-                                        label={'Birthdate'}
-                                        onChange={value => this.handleChange('dob', value)}
-                                        type="date"
-                                        defaultValue="03/13/1990"
+                                    <DatePicker
+                                        keyboard
+                                        label="Birthdate"
+                                        format={"MM/DD/YYYY"}
+                                        placeholder={moment().format("MM/DD/YYYY")}
+                                        mask={value =>
+                                        // handle clearing outside if value can be changed outside of the component
+                                        value ? [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/] : []
+                                        }
+                                        value={this.state.form.visit_datetime}
+                                        onChange={value => this.handleDateChange('visit_datetime', value)}
                                         fullWidth
-                                        required={true}
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
-                                            shrink: true,
+                                        shrink: true,
                                         }}
-                                    /> 
+                                    />
 
                                     <TextField
                                         id="gender"

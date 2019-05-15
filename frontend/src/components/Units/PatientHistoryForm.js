@@ -12,10 +12,11 @@ import InputAdornment from '@material-ui/core/InputAdornment'
 
 import { CConfirm } from 'components'
 import { _createPatientHistory } from '../../rest/patient_history.api'
-
+import { DatePicker } from "material-ui-pickers"
+import moment from 'moment'
 import _ from 'lodash'
 
-import moment from 'moment'
+
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -46,7 +47,7 @@ const styles = theme => ({
 class PatientHistoryForm extends React.Component {
    state =  {
       form: {},
-      confirm: false
+      confirm: false,
    }
 
    showPopup = val => {
@@ -58,10 +59,22 @@ class PatientHistoryForm extends React.Component {
 
       form['patient'] = this.props.dataID;
 
+      if(_.isEmpty(this.state.form.visit_datetime)){
+         form['visit_datetime'] = moment().format("MM/DD/YYYY")
+      }
+
       _createPatientHistory(form, () => {
          this.showPopup(false)
          this.props.closeForm()
          this.props.refreshList()
+      })
+   }
+   handleDateChange = (field, e) => {
+      let form = this.state.form
+      form[field] = moment(e).format("MM/DD/YYYY")
+      
+      this.setState({
+         form
       })
    }
 
@@ -93,31 +106,38 @@ class PatientHistoryForm extends React.Component {
 
                                     <Grid container>
                                         <Grid item md={4} xs={12} style={{ paddingRight: 5 }}>
-                                            <TextField
-                                                label={'Visit Date/Time'}
-                                                onChange={value => this.handleChange('visit_datetime', value)}
-                                                type="date"
-                                                fullWidth
-                                                defaultValue={moment(new Date()).format("DD/MM/YYYY")}
-                                                margin="dense"
-                                                variant="outlined"
-                                                InputLabelProps={{
-                                                    shrink: true,
-                                                }}
-                                            /> 
+                                          <DatePicker
+                                             keyboard
+                                             label="Date of Visit"
+                                             format={"MM/DD/YYYY"}
+                                             placeholder={moment().format("MM/DD/YYYY")}
+                                             mask={value =>
+                                                // handle clearing outside if value can be changed outside of the component
+                                                value ? [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/] : []
+                                             }
+                                             value={this.state.form.visit_datetime}
+                                             onChange={value => this.handleDateChange('visit_datetime', value)}
+                                             fullWidth
+                                             margin="dense"
+                                             variant="outlined"
+                                             InputLabelProps={{
+                                                shrink: true,
+                                             }}
+                                          />
 
                                             <TextField
                                             id="chief_complaint"
                                             label="Chief Complaint"
                                             placeholder="Enter Chief Complaint"
                                             fullWidth
-                                            margin="dense"
-                                            variant="outlined"
+                                             margin="dense"
+                                             variant="outlined"
+                                             InputLabelProps={{
+                                                shrink: true,
+                                             }}
                                             onChange={value => this.handleChange('chief_complaint', value)}
                                             
-                                            InputLabelProps={{
-                                                    shrink: true,
-                                            }}
+
                                             inputProps={{ autoCapitalize: true }}
                                             />
 
