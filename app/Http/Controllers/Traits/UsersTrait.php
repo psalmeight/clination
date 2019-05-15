@@ -12,17 +12,18 @@ trait UsersTrait
 {
 
   use ClinicUserTrait;
-  
+
   public function func_saveUser($request)
   {
       $obj = new User;
-
       $sideCheck = User::whereRaw('email = ?', [$request->email])->first();
+
+      Log::info(Auth::user());
 
       if(!empty($sideCheck)){
         return array(
-          'error' => true,
-          'message' => 'Email is already in use'
+          'status' => 401,
+          'message' => 'Oops. Email is already in use.'
         );
       }
 
@@ -41,21 +42,26 @@ trait UsersTrait
       $obj->email = $request->email;
       $obj->contact_no = $request->contact_no;
       $obj->dob = $request->dob;
-      $obj->role = $request->role ? $request->role : "";
 
-      $obj->save();
+      if(isset($request->ox) && !empty($request->ox)){
+        $obj->role = 'MAIN_OWNER';
+      }
+      else {
+        $obj->role = $request->role ? $request->role : "STAFF";
 
-      if(!empty($request->user_id)){
-        return $obj;
+        $obj->owned_by = $request->user()->id;
       }
       
-      return $obj->id;
+      $obj->save();
+
+      return array("status" => 200, "message" => "Successfully added");
   }
 
   public function func_getUsers()
   {
+
       $usersList = [];
-      $objectList = User::orderBy('created_at')->get();
+      $objectList = User::whereRaw('id = ? or owned_by = ?', [Auth::user()->id, Auth::user()->id])->get();
 
       foreach($objectList as $obj){
         $clinicUsers = $this->func_getClinicUsersByUser($obj->id);

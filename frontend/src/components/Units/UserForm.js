@@ -52,7 +52,7 @@ class UserForm extends React.Component {
             this.showPopup(false)
             this.props.closeForm()
             this.props.refreshList()
-        })
+        }, false)
     }
 
     handleChange = (field, e) => {

@@ -23,15 +23,28 @@ export let _getDoctorsByClinic = (clinicID, callback = null) => {
     })
 }
 
-export let _createUser = (data, callback = null) => {
+export let _createUser = (data, callback = null, mainUser = true) => {
   console.log('_createUser called')
-  post('/api/user', data)
+
+  if(mainUser){
+    post('/api/user', data)
     .then(response => {
       if (callback) callback(response.data)
     })
     .catch(e => {
       console.log('Error in _saveUser', e)
     })
+  }
+  else {
+    post('/api/v1/user/staff', data)
+    .then(response => {
+      if (callback) callback(response.data)
+    })
+    .catch(e => {
+      console.log('Error in _saveUser', e)
+    })
+  }
+
 }
 
 export let _tryLogin = (payload, callback = null) => {

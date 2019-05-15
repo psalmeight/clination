@@ -28,6 +28,7 @@ Route::prefix('/v1')->middleware(['auth:api'])->group(function () {
     Route::get('/users/clinic_doctors/{id}', 'UsersController@getDoctorsByClinic');
     Route::get('/user/{id}', 'UsersController@getUser');
     Route::delete('/user/{id}', 'UsersController@deleteUser');
+    Route::post('/user/staff', 'UsersController@saveUser');
 
     //Clinics API
     Route::post('/clinic', 'ClinicController@saveClinic');

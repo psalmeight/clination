@@ -30,7 +30,8 @@ class CMainLayout extends React.Component {
     state = {
         showRegistration: false,
         form: {},
-        confirm: false
+        confirm: false,
+        message: ''
     }
 
     showRegistration = val => {
@@ -42,9 +43,17 @@ class CMainLayout extends React.Component {
     }
 
     submitForm = () => {
-        _createUser(this.state.form, () => {
-            this.showRegistration(false)
-            this.showConfirm(false)
+        let form = this.state.form
+        form['ox'] = true;
+
+        _createUser(form, data => {
+            if(data.status != 200){
+                this.setState({ message: data.message }, () => this.showConfirm(false))
+            }
+            else {
+                this.showRegistration(false)
+                this.showConfirm(false)
+            }
         })
 
     }
@@ -174,7 +183,7 @@ class CMainLayout extends React.Component {
                                         }}
                                     />
 
-                                    <TextField
+                                    {/* <TextField
                                         id="username"
                                         label="Username"
                                         placeholder="Enter Username"
@@ -185,7 +194,7 @@ class CMainLayout extends React.Component {
                                         InputLabelProps={{
                                             shrink: true,
                                         }}
-                                    />
+                                    /> */}
                 
                                     <TextField
                                         id="password"
@@ -214,6 +223,12 @@ class CMainLayout extends React.Component {
                                             shrink: true,
                                         }}
                                     />
+
+{
+                                    !_.isEmpty(this.state.message) ? <Typography variant="button" gutterBottom style={{ color: 'red' }}>
+                                            {this.state.message}
+                                        </Typography> : null
+                                    }
 
                                     <Grid container>
                                         <Grid item md={6}>
