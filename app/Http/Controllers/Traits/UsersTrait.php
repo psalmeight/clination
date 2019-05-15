@@ -87,7 +87,7 @@ trait UsersTrait
       {
           $user = $this->func_getUser($obj->user->id);
 
-          if($obj->user->role == 'DOCTOR')
+          if($obj->user->role == 'DOCTOR' || $obj->user->role == 'MAIN_OWNER')
             array_push($resultList, $user);
       } 
 

@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 const auth0BaseUrl = 'https://srv.hisd3.com'
+//const auth0BaseUrl = 'http://localhost:8000'
 
 let instance = axios.create({
   baseURL: auth0BaseUrl,
