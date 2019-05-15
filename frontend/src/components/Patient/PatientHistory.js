@@ -167,6 +167,12 @@ class PatientHistory extends React.Component {
                                                    </TableCell>
                                                    <TableCell>{record.init_resp_rate} bpm</TableCell>
                                                 </TableRow>
+                                                <TableRow>
+                                                   <TableCell>
+                                                   <strong>Respiratory</strong>
+                                                   </TableCell>
+                                                   <TableCell>{record.init_resp_rate} bpm</TableCell>
+                                                </TableRow>
                                              </TableBody>
                                           </Table>
                                        </Paper>

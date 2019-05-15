@@ -87,15 +87,20 @@ class Patients extends React.Component {
    state = {
       expanded: 0,
       data: [],
-      openPatientForm: false
+      openPatientForm: false,
+      search: ''
    }
 
    componentDidMount(){
       this.fetchData()
    }
 
+   searchPatient = search => {
+      this.setState({ search: search.target.value }, () => this.fetchData())
+   }
+
    fetchData = () => {
-      _getPatientsByClinic(this.props.match.params.clinicID, data => {
+      _getPatientsByClinic(this.props.match.params.clinicID, this.state.search, data => {
          this.setState({ data })
       })
    }
@@ -132,7 +137,7 @@ class Patients extends React.Component {
                <Grid container>
                   <Grid item md={10} xs={8}>
                      <Paper className={classes.searchRoot} style={{ marginBottom: 10, paddingLeft: 10 }}>
-                        <InputBase className={classes.input} placeholder="Search patient" />
+                        <InputBase className={classes.input} placeholder="Search patient" onChange={val => this.searchPatient(val)} />
                      </Paper>
                   </Grid>
                   <Grid item md={2} xs={4} style={{ paddingLeft: 10 }}>

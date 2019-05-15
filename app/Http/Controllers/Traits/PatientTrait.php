@@ -21,6 +21,7 @@ trait PatientTrait
         $obj->middlename = $request->middlename;
         $obj->firstname = $request->firstname;
         $obj->lastname = $request->lastname;
+        $obj->fullname = $request->lastname . ', ' . $request->firstname . ' ' . $request->middlename;
         $obj->gender = $request->gender;
         $obj->contact_no = $request->contact_no;
         $obj->dob = $request->dob;
@@ -36,15 +37,23 @@ trait PatientTrait
         return $obj->id;
     }
 
-    public function func_getPatients()
+    public function func_getPatients($search)
     {
         $objectList = Patient::orderBy('created_at')->get();
+
+        if(!empty($search))
+            $objectList = Patient::whereRaw("upper(fullname) like ?", ['%' . strtoupper($search) . '%'])->get();
+            
         return $objectList;
     }
 
-    public function func_getPatientsByClinic($clinidID)
-    {
+    public function func_getPatientsByClinic($clinidID, $search)
+    { 
         $objectList = Patient::where('clinic_id', $clinidID)->get();
+
+        if(!empty($search))
+            $objectList = Patient::whereRaw("clinic_id = ? and upper(fullname) like ?", [$clinidID, '%' . strtoupper($search) . '%'])->get();
+        
         return $objectList;
     }
 

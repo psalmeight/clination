@@ -1,7 +1,7 @@
 import { get, post, destroy } from '../rest'
 
-export let _getPatients = (callback = null) => {
-  get('/api/v1/patients')
+export let _getPatients = (search = '', callback = null) => {
+  get('/api/v1/patients', { search })
     .then(response => {
       if (callback) callback(response.data)
     })
@@ -10,8 +10,8 @@ export let _getPatients = (callback = null) => {
     })
 }
 
-export let _getPatientsByClinic = (clinicID, callback = null) => {
-  get(`/api/v1/patients/by_clinic/${clinicID}`)
+export let _getPatientsByClinic = (clinicID, search = '', callback = null) => {
+  get(`/api/v1/patients/by_clinic/${clinicID}?search=${search}`)
     .then(response => {
       if (callback) callback(response.data)
     })

@@ -103,212 +103,200 @@ class PatientHistoryForm extends React.Component {
                                     New Patient History Record
                                 </Typography>
                                 <form noValidate autoComplete="off">
-
                                     <Grid container>
                                         <Grid item md={4} xs={12} style={{ paddingRight: 5 }}>
-                                          <DatePicker
-                                             keyboard
-                                             label="Date of Visit"
-                                             format={"MM/DD/YYYY"}
-                                             placeholder={moment().format("MM/DD/YYYY")}
-                                             mask={value =>
-                                                // handle clearing outside if value can be changed outside of the component
-                                                value ? [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/] : []
-                                             }
-                                             value={this.state.form.visit_datetime}
-                                             onChange={value => this.handleDateChange('visit_datetime', value)}
-                                             fullWidth
-                                             margin="dense"
-                                             variant="outlined"
-                                             InputLabelProps={{
-                                                shrink: true,
-                                             }}
-                                          />
-
-                                            <TextField
-                                            id="chief_complaint"
-                                            label="Chief Complaint"
-                                            placeholder="Enter Chief Complaint"
-                                            fullWidth
-                                             margin="dense"
-                                             variant="outlined"
-                                             InputLabelProps={{
-                                                shrink: true,
-                                             }}
-                                            onChange={value => this.handleChange('chief_complaint', value)}
-                                            
-
-                                            inputProps={{ autoCapitalize: true }}
+                                            <DatePicker
+                                                keyboard
+                                                label="Date of Visit"
+                                                format={"MM/DD/YYYY"}
+                                                placeholder={moment().format("MM/DD/YYYY")}
+                                                mask={value =>
+                                                    // handle clearing outside if value can be changed outside of the component
+                                                    value ? [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/] : []
+                                                }
+                                                value={this.state.form.visit_datetime}
+                                                onChange={value => this.handleDateChange('visit_datetime', value)}
+                                                fullWidth
+                                                margin="dense"
+                                                variant="outlined"
+                                                InputLabelProps={{
+                                                    shrink: true,
+                                                }}
                                             />
 
                                             <TextField
-                                            id="history_present_illness"
-                                            label="History of Illness"
-                                            placeholder="Enter of Illness"
-                                            fullWidth
-                                            margin="dense"
-                                            variant="outlined"
-                                            onChange={value => this.handleChange('history_present_illness', value)}
-                                            
-                                            InputLabelProps={{
+                                                id="chief_complaint"
+                                                label="Chief Complaint"
+                                                placeholder="Enter Chief Complaint"
+                                                fullWidth
+                                                margin="dense"
+                                                variant="outlined"
+                                                InputLabelProps={{
                                                     shrink: true,
-                                            }}
-                                            inputProps={{ autoCapitalize: true }}
+                                                }}
+                                                onChange={value => this.handleChange('chief_complaint', value)}
+                                                inputProps={{ autoCapitalize: true }}
                                             />
 
                                             <TextField
-                                            id="physical_exam"
-                                            label="Physical Exam"
-                                            placeholder="Enter Physical Exam"
-                                            fullWidth
-                                            margin="dense"
-                                            variant="outlined"
-                                            onChange={value => this.handleChange('physical_exam', value)}
-                                            
-                                            InputLabelProps={{
-                                                    shrink: true,
-                                            }}
-                                            inputProps={{ autoCapitalize: true }}
+                                                id="history_present_illness"
+                                                label="History of Illness"
+                                                placeholder="Enter of Illness"
+                                                fullWidth
+                                                margin="dense"
+                                                variant="outlined"
+                                                onChange={value => this.handleChange('history_present_illness', value)}
+                                                
+                                                InputLabelProps={{
+                                                        shrink: true,
+                                                }}
+                                                inputProps={{ autoCapitalize: true }}
                                             />
 
                                             <TextField
-                                            id="diagnosis"
-                                            label="Diagnosis"
-                                            placeholder="Enter Diagnosis"
-                                            fullWidth
-                                            margin="dense"
-                                            variant="outlined"
-                                            onChange={value => this.handleChange('diagnosis', value)}
-                                            
-                                            InputLabelProps={{
-                                                    shrink: true,
-                                            }}
-                                            inputProps={{ autoCapitalize: true }}
+                                                id="physical_exam"
+                                                label="Physical Exam"
+                                                placeholder="Enter Physical Exam"
+                                                fullWidth
+                                                margin="dense"
+                                                variant="outlined"
+                                                onChange={value => this.handleChange('physical_exam', value)}
+                                                
+                                                InputLabelProps={{
+                                                        shrink: true,
+                                                }}
+                                                inputProps={{ autoCapitalize: true }}
+                                            />
+
+                                            <TextField
+                                                id="diagnosis"
+                                                label="Diagnosis"
+                                                placeholder="Enter Diagnosis"
+                                                fullWidth
+                                                margin="dense"
+                                                variant="outlined"
+                                                onChange={value => this.handleChange('diagnosis', value)}
+                                                
+                                                InputLabelProps={{
+                                                        shrink: true,
+                                                }}
+                                                inputProps={{ autoCapitalize: true }}
                                             />
                                         </Grid>
                                         <Grid item md={4} xs={12} style={{ paddingLeft: 5, paddingRight: 5 }}>
-                                        <TextField
-                                       id="init_weight"
-                                       label="Weight"
-                                       placeholder="Enter Weight"
-                                       fullWidth
-                                       margin="dense"
-                                       variant="outlined"
-                                       onChange={value => this.handleChange('init_weight', value)}
-                                       
-                                       InputLabelProps={{
-                                             shrink: true,
-                                       }}
-                                       InputProps={{
-                                            endAdornment: <InputAdornment position="end">kg</InputAdornment>,
-                                        }}
-                                    />
+                                            <TextField
+                                                id="init_weight"
+                                                label="Weight"
+                                                placeholder="Enter Weight"
+                                                fullWidth
+                                                margin="dense"
+                                                variant="outlined"
+                                                onChange={value => this.handleChange('init_weight', value)}
+                                                
+                                                InputLabelProps={{
+                                                        shrink: true,
+                                                }}
+                                                InputProps={{
+                                                        endAdornment: <InputAdornment position="end">kg</InputAdornment>,
+                                                    }}
+                                            />
 
-                                    <TextField
-                                       id="init_height"
-                                       label="Height"
-                                       placeholder="Enter Height"
-                                       fullWidth
-                                       margin="dense"
-                                       variant="outlined"
-                                       onChange={value => this.handleChange('init_height', value)}
-                                       
-                                       InputLabelProps={{
-                                             shrink: true,
-                                       }}
-                                       InputProps={{
-                                            endAdornment: <InputAdornment position="end">cm</InputAdornment>,
-                                        }}
-                                    />
+                                            <TextField
+                                                id="init_height"
+                                                label="Height"
+                                                placeholder="Enter Height"
+                                                fullWidth
+                                                margin="dense"
+                                                variant="outlined"
+                                                onChange={value => this.handleChange('init_height', value)}
+                                                InputLabelProps={{
+                                                        shrink: true,
+                                                }}
+                                                InputProps={{
+                                                        endAdornment: <InputAdornment position="end">cm</InputAdornment>,
+                                                }}
+                                            />
 
-                                    <TextField
-                                       id="init_temp"
-                                       label="Temperature"
-                                       placeholder="Enter Temperature"
-                                       fullWidth
-                                       margin="dense"
-                                       variant="outlined"
-                                       onChange={value => this.handleChange('init_temp', value)}
-                                       
-                                       InputLabelProps={{
-                                             shrink: true,
-                                       }}
-                                       InputProps={{
-                                            endAdornment: <InputAdornment position="end">C</InputAdornment>,
-                                        }}
-                                    />
+                                            <TextField
+                                                id="init_temp"
+                                                label="Temperature"
+                                                placeholder="Enter Temperature"
+                                                fullWidth
+                                                margin="dense"
+                                                variant="outlined"
+                                                onChange={value => this.handleChange('init_temp', value)}
+                                                
+                                                InputLabelProps={{
+                                                        shrink: true,
+                                                }}
+                                                InputProps={{
+                                                    endAdornment: <InputAdornment position="end">C</InputAdornment>,
+                                                }}
+                                            />
 
-                                    <TextField
-                                        id="init_pulse_rate"
-                                        label="Pulse Rate"
-                                        placeholder="Enter Pulse Rate"
-                                        fullWidth
-                                        margin="dense"
-                                        variant="outlined"
-                                        onChange={value => this.handleChange('init_pulse_rate', value)}
-                                        
-                                        InputLabelProps={{
-                                                shrink: true,
-                                        }}
-                                        InputProps={{
-                                            endAdornment: <InputAdornment position="end">bpm</InputAdornment>,
-                                        }}
-                                    />
+                                            <TextField
+                                                id="init_pulse_rate"
+                                                label="Pulse Rate"
+                                                placeholder="Enter Pulse Rate"
+                                                fullWidth
+                                                margin="dense"
+                                                variant="outlined"
+                                                onChange={value => this.handleChange('init_pulse_rate', value)}
+                                                
+                                                InputLabelProps={{
+                                                        shrink: true,
+                                                }}
+                                                InputProps={{
+                                                    endAdornment: <InputAdornment position="end">bpm</InputAdornment>,
+                                                }}
+                                            />
 
-                                    <TextField
-                                       id="init_resp_rate"
-                                       label="Respiratory Rate"
-                                       placeholder="Enter Respiratory Rate"
-                                       fullWidth
-                                       margin="dense"
-                                       variant="outlined"
-                                       onChange={value => this.handleChange('init_resp_rate', value)}
-                                       
-                                       InputLabelProps={{
-                                             shrink: true,
-                                       }}
-                                       InputProps={{
-                                            endAdornment: <InputAdornment position="end">bpm</InputAdornment>,
-                                        }}
-                                    />
+                                            <TextField
+                                                id="init_resp_rate"
+                                                label="Respiratory Rate"
+                                                placeholder="Enter Respiratory Rate"
+                                                fullWidth
+                                                margin="dense"
+                                                variant="outlined"
+                                                onChange={value => this.handleChange('init_resp_rate', value)}
+                                                
+                                                InputLabelProps={{
+                                                        shrink: true,
+                                                }}
+                                                InputProps={{
+                                                    endAdornment: <InputAdornment position="end">bpm</InputAdornment>,
+                                                }}
+                                            />
                                         </Grid>
                                         <Grid item md={4} xs={12} style={{ paddingLeft: 5 }}>
-                                        <TextField
-                                        id="init_food_allergy"
-                                        label="Food Allergy"
-                                        placeholder="Enter Food Allergy"
-                                        fullWidth
-                                        margin="dense"
-                                        variant="outlined"
-                                        onChange={value => this.handleChange('init_food_allergy', value)}
-                                        
-                                        InputLabelProps={{
-                                                shrink: true,
-                                        }}
-                                        InputProps={{
-                                            endAdornment: <InputAdornment position="end">bpm</InputAdornment>,
-                                        }}
-                                    />
+                                            <TextField
+                                                id="init_food_allergy"
+                                                label="Food Allergy"
+                                                placeholder="Enter Food Allergy"
+                                                fullWidth
+                                                margin="dense"
+                                                variant="outlined"
+                                                onChange={value => this.handleChange('init_food_allergy', value)}
+                                                InputLabelProps={{
+                                                        shrink: true,
+                                                }}
+                                            />
 
-                                    <TextField
-                                       id="init_drug_allergy"
-                                       label="Drug Allergy"
-                                       placeholder="Enter Drug Allergy"
-                                       fullWidth
-                                       margin="dense"
-                                       variant="outlined"
-                                       onChange={value => this.handleChange('init_drug_allergy', value)}
-                                       
-                                       InputLabelProps={{
-                                             shrink: true,
-                                       }}
-                                       InputProps={{
-                                            endAdornment: <InputAdornment position="end">bpm</InputAdornment>,
-                                        }}
-                                    />
+                                            <TextField
+                                                id="init_drug_allergy"
+                                                label="Drug Allergy"
+                                                placeholder="Enter Drug Allergy"
+                                                fullWidth
+                                                margin="dense"
+                                                variant="outlined"
+                                                onChange={value => this.handleChange('init_drug_allergy', value)}
+                                                
+                                                InputLabelProps={{
+                                                        shrink: true,
+                                                }}
+                                            />
                                         </Grid>
                                     </Grid>
-
 
                                     <Grid container>
                                         <Grid item md={6} xs={6}>
@@ -322,7 +310,6 @@ class PatientHistoryForm extends React.Component {
                                             </Button>
                                         </Grid>
                                     </Grid>
-
                                 </form>
                             </Paper>
                         </Grid>

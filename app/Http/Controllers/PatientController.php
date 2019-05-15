@@ -29,9 +29,9 @@ class PatientController extends Controller
     return response()->json($objResult);
   }
 
-  public function getPatientsByClinic($clinic_id)
+  public function getPatientsByClinic(Request $request, $clinic_id)
   {
-    $objList = $this->func_getPatientsByClinic($clinic_id);
+    $objList = $this->func_getPatientsByClinic($clinic_id, $request->search);
     return response()->json($objList);
   }
 
