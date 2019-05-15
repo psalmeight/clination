@@ -9,6 +9,8 @@ import {
 import _ from 'lodash'
 
 import { _createUser } from '../../rest/users.api'
+import { DatePicker } from "material-ui-pickers"
+import moment from 'moment'
 
 import CAppBar from './CAppBar'
 import { CConfirm } from 'components'
@@ -56,6 +58,15 @@ class CMainLayout extends React.Component {
             }
         })
 
+    }
+
+    handleDateChange = (field, e) => {
+        let form = this.state.form
+        form[field] = moment(e).format("MM/DD/YYYY")
+        
+        this.setState({
+           form
+        })
     }
 
     handleChange = (field, e) => {
@@ -144,18 +155,24 @@ class CMainLayout extends React.Component {
                                         </Grid>
                                     </Grid>
 
-                                    <TextField
-                                        label={'Birthdate'}
-                                        onChange={value => this.handleChange('dob', value)}
-                                        type="date"
-                                        defaultValue="03/13/1990"
+                                    <DatePicker
+                                        keyboard
+                                        label="Birthdate"
+                                        format={"MM/DD/YYYY"}
+                                        placeholder={moment().format("MM/DD/YYYY")}
+                                        mask={value =>
+                                        // handle clearing outside if value can be changed outside of the component
+                                        value ? [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/] : []
+                                        }
+                                        value={this.state.form.dob}
+                                        onChange={value => this.handleDateChange('dob', value)}
                                         fullWidth
                                         margin="dense"
                                         variant="outlined"
                                         InputLabelProps={{
-                                            shrink: true,
+                                        shrink: true,
                                         }}
-                                    /> 
+                                    />
 
                                     <TextField
                                         id="contact"

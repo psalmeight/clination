@@ -90,7 +90,7 @@ class ClinicForm extends React.Component {
                         />
 
                         <TextField
-                            id="clinicaddress"
+                            id="clinic_address"
                             label="Clinic Address"
                             placeholder="Enter Address of Clinic"
                             onChange={val => this.handleChange('clinic_address', val)}

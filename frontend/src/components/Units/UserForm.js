@@ -149,7 +149,7 @@ class UserForm extends React.Component {
                                         // handle clearing outside if value can be changed outside of the component
                                         value ? [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/] : []
                                         }
-                                        value={this.state.form.visit_datetime}
+                                        value={this.state.form.dob}
                                         onChange={value => this.handleDateChange('dob', value)}
                                         fullWidth
                                         margin="dense"
