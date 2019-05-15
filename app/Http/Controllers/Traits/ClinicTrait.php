@@ -26,6 +26,13 @@ trait ClinicTrait
 
       $obj->save();
 
+      $obj2 = new ClinicUser;
+      
+      $obj2->user_id = Auth::user()->id;
+      $obj2->clinic_id = $obj->id;
+
+      $obj->save();
+
       return $obj->id;
   }
 
