@@ -170,7 +170,7 @@ class PatientForm extends React.Component {
                                         value ? [/\d/, /\d/, "/", /\d/, /\d/, "/", /\d/, /\d/, /\d/, /\d/] : []
                                         }
                                         value={this.state.form.visit_datetime}
-                                        onChange={value => this.handleDateChange('visit_datetime', value)}
+                                        onChange={value => this.handleDateChange('dob', value)}
                                         fullWidth
                                         margin="dense"
                                         variant="outlined"
