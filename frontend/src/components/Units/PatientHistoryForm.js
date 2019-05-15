@@ -15,6 +15,8 @@ import { _createPatientHistory } from '../../rest/patient_history.api'
 
 import _ from 'lodash'
 
+import moment from 'moment'
+
 function rand() {
   return Math.round(Math.random() * 20) - 10;
 }
@@ -42,38 +44,39 @@ const styles = theme => ({
 })
 
 class PatientHistoryForm extends React.Component {
-    state =  {
-        form: {},
-        confirm: false
-    }
+   state =  {
+      form: {},
+      confirm: false
+   }
 
-    showPopup = val => {
-        this.setState({ confirm: val })
-    }
+   showPopup = val => {
+      this.setState({ confirm: val })
+   }
 
-    submitForm = () => {
-        let form = this.state.form;
+   submitForm = () => {
+      let form = this.state.form;
 
-        form['patient'] = this.props.dataID;
+      form['patient'] = this.props.dataID;
 
-        _createPatientHistory(form, () => {
-            this.showPopup(false)
-            this.props.closeForm()
-            this.props.refreshList()
-        })
-    }
+      _createPatientHistory(form, () => {
+         this.showPopup(false)
+         this.props.closeForm()
+         this.props.refreshList()
+      })
+   }
 
-    handleChange = (field, e) => {
-        let form = this.state.form
-        form[field] = e.target.value
-        
-        this.setState({
-            form
-        })
-    }
-    render() {
+   handleChange = (field, e) => {
+      let form = this.state.form
+      form[field] = e.target.value
+      
+      this.setState({
+         form
+      })
+   }
 
-        return (
+   render() {
+
+      return (
             <div>
                 <Modal open={this.props.open}>
                     <Grid 
@@ -94,9 +97,8 @@ class PatientHistoryForm extends React.Component {
                                                 label={'Visit Date/Time'}
                                                 onChange={value => this.handleChange('visit_datetime', value)}
                                                 type="date"
-                                                defaultValue="03/13/1990"
                                                 fullWidth
-                                                
+                                                defaultValue={moment(new Date()).format("DD/MM/YYYY")}
                                                 margin="dense"
                                                 variant="outlined"
                                                 InputLabelProps={{

@@ -25,14 +25,14 @@ trait PatientHistoryTrait
         $obj->physical_exam = $request->physical_exam;
         $obj->diagnosis = $request->diagnosis;
 
-        // $obj->init_weight = $request->init_weight;
-        // $obj->init_height = $request->init_height;
-        // $obj->init_blood_pressure = $request->init_blood_pressure;
-        // $obj->init_pulse_rate = $request->init_pulse_rate;
-        // $obj->init_resp_rate = $request->init_resp_rate;
-        // $obj->init_temp = $request->init_temp;
-        // $obj->init_food_allergy = $request->init_food_allergy;
-        // $obj->init_drug_allergy = $request->init_drug_allergy;
+        $obj->init_weight = $request->init_weight;
+        $obj->init_height = $request->init_height;
+        $obj->init_blood_pressure = $request->init_blood_pressure;
+        $obj->init_pulse_rate = $request->init_pulse_rate;
+        $obj->init_resp_rate = $request->init_resp_rate;
+        $obj->init_temp = $request->init_temp;
+        $obj->init_food_allergy = $request->init_food_allergy;
+        $obj->init_drug_allergy = $request->init_drug_allergy;
 
         $obj->save();
 

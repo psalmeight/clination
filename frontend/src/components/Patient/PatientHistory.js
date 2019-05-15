@@ -27,6 +27,8 @@ import { _getPatientHistoriesByPatient, _deletePatientHistory } from '../../rest
 
 import { CConfirm } from 'components'
 
+import moment from 'moment'
+
 import _ from 'lodash'
 
 const styles = theme => ({
@@ -106,41 +108,78 @@ class PatientHistory extends React.Component {
                _.map(this.state.data, (record, idx) => {
                   return <ExpansionPanel>
                      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography className={classes.heading}><strong>{record.visit_datetime} - {record.chief_complaint}</strong></Typography>
+                        <Typography className={classes.heading}><strong>{moment(record.visit_datetime).format("MM/DD/YYYY")} - {record.chief_complaint}</strong></Typography>
                      </ExpansionPanelSummary>
                      <ExpansionPanelDetails>
                         <Grid container spacing={8}>
                            <Grid item md={12} style={{ width: '100%' }}>
-                              <Paper>
-                                 <Table>
-                                    <TableBody>
-                                       <TableRow>
-                                          <TableCell>
-                                             <strong>Chief Complaint</strong>
-                                          </TableCell>
-                                          <TableCell>{record.chief_complaint}</TableCell>
-                                       </TableRow>
-                                       <TableRow>
-                                          <TableCell>
-                                          <strong>History of Illness</strong>
-                                          </TableCell>
-                                          <TableCell>{record.history_present_illness}</TableCell>
-                                       </TableRow>
-                                       <TableRow>
-                                          <TableCell>
-                                          <strong>Physical Exam</strong>
-                                          </TableCell>
-                                          <TableCell>{record.physical_exam}</TableCell>
-                                       </TableRow>
-                                       <TableRow>
-                                          <TableCell>
-                                          <strong>Diagnosis</strong>
-                                          </TableCell>
-                                          <TableCell>{record.diagnosis}</TableCell>
-                                       </TableRow>
-                                    </TableBody>
-                                 </Table>
-                              </Paper>
+                              
+                                 <Grid container>
+                                    <Grid item md={6} xs={12} style={{ paddingRight: 5 }}>
+                                       <Paper style={{ marginBottom: 10 }}>
+                                          <Table>
+                                             <TableBody>
+                                                <TableRow>
+                                                   <TableCell>
+                                                      <strong>Chief Complaint</strong>
+                                                   </TableCell>
+                                                   <TableCell>{record.chief_complaint}</TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                   <TableCell>
+                                                   <strong>History of Illness</strong>
+                                                   </TableCell>
+                                                   <TableCell>{record.history_present_illness}</TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                   <TableCell>
+                                                   <strong>Physical Exam</strong>
+                                                   </TableCell>
+                                                   <TableCell>{record.physical_exam}</TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                   <TableCell>
+                                                   <strong>Diagnosis</strong>
+                                                   </TableCell>
+                                                   <TableCell>{record.diagnosis}</TableCell>
+                                                </TableRow>
+                                             </TableBody>
+                                          </Table>
+                                       </Paper>
+                                    </Grid>
+                                    <Grid item md={6} xs={12} style={{ paddingLeft: 5 }}>
+                                       <Paper>
+                                          <Table>
+                                             <TableBody>
+                                                <TableRow>
+                                                   <TableCell>
+                                                      <strong>Weight/Height</strong>
+                                                   </TableCell>
+                                                   <TableCell>{record.init_weight || '--'} kg / {record.init_height || '--'} cm</TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                   <TableCell>
+                                                   <strong>Temperature</strong>
+                                                   </TableCell>
+                                                   <TableCell>{record.init_temp} C</TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                   <TableCell>
+                                                   <strong>Pulse</strong>
+                                                   </TableCell>
+                                                   <TableCell>{record.init_pulse_rate} bpm</TableCell>
+                                                </TableRow>
+                                                <TableRow>
+                                                   <TableCell>
+                                                   <strong>Respiratory</strong>
+                                                   </TableCell>
+                                                   <TableCell>{record.init_resp_rate} bpm</TableCell>
+                                                </TableRow>
+                                             </TableBody>
+                                          </Table>
+                                       </Paper>
+                                    </Grid>
+                                 </Grid>
                            </Grid>
                         </Grid>
 
