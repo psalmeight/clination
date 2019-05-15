@@ -29,7 +29,8 @@ class MainContainer extends React.Component {
     state = {
         showRegistration: false,
         email: '',
-        password: ''
+        password: '',
+        message: ''
     }
 
     componentDidMount(){
@@ -58,11 +59,15 @@ class MainContainer extends React.Component {
             email: this.state.email,
             password: this.state.password
         }, data => {
+            
             if(data.status == 200 && !_.isEmpty(data.access_token)){
                 if(rule.roleQualified(rule.VIEW_DASHBOARD))
                     this.goTo('/dashboard')
                 else
                     this.goTo('/clinics')
+            }
+            else if(data.status == 401) {
+                this.setState({ message: 'Invalid email or password' })
             }
         })
     }
@@ -78,9 +83,16 @@ class MainContainer extends React.Component {
         return (
             <CMainLayout className={classes.root}>
 
+                
                 <Grid container style={{ marginTop: 50 }} spacing={8} justify="center" alignContent="center">
                     <Grid item>
+                        {
+                            !_.isEmpty(this.state.message) ? <Typography variant="button" gutterBottom style={{ color: 'red' }}>
+                                {this.state.message}
+                            </Typography> : null
+                        }
                         <form noValidate autoComplete="off">
+
                             <TextField
                                 id="username"
                                 label="Username/Email"
@@ -116,7 +128,7 @@ class MainContainer extends React.Component {
                                     }
                                 }}
                             />
-
+                            
                             <Button variant="contained" fullWidth color="primary" onClick={() => this.tryLogin()} style={{ marginTop: 10 }}>
                                 Login
                             </Button>

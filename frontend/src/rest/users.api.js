@@ -1,4 +1,5 @@
 import { get, post, destroy } from '../rest'
+import _ from 'lodash'
 
 export let _getUsers = (callback = null) => {
   console.log('_getUsers called')
@@ -37,12 +38,15 @@ export let _tryLogin = (payload, callback = null) => {
   console.log('_tryLogin called')
   post('/api/trylogin', payload)
     .then(response => {
-
-      localStorage.setItem('access_token', response.data.access_token)
-      localStorage.setItem('rx', response.data.user.role)
-      localStorage.setItem('user_id', response.data.user.id)
+      
+      if(response.data.status == 200 && !_.isEmpty(response.data.access_token)){
+        localStorage.setItem('access_token', response.data.access_token)
+        localStorage.setItem('rx', response.data.user.role)
+        localStorage.setItem('user_id', response.data.user.id)
+      }
 
       if (callback) callback(response.data)
+
     })
     .catch(e => {
       console.log('Error in _getUsers', e)
