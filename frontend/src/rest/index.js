@@ -1,8 +1,6 @@
 import axios from 'axios'
-import { IP_ADDRESS } from '../components/Utils/RouterAction'
 
-//const auth0BaseUrl = 'https://' + IP_ADDRESS
-const auth0BaseUrl = 'http://localhost:8000'
+const auth0BaseUrl = 'https://srv.hisd3.com'
 
 let instance = axios.create({
   baseURL: auth0BaseUrl,

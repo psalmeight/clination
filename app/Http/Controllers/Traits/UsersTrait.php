@@ -18,8 +18,6 @@ trait UsersTrait
       $obj = new User;
       $sideCheck = User::whereRaw('email = ?', [$request->email])->first();
 
-      Log::info(Auth::user());
-
       if(!empty($sideCheck)){
         return array(
           'status' => 401,
@@ -92,8 +90,6 @@ trait UsersTrait
           if($obj->user->role == 'DOCTOR')
             array_push($resultList, $user);
       } 
-
-      //Log::info($resultList);
 
       return $resultList;
   }
