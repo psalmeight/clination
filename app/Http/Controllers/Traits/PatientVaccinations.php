@@ -21,6 +21,9 @@ trait PatientVaccinationTrait
 
         $obj->visit_datetime = $request->visit_datetime;
         $obj->vaccination_date = $request->vaccination_date;
+        $obj->vaccination_details = $request->vaccination_details;
+        $obj->next_vaccination_schedule = $request->next_vaccination_schedule;
+        
         $obj->vaccination_notes = $request->vaccination_notes;
 
         $obj->save();

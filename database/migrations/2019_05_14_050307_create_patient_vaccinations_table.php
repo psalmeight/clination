@@ -18,6 +18,9 @@ class CreatePatientVaccinationsTable extends Migration
 
             $table->dateTime('visit_datetime')->nullable();
             $table->date('vaccination_date')->nullable();
+            $table->string('vaccination_details')->nullable();
+
+            $table->date('next_vaccination_schedule')->nullable();
             $table->string('vaccination_notes')->nullable();
 
             $table->integer('patient_id')->unsigned()->nullable();

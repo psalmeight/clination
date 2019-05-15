@@ -16,8 +16,8 @@ import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 
-import { ActionBar, PatientHistoryForm } from 'components'
-import { _getPatientHistoriesByPatient, _deletePatientHistory } from '../../rest/patient_history.api'
+import { ActionBar, PatientVaccinationForm } from 'components'
+import { _getPatientVaccinationsByPatient, _deletePatientVaccination } from '../../rest/patient_vaccination.api'
 
 import { CConfirm } from 'components'
 
@@ -40,7 +40,7 @@ const styles = theme => ({
    }
 })
 
-class PatientHistory extends React.Component {
+class PatientVaccination extends React.Component {
    state = {
       expanded: 0,
       data: [],
@@ -54,7 +54,7 @@ class PatientHistory extends React.Component {
    }
 
    fetchData = () => {
-      _getPatientHistoriesByPatient(this.props.match.params.patientID, data => {
+      _getPatientVaccinationsByPatient(this.props.match.params.patientID, data => {
          this.setState({
             data
          })
@@ -80,7 +80,7 @@ class PatientHistory extends React.Component {
    }
 
    deleteDataSuccess = () => {
-      _deletePatientHistory(this.state.selectedDataID, () => {
+      _deletePatientVaccination(this.state.selectedDataID, () => {
          this.fetchData()
          this.onDeleteData(false, '')
       })
@@ -94,7 +94,7 @@ class PatientHistory extends React.Component {
 
             <ActionBar style={{ marginBottom: 10 }}>
                <Button color="primary" onClick={() => this.openDataForm(true)}>
-                  Add New History Record
+                  Add New Vaccination Record
                </Button>
             </ActionBar>
 
@@ -102,7 +102,7 @@ class PatientHistory extends React.Component {
                _.map(this.state.data, (record, idx) => {
                   return <ExpansionPanel>
                      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography className={classes.heading}><strong>{moment(record.visit_datetime).format("MM/DD/YYYY")} - {record.chief_complaint}</strong></Typography>
+                        <Typography className={classes.heading}><strong>{moment(record.vaccination_date).format("MM/DD/YYYY")} - {record.chief_complaint}</strong></Typography>
                      </ExpansionPanelSummary>
                      <ExpansionPanelDetails>
                         <Grid container spacing={8}>
@@ -114,27 +114,21 @@ class PatientHistory extends React.Component {
                                              <TableBody>
                                                 <TableRow>
                                                    <TableCell>
-                                                      <strong>Chief Complaint</strong>
+                                                      <strong>Vaccination Date</strong>
                                                    </TableCell>
-                                                   <TableCell>{record.chief_complaint}</TableCell>
+                                                   <TableCell>{record.vaccination_date}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                    <TableCell>
-                                                   <strong>History of Illness</strong>
+                                                   <strong>Vaccination Notes</strong>
                                                    </TableCell>
-                                                   <TableCell>{record.history_present_illness}</TableCell>
+                                                   <TableCell>{record.vaccination_notes}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                    <TableCell>
-                                                   <strong>Physical Exam</strong>
+                                                   <strong>Next Vaccination Schedule</strong>
                                                    </TableCell>
-                                                   <TableCell>{record.physical_exam}</TableCell>
-                                                </TableRow>
-                                                <TableRow>
-                                                   <TableCell>
-                                                   <strong>Diagnosis</strong>
-                                                   </TableCell>
-                                                   <TableCell>{record.diagnosis}</TableCell>
+                                                   <TableCell>{record.next_vaccination_schedule}</TableCell>
                                                 </TableRow>
                                              </TableBody>
                                           </Table>
@@ -142,13 +136,15 @@ class PatientHistory extends React.Component {
                                     </Grid>
                                     <Grid item md={6} xs={12} style={{ paddingLeft: 5 }}>
                                        <Paper>
-                                          <Table>
+                                          {/* <Table>
                                              <TableBody>
                                                 <TableRow>
                                                    <TableCell>
-                                                      <strong>Weight/Height</strong>
+                                                      <strong>Vaccine</strong>
                                                    </TableCell>
-                                                   <TableCell>{record.init_weight || '--'} kg / {record.init_height || '--'} cm</TableCell>
+                                                   <TableCell>
+                                                      <strong>Route</strong>
+                                                   </TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                    <TableCell>
@@ -162,14 +158,9 @@ class PatientHistory extends React.Component {
                                                    </TableCell>
                                                    <TableCell>{record.init_pulse_rate} bpm</TableCell>
                                                 </TableRow>
-                                                <TableRow>
-                                                   <TableCell>
-                                                   <strong>Respiratory</strong>
-                                                   </TableCell>
-                                                   <TableCell>{record.init_resp_rate} bpm</TableCell>
-                                                </TableRow>
+
                                              </TableBody>
-                                          </Table>
+                                          </Table> */}
                                        </Paper>
                                     </Grid>
                                  </Grid>
@@ -185,7 +176,7 @@ class PatientHistory extends React.Component {
                })
             }
             
-            <PatientHistoryForm 
+            <PatientVaccinationForm 
                open={this.state.openDataForm} 
                closeForm={() => this.openDataForm(false)} 
                refreshList={() => this.fetchData()}
@@ -208,8 +199,8 @@ class PatientHistory extends React.Component {
    }
 }
 
-PatientHistory.propTypes = {
+PatientVaccination.propTypes = {
    classes: PropTypes.object.isRequired,
  }
 
-export default withStyles(styles, { withTheme: true })(PatientHistory)
+export default withStyles(styles, { withTheme: true })(PatientVaccination)

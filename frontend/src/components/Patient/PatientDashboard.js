@@ -19,7 +19,7 @@ import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
 
-import { PatientInformation, PatientHistory, PatientMedications } from 'components'
+import { PatientInformation, PatientHistory, PatientVaccination } from 'components'
 
 function TabContainer(props) {
   return (
@@ -74,7 +74,7 @@ class PatientDashboard extends React.Component {
               <Tabs value={value} onChange={this.handleChange}>
                 <Tab label="History" />
                 {/* <Tab label="Medications" /> */}
-                <Tab label="Information" />
+                <Tab label="Vaccinations" />
               </Tabs>
           </AppBar>
         </div>
@@ -83,7 +83,7 @@ class PatientDashboard extends React.Component {
                 <PatientHistory {...this.props} />
           </TabContainer>}
           {value === 1 && <TabContainer>
-                <PatientMedications {...this.props} />
+                <PatientVaccination {...this.props} />
           </TabContainer>}
           {value === 2 && <TabContainer>
                 <PatientInformation {...this.props} />
