@@ -45,7 +45,7 @@ trait ClinicTrait
   {
     $objList = [];
 
-    if(Auth::user()->role === 'MAIN_OWNER' || Auth::user()->role === 'OWNER'){
+    if(Auth::user()->role === 'MAIN_OWNER'){
       $objList = Clinic::where('user_id', $userID)->with('user')->get();
     }
     else {

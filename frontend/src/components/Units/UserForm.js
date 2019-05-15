@@ -219,7 +219,6 @@ class UserForm extends React.Component {
                                         InputLabelProps={{
                                                 shrink: true,
                                         }}>
-                                        <MenuItem value={'OWNER'}>OWNER</MenuItem>
                                         <MenuItem value={'DOCTOR'}>DOCTOR</MenuItem>
                                         <MenuItem value={'STAFF'}>STAFF</MenuItem>
                                     </TextField>
