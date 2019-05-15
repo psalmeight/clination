@@ -10,6 +10,11 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
 import InputAdornment from '@material-ui/core/InputAdornment'
 
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableRow from '@material-ui/core/TableRow';
+
 import { CConfirm } from 'components'
 import { _createPatientHistory } from '../../rest/patient_history.api'
 import { DatePicker } from "material-ui-pickers"
@@ -48,6 +53,7 @@ class PatientVaccinationForm extends React.Component {
    state =  {
       form: {},
       confirm: false,
+      vaccList: []
    }
 
    showPopup = val => {
@@ -85,6 +91,37 @@ class PatientVaccinationForm extends React.Component {
       this.setState({
          form
       })
+   }
+
+   handleVaccChange = (field, e) => {        
+        this.setState({
+            [field]: e.target.value
+        })
+   }
+
+   addToVaccList = () => {
+        let vaccList = this.state.vaccList
+
+        vaccList.push({ 
+            id: rand(), 
+            vaccine: this.state.vaccine, 
+            route: this.state.route 
+        })
+
+        this.setState({
+            vaccList
+        })
+   }
+
+   removeVacc = (id) => {      
+       let vaccList = this.state.vaccList  
+        _.remove(vaccList, data => {
+            return data.id == id
+        })
+
+        this.setState({
+            vaccList
+        })
    }
 
    render() {
@@ -179,6 +216,75 @@ class PatientVaccinationForm extends React.Component {
                                             />
                                         </Grid>
                                         <Grid item md={6} xs={12} style={{ paddingLeft: 5, paddingRight: 5 }}>
+                                            <Grid container>
+                                                <Grid item md={5}>
+                                                    <TextField
+                                                        id="vaccine"
+                                                        label="Vaccine"
+                                                        placeholder="Enter Vaccine"
+                                                        fullWidth
+                                                        margin="dense"
+                                                        variant="outlined"
+                                                        onChange={value => this.handleVaccChange('vaccine', value)}
+                                                        
+                                                        InputLabelProps={{
+                                                                shrink: true,
+                                                        }}
+                                                        inputProps={{ autoCapitalize: true }}
+                                                    />
+                                                </Grid>
+                                                <Grid item md={5}>
+                                                    <TextField
+                                                        id="route"
+                                                        label="Route"
+                                                        placeholder="Enter Route"
+                                                        fullWidth
+                                                        margin="dense"
+                                                        variant="outlined"
+                                                        onChange={value => this.handleVaccChange('route', value)}
+                                                        
+                                                        InputLabelProps={{
+                                                                shrink: true,
+                                                        }}
+                                                        inputProps={{ autoCapitalize: true }}
+                                                    />
+                                                </Grid>
+                                                <Grid item md={2}>
+                                                    <Button color="primary" onClick={this.addToVaccList}>Add</Button>
+                                                </Grid>
+                                            </Grid>
+
+                                            <Table>
+                                                <TableBody>
+                                                    <TableRow>
+                                                        <TableCell>
+                                                            <strong>Vaccine</strong>
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            <strong>Route</strong>
+                                                        </TableCell>
+                                                        <TableCell>
+                                                            <strong>Action</strong>
+                                                        </TableCell>
+                                                    </TableRow>
+                                                    {
+                                                        _.map(this.state.vaccList, data => {
+                                                            return <TableRow>
+                                                                <TableCell>
+                                                                    {data.vaccine}
+                                                                </TableCell>
+                                                                <TableCell>
+                                                                    {data.route}
+                                                                </TableCell>
+                                                                <TableCell>
+                                                                    <Button color="secondary" onClick={() => this.removeVacc(data.id)}>REMOVE</Button>
+                                                                </TableCell>
+                                                            </TableRow>
+                                                        })
+                                                    }
+                                                    
+                                                </TableBody>
+                                            </Table>
 
 
                                         </Grid>
