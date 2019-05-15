@@ -35,8 +35,6 @@ trait ClinicTrait
 
       $obj2->save();
 
-      $obj->save();
-
       return $obj->id;
   }
 
