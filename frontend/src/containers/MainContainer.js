@@ -3,7 +3,7 @@ import MenuIcon from '@material-ui/icons/Menu'
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles'
 import {
-  Modal, AppBar, Toolbar, Typography, Button, IconButton, Grid, Paper, TextField
+  Modal, AppBar, Toolbar, Typography, Button, IconButton, Grid, Paper, TextField, LinearProgress, CircularProgress
 } from '@material-ui/core'
 import { CMainLayout } from 'components'
 import { RouteTo } from '../components/Utils/RouterAction'
@@ -30,7 +30,8 @@ class MainContainer extends React.Component {
         showRegistration: false,
         email: '',
         password: '',
-        message: ''
+        message: '',
+        inProgress: false
     }
 
     componentDidMount(){
@@ -55,20 +56,22 @@ class MainContainer extends React.Component {
     }
 
     tryLogin = () => {
-        _tryLogin({
-            email: this.state.email,
-            password: this.state.password
-        }, data => {
-            
-            if(data.status == 200 && !_.isEmpty(data.access_token)){
-                if(rule.roleQualified(rule.VIEW_DASHBOARD))
-                    this.goTo('/dashboard')
-                else
-                    this.goTo('/clinics')
-            }
-            else if(data.status == 401) {
-                this.setState({ message: 'Invalid email or password' })
-            }
+        this.setState({ inProgress: true }, () => {
+            _tryLogin({
+                email: this.state.email,
+                password: this.state.password
+            }, data => {
+                
+                if(data.status == 200 && !_.isEmpty(data.access_token)){
+                    if(rule.roleQualified(rule.VIEW_DASHBOARD))
+                        this.goTo('/dashboard')
+                    else
+                        this.goTo('/clinics')
+                }
+                else if(data.status == 401) {
+                    this.setState({ message: 'Invalid email or password', inProgress: false })
+                }
+            })
         })
     }
 
@@ -129,8 +132,10 @@ class MainContainer extends React.Component {
                                 }}
                             />
                             
-                            <Button variant="contained" fullWidth color="primary" onClick={() => this.tryLogin()} style={{ marginTop: 10 }}>
-                                Login
+                            <Button disabled={this.state.inProgress} variant="contained" fullWidth color="primary" onClick={() => this.tryLogin()} style={{ marginTop: 10 }}>
+                                {
+                                    this.state.inProgress ? 'Authenticating' : 'Login'
+                                }
                             </Button>
 
                             <Button fullWidth color="primary" onClick={() => this.goTo('/dashboard')} style={{ marginTop: 10 }}>
