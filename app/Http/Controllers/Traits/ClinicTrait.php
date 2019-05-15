@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Traits;
 use Auth;
 use App\User;
 use App\Models\Clinic;
+use App\Models\ClinicUser;
+
 use Illuminate\Support\Facades\Log;
 use Carbon\Carbon;
 
@@ -27,7 +29,7 @@ trait ClinicTrait
       $obj->save();
 
       $obj2 = new ClinicUser;
-      
+
       $obj2->user_id = Auth::user()->id;
       $obj2->clinic_id = $obj->id;
 
