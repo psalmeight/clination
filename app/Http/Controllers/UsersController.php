@@ -10,6 +10,12 @@ class UsersController extends Controller
 {
   use UsersTrait;
 
+  public function getOwnerDashboardData()
+  {
+    $obj = $this->func_getOwnerDashboardData();
+    return response()->json($obj);
+  }
+
   public function saveUser(Request $request)
   {
     $obj = $this->func_saveUser($request);

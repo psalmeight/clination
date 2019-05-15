@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Traits;
 
 use App\User;
 use App\Models\ClinicUser;
+use App\Models\Clinic;
+use App\Models\Patient;
+
 use Auth;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Traits\ClinicUserTrait;
@@ -12,6 +15,21 @@ trait UsersTrait
 {
 
   use ClinicUserTrait;
+
+  public function func_getOwnerDashboardData()
+  {
+    //clinics, users -own, 
+
+    $clinicCount = Clinic::where('user_id', Auth::user()->id)->count();
+    $staffCount = ClinicUser::where('owned_by', Auth::user()->id)->count();
+    $patientCount = Patient::where('owned_by', Auth::user()->id)->count();
+
+    return array(
+      'clinic_count' => $clinicCount,
+      'staff_count' => $staffCount,
+      'patient_count' => $patientCount
+    );
+  }
 
   public function func_saveUser($request)
   {

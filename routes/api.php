@@ -24,6 +24,7 @@ Route::middleware('api')->group(function(){
 Route::prefix('/v1')->middleware(['auth:api'])->group(function () {
 
     //Users API
+    Route::get('/user/dashboard_data', 'UsersController@getOwnerDashboardData');
     Route::get('/users', 'UsersController@getUsers');
     Route::get('/users/clinic_doctors/{id}', 'UsersController@getDoctorsByClinic');
     Route::get('/user/{id}', 'UsersController@getUser');

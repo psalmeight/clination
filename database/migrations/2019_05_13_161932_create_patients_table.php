@@ -23,7 +23,7 @@ class CreatePatientsTable extends Migration
             $table->date('dob')->nullable();
             $table->string('gender')->nullable();
             $table->string('contact_no')->nullable();
-
+            $table->integer('owned_by')->nullable();
             $table->integer('clinic_id')->unsigned()->nullable();
             $table->foreign('clinic_id')
                   ->references('id')->on('clinics')

@@ -27,12 +27,9 @@ trait PatientTrait
         $obj->dob = $request->dob;
         $obj->user_id = $user->getKey();
         $obj->clinic_id = $clinic->getKey();
+        $obj->owned_by = $clinic->user_id;
 
         $obj->save();
-
-        if(!empty($request->user_id)){
-            return $obj;
-        }
         
         return $obj->id;
     }
