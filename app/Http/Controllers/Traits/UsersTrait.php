@@ -21,7 +21,7 @@ trait UsersTrait
     //clinics, users -own, 
 
     $clinicCount = Clinic::where('user_id', Auth::user()->id)->count();
-    $staffCount = ClinicUser::where('owned_by', Auth::user()->id)->count();
+    $staffCount = ClinicUser::where('user_id', Auth::user()->id)->count();
     $patientCount = Patient::where('owned_by', Auth::user()->id)->count();
 
     return array(
