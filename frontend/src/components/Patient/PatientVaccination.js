@@ -50,7 +50,6 @@ class PatientVaccination extends React.Component {
 
    componentDidMount(){
       this.fetchData()
-      console.log(this.props)
    }
 
    fetchData = () => {

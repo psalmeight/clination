@@ -1,7 +1,6 @@
 import { get, post, destroy } from '../rest'
 
 export let _getPatientVaccinations = (callback = null) => {
-  console.log('_getPatientVaccinations called')
   get('/api/v1/patient_vaccinations')
     .then(response => {
       if (callback) callback(response.data)
@@ -12,7 +11,6 @@ export let _getPatientVaccinations = (callback = null) => {
 }
 
 export let _getPatientVaccinationsByPatient = (patientID, callback = null) => {
-  console.log('_getPatientVaccinations called')
   get(`/api/v1/patient_vaccination/patient/${patientID}`)
     .then(response => {
       if (callback) callback(response.data)
@@ -23,7 +21,6 @@ export let _getPatientVaccinationsByPatient = (patientID, callback = null) => {
 }
 
 export let _getPatientVaccination = (id, callback = null) => {
-  console.log('_getPatientVaccination called')
   get(`/api/v1/patient_vaccination/${id}`)
     .then(response => {
       if (callback) callback(response.data)
@@ -34,7 +31,6 @@ export let _getPatientVaccination = (id, callback = null) => {
 }
 
 export let _createPatientVaccination = (data, callback = null) => {
-  console.log('_createPatientVaccination called')
   post('/api/v1/patient_vaccination', data)
     .then(response => {
       if (callback) callback(response.data)
@@ -45,7 +41,6 @@ export let _createPatientVaccination = (data, callback = null) => {
 }
 
 export let _deletePatientVaccination = (patient_vaccinationId, callback = null) => {
-  console.log('_deletePatientVaccination called')
   destroy(`/api/v1/patient_vaccination/${patient_vaccinationId}`)
     .then(response => {
       if (callback) callback(response.data)
