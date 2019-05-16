@@ -126,25 +126,25 @@ class PatientHistory extends React.Component {
                                                    <TableCell>
                                                       <strong>Chief Complaint</strong>
                                                    </TableCell>
-                                                   <TableCell>{record.chief_complaint}</TableCell>
+                                                   <TableCell style={{ textAlign: 'right' }}>{record.chief_complaint}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                    <TableCell>
                                                    <strong>History of Illness</strong>
                                                    </TableCell>
-                                                   <TableCell>{record.history_present_illness}</TableCell>
+                                                   <TableCell style={{ textAlign: 'right' }}>{record.history_present_illness}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                    <TableCell>
                                                    <strong>Physical Exam</strong>
                                                    </TableCell>
-                                                   <TableCell>{record.physical_exam}</TableCell>
+                                                   <TableCell style={{ textAlign: 'right' }}>{record.physical_exam}</TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                    <TableCell>
                                                    <strong>Diagnosis</strong>
                                                    </TableCell>
-                                                   <TableCell>{record.diagnosis}</TableCell>
+                                                   <TableCell style={{ textAlign: 'right' }}>{record.diagnosis}</TableCell>
                                                 </TableRow>
                                              </TableBody>
                                           </Table>
@@ -156,31 +156,31 @@ class PatientHistory extends React.Component {
                                                    <TableCell>
                                                       <strong>Weight/Height</strong>
                                                    </TableCell>
-                                                   <TableCell>{record.init_weight || '--'} kg / {record.init_height || '--'} cm</TableCell>
+                                                   <TableCell style={{ textAlign: 'right' }}>{record.init_weight || '--'} kg / {record.init_height || '--'} cm</TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                    <TableCell>
                                                    <strong>Temperature</strong>
                                                    </TableCell>
-                                                   <TableCell>{record.init_temp || '--'} C</TableCell>
+                                                   <TableCell style={{ textAlign: 'right' }}>{record.init_temp || '--'} C</TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                    <TableCell>
                                                    <strong>Pulse</strong>
                                                    </TableCell>
-                                                   <TableCell>{record.init_pulse_rate || '--'} bpm</TableCell>
+                                                   <TableCell style={{ textAlign: 'right' }}>{record.init_pulse_rate || '--'} bpm</TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                    <TableCell>
                                                    <strong>Respiratory</strong>
                                                    </TableCell>
-                                                   <TableCell>{record.init_resp_rate || '--'} bpm</TableCell>
+                                                   <TableCell style={{ textAlign: 'right' }}>{record.init_resp_rate || '--'} bpm</TableCell>
                                                 </TableRow>
                                                 <TableRow>
                                                    <TableCell>
                                                    <strong>Respiratory</strong>
                                                    </TableCell>
-                                                   <TableCell>{record.init_resp_rate || '--'} bpm</TableCell>
+                                                   <TableCell style={{ textAlign: 'right' }}>{record.init_resp_rate || '--'} bpm</TableCell>
                                                 </TableRow>
                                              </TableBody>
                                           </Table>

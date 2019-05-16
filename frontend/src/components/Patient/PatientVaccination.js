@@ -143,19 +143,19 @@ class PatientVaccination extends React.Component {
                                                       <TableCell>
                                                          <strong>Vaccination Date</strong>
                                                       </TableCell>
-                                                      <TableCell>{record.vaccination_date}</TableCell>
+                                                      <TableCell style={{ textAlign: 'right' }}>{record.vaccination_date}</TableCell>
                                                    </TableRow>
                                                    <TableRow>
                                                       <TableCell>
                                                       <strong>Vaccination Notes</strong>
                                                       </TableCell>
-                                                      <TableCell>{record.vaccination_notes}</TableCell>
+                                                      <TableCell style={{ textAlign: 'right' }}>{record.vaccination_notes}</TableCell>
                                                    </TableRow>
                                                    <TableRow>
                                                       <TableCell>
                                                       <strong>Next Vaccination Schedule</strong>
                                                       </TableCell>
-                                                      <TableCell>{record.next_vaccination_schedule}</TableCell>
+                                                      <TableCell style={{ textAlign: 'right' }}>{record.next_vaccination_schedule}</TableCell>
                                                    </TableRow>
                                                 </TableBody>
                                              </Table>
