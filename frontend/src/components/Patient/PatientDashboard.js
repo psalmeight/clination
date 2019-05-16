@@ -80,8 +80,8 @@ class PatientDashboard extends React.Component {
           <AppBar position="static">
               <Tabs value={value} onChange={this.handleChange}>
                 <Tab label="History" />
-                {/* <Tab label="Medications" /> */}
                 <Tab label="Vaccinations" />
+                <Tab label="Information" />
               </Tabs>
           </AppBar>
         </div>
@@ -93,7 +93,11 @@ class PatientDashboard extends React.Component {
                 <PatientVaccination {...this.props} />
           </TabContainer>}
           {value === 2 && <TabContainer>
-                <PatientInformation {...this.props} />
+                <PatientInformation 
+                  fetchPatient={this.fetchPatient} 
+                  patient={this.state.patient} 
+                  {...this.props} 
+                />
           </TabContainer>}
         </div>
 

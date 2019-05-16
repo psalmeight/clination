@@ -89,103 +89,109 @@ class PatientVaccination extends React.Component {
       const { classes } = this.props
 
       return (
-         <div className={classes.root}>
+         <div className={classes.root} style={{ padding: 10 }}>
 
-            <ActionBar style={{ marginBottom: 10 }}>
-               <Button color="primary" onClick={() => this.openDataForm(true)}>
-                  Add New Vaccination Record
-               </Button>
-            </ActionBar>
+            <Paper elevation={2} style={{ padding: 20 }}>
+               <Typography variant="h6" style={{ marginBottom: 20 }}>
+                  Patient Vaccinations
+               </Typography>
 
-            {
-               _.map(this.state.data, (record, idx) => {
+               <ActionBar style={{ marginBottom: 10 }}>
+                  <Button color="primary" onClick={() => this.openDataForm(true)}>
+                     Add New Vaccination Record
+                  </Button>
+               </ActionBar>
 
-                  let vaccinationRecord = record.vaccination_details ? JSON.parse(record.vaccination_details) : []
-                  let vaccineString = '';
+               {
+                  _.map(this.state.data, (record, idx) => {
 
-                  if(!_.isEmpty(vaccinationRecord)){   
-                     vaccinationRecord.forEach((vRec, i) => {
-                        if(i == 0)
-                           vaccineString = vaccineString + vRec.vaccine + '(' + vRec.route + ')'
-                        else
-                           vaccineString = vaccineString + ', ' + vRec.vaccine + '(' + vRec.route + ')'
-                     })
-                  }
+                     let vaccinationRecord = record.vaccination_details ? JSON.parse(record.vaccination_details) : []
+                     let vaccineString = '';
 
-                  return <ExpansionPanel>
-                     <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-                        <Typography className={classes.heading}><strong>{moment(record.vaccination_date).format("MM/DD/YYYY")} - {vaccineString}</strong></Typography>
-                     </ExpansionPanelSummary>
-                     <ExpansionPanelDetails>
-                        <Grid container spacing={8}>
-                           <Grid item md={12} style={{ width: '100%' }}>
-                                 <Grid container>
-                                    <Grid item md={6} xs={12} style={{ paddingRight: 5 }}>
-                                       <Paper style={{ marginBottom: 10 }}>
-                                          <Table>
-                                             <TableBody>
-                                                <TableRow>
-                                                   <TableCell>
-                                                      <strong>Vaccination Date</strong>
-                                                   </TableCell>
-                                                   <TableCell>{record.vaccination_date}</TableCell>
-                                                </TableRow>
-                                                <TableRow>
-                                                   <TableCell>
-                                                   <strong>Vaccination Notes</strong>
-                                                   </TableCell>
-                                                   <TableCell>{record.vaccination_notes}</TableCell>
-                                                </TableRow>
-                                                <TableRow>
-                                                   <TableCell>
-                                                   <strong>Next Vaccination Schedule</strong>
-                                                   </TableCell>
-                                                   <TableCell>{record.next_vaccination_schedule}</TableCell>
-                                                </TableRow>
-                                             </TableBody>
-                                          </Table>
-                                       </Paper>
-                                    </Grid>
-                                    <Grid item md={6} xs={12} style={{ paddingLeft: 5 }}>
-                                       <Paper>
-                                       <Table>
+                     if(!_.isEmpty(vaccinationRecord)){   
+                        vaccinationRecord.forEach((vRec, i) => {
+                           if(i == 0)
+                              vaccineString = vaccineString + vRec.vaccine + '(' + vRec.route + ')'
+                           else
+                              vaccineString = vaccineString + ', ' + vRec.vaccine + '(' + vRec.route + ')'
+                        })
+                     }
+
+                     return <ExpansionPanel>
+                        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+                           <Typography className={classes.heading}><strong>{moment(record.vaccination_date).format("MM/DD/YYYY")} - {vaccineString}</strong></Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
+                           <Grid container spacing={8}>
+                              <Grid item md={12} style={{ width: '100%' }}>
+                                    <Grid container>
+                                       <Grid item md={6} xs={12} style={{ paddingRight: 5 }}>
+                                          <Paper style={{ marginBottom: 10 }}>
+                                             <Table>
                                                 <TableBody>
-                                                    <TableRow>
-                                                        <TableCell>
-                                                            <strong>Vaccine</strong>
-                                                        </TableCell>
-                                                        <TableCell>
-                                                            <strong>Route</strong>
-                                                        </TableCell>
-                                                    </TableRow>
-                                                    {
-                                                        _.map(vaccinationRecord, data => {
-                                                            return <TableRow>
-                                                                <TableCell>
-                                                                    {data.vaccine}
-                                                                </TableCell>
-                                                                <TableCell>
-                                                                    {data.route}
-                                                                </TableCell>
-                                                            </TableRow>
-                                                        })
-                                                    }
+                                                   <TableRow>
+                                                      <TableCell>
+                                                         <strong>Vaccination Date</strong>
+                                                      </TableCell>
+                                                      <TableCell>{record.vaccination_date}</TableCell>
+                                                   </TableRow>
+                                                   <TableRow>
+                                                      <TableCell>
+                                                      <strong>Vaccination Notes</strong>
+                                                      </TableCell>
+                                                      <TableCell>{record.vaccination_notes}</TableCell>
+                                                   </TableRow>
+                                                   <TableRow>
+                                                      <TableCell>
+                                                      <strong>Next Vaccination Schedule</strong>
+                                                      </TableCell>
+                                                      <TableCell>{record.next_vaccination_schedule}</TableCell>
+                                                   </TableRow>
                                                 </TableBody>
-                                            </Table>
-                                       </Paper>
+                                             </Table>
+                                          </Paper>
+                                       </Grid>
+                                       <Grid item md={6} xs={12} style={{ paddingLeft: 5 }}>
+                                          <Paper>
+                                          <Table>
+                                                   <TableBody>
+                                                      <TableRow>
+                                                         <TableCell>
+                                                               <strong>Vaccine</strong>
+                                                         </TableCell>
+                                                         <TableCell>
+                                                               <strong>Route</strong>
+                                                         </TableCell>
+                                                      </TableRow>
+                                                      {
+                                                         _.map(vaccinationRecord, data => {
+                                                               return <TableRow>
+                                                                  <TableCell>
+                                                                     {data.vaccine}
+                                                                  </TableCell>
+                                                                  <TableCell>
+                                                                     {data.route}
+                                                                  </TableCell>
+                                                               </TableRow>
+                                                         })
+                                                      }
+                                                   </TableBody>
+                                             </Table>
+                                          </Paper>
+                                       </Grid>
                                     </Grid>
-                                 </Grid>
+                              </Grid>
                            </Grid>
-                        </Grid>
-                     </ExpansionPanelDetails>
-                     <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
-                        <Button size="small" color="secondary" onClick={() => this.onDeleteData(true, record.id)}>
-                           DELETE RECORD
-                        </Button>
-                     </ExpansionPanelActions>
-                  </ExpansionPanel>
-               })
-            }
+                        </ExpansionPanelDetails>
+                        <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
+                           <Button size="small" color="secondary" onClick={() => this.onDeleteData(true, record.id)}>
+                              DELETE RECORD
+                           </Button>
+                        </ExpansionPanelActions>
+                     </ExpansionPanel>
+                  })
+               }
+            </Paper>
             
             <PatientVaccinationForm 
                open={this.state.openDataForm} 

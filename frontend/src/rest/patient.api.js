@@ -1,4 +1,4 @@
-import { get, post, destroy } from '../rest'
+import { get, post, destroy, patch } from '../rest'
 
 export let _getPatient = (patientID, callback = null) => {
   get('/api/v1/patient/' + patientID)
@@ -48,6 +48,16 @@ export let _savePatient = (data, callback = null) => {
     })
     .catch(e => {
       console.log('Error in _savePatient', e)
+    })
+}
+
+export let _updatePatient = (data, callback = null) => {
+  patch('/api/v1/patient', data)
+    .then(response => {
+      if (callback) callback(response.data)
+    })
+    .catch(e => {
+      console.log('Error in _updatePatient', e)
     })
 }
 

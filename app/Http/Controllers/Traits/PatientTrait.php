@@ -34,6 +34,26 @@ trait PatientTrait
         return $obj->id;
     }
 
+    public function func_updatePatient($request)
+    {
+        $obj = new Patient;
+
+        if(isset($request->patient_id) || !empty($request->patient_id))
+            $obj = Patient::find($request->patient_id);
+
+        $obj->middlename = $request->middlename;
+        $obj->firstname = $request->firstname;
+        $obj->lastname = $request->lastname;
+        $obj->fullname = $request->lastname . ', ' . $request->firstname . ' ' . $request->middlename;
+        $obj->gender = $request->gender;
+        $obj->contact_no = $request->contact_no;
+        $obj->dob = $request->dob;
+
+        $obj->save();
+        
+        return $obj->id;
+    }
+
     public function func_getPatients($search)
     {
         $objectList = Patient::orderBy('created_at')->get();

@@ -48,6 +48,7 @@ Route::prefix('/v1')->middleware(['auth:api'])->group(function () {
 
     //Patients API
     Route::post('/patient', 'PatientController@savePatient');
+    Route::patch('/patient', 'PatientController@updatePatient');
     Route::get('/patient/{id}', 'PatientController@getPatient');
     Route::delete('/patient/{id}', 'PatientController@deletePatient');
     Route::get('/patients', 'PatientController@getPatients');
