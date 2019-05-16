@@ -127,70 +127,70 @@ class PatientVaccination extends React.Component {
                      }
 
                      let expanded = idx == 0 ? true : null
-                     return <ExpansionPanel expanded={expanded}>
+                     let bgColor = idx == 0 ? '#e0f1ff80' : '#fff'
+
+                     return <ExpansionPanel expanded={expanded} style={{ backgroundColor: bgColor }}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                            <Typography className={classes.heading}><strong>{moment(record.vaccination_date).format("MM/DD/YYYY")} - {vaccineString}</strong></Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                            <Grid container spacing={8}>
-                              <Grid item md={12} style={{ width: '100%' }}>
-                                    <Grid container>
-                                       <Grid item md={6} xs={12} style={{ paddingRight: 5 }}>
-                                          <Paper style={{ marginBottom: 10 }}>
-                                             <Table>
-                                                <TableBody>
-                                                   <TableRow>
-                                                      <TableCell>
-                                                         <strong>Vaccination Date</strong>
-                                                      </TableCell>
-                                                      <TableCell style={{ textAlign: 'right' }}>{record.vaccination_date}</TableCell>
-                                                   </TableRow>
-                                                   <TableRow>
-                                                      <TableCell>
-                                                      <strong>Vaccination Notes</strong>
-                                                      </TableCell>
-                                                      <TableCell style={{ textAlign: 'right' }}>{record.vaccination_notes}</TableCell>
-                                                   </TableRow>
-                                                   <TableRow>
-                                                      <TableCell>
-                                                      <strong>Next Vaccination Schedule</strong>
-                                                      </TableCell>
-                                                      <TableCell style={{ textAlign: 'right' }}>{record.next_vaccination_schedule}</TableCell>
-                                                   </TableRow>
-                                                </TableBody>
-                                             </Table>
-                                          </Paper>
-                                       </Grid>
-                                       <Grid item md={6} xs={12} style={{ paddingLeft: 5 }}>
-                                          <Paper>
-                                          <Table>
-                                                   <TableBody>
-                                                      <TableRow>
+                              <Paper style={{ width: '100%' }}>
+                              <Grid item md={12}>
+                                 <Grid container>
+                                    <Grid item md={6} xs={12} style={{ paddingRight: 5 }}>
+                                       <Table>
+                                          <TableBody>
+                                             <TableRow>
+                                                <TableCell>
+                                                   <strong>Vaccination Date</strong>
+                                                </TableCell>
+                                                <TableCell style={{ textAlign: 'right' }}>{moment(record.vaccination_date).format("MM/DD/YYYY")}</TableCell>
+                                             </TableRow>
+                                             <TableRow>
+                                                <TableCell>
+                                                <strong>Vaccination Notes</strong>
+                                                </TableCell>
+                                                <TableCell style={{ textAlign: 'right' }}>{record.vaccination_notes}</TableCell>
+                                             </TableRow>
+                                             <TableRow>
+                                                <TableCell>
+                                                <strong>Next Vaccination Schedule</strong>
+                                                </TableCell>
+                                                <TableCell style={{ textAlign: 'right' }}>{moment(record.next_vaccination_schedule).format("MM/DD/YYYY")}</TableCell>
+                                             </TableRow>
+                                          </TableBody>
+                                       </Table>
+                                    </Grid>
+                                    <Grid item md={6} xs={12} style={{ paddingLeft: 5 }}>
+                                       <Table>
+                                          <TableBody>
+                                             <TableRow>
+                                                <TableCell>
+                                                      <strong>Vaccine</strong>
+                                                </TableCell>
+                                                <TableCell>
+                                                      <strong>Route</strong>
+                                                </TableCell>
+                                             </TableRow>
+                                                {
+                                                   _.map(vaccinationRecord, data => {
+                                                      return <TableRow>
                                                          <TableCell>
-                                                               <strong>Vaccine</strong>
+                                                            {data.vaccine}
                                                          </TableCell>
                                                          <TableCell>
-                                                               <strong>Route</strong>
+                                                            {data.route}
                                                          </TableCell>
                                                       </TableRow>
-                                                      {
-                                                         _.map(vaccinationRecord, data => {
-                                                               return <TableRow>
-                                                                  <TableCell>
-                                                                     {data.vaccine}
-                                                                  </TableCell>
-                                                                  <TableCell>
-                                                                     {data.route}
-                                                                  </TableCell>
-                                                               </TableRow>
-                                                         })
-                                                      }
-                                                   </TableBody>
-                                             </Table>
-                                          </Paper>
-                                       </Grid>
+                                                   })
+                                                }
+                                             </TableBody>
+                                       </Table>
                                     </Grid>
+                                 </Grid>
                               </Grid>
+                              </Paper>
                            </Grid>
                         </ExpansionPanelDetails>
                         <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>

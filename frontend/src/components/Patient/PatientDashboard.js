@@ -14,6 +14,7 @@ import deepOrange from '@material-ui/core/colors/deepOrange';
 import deepPurple from '@material-ui/core/colors/deepPurple';
 import { PatientInformation, PatientHistory, PatientVaccination } from 'components'
 import _ from 'lodash'
+import moment from 'moment'
 
 function TabContainer(props) {
   return (
@@ -72,8 +73,8 @@ class PatientDashboard extends React.Component {
 
       let patient = {
          id: this.state.patient.id,
-         patient_name: this.state.patient.fullname,
-         details: this.state.patient.gender + ' | ' + this.state.patient.dob
+         patient_name: this.state.patient.fullname + ' (' + moment().diff(this.state.patient.dob, 'years') + ' y.o)',
+         details: this.state.patient.gender + ' | ' + moment(this.state.patient.dob).format("MM/DD/YYYY")
       }
 
       let avatarClass = this.state.patient.gender === 'MALE' ? classes.purpleAvatar : classes.orangeAvatar
