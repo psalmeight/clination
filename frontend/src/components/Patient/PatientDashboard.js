@@ -10,8 +10,10 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import Avatar from '@material-ui/core/Avatar';
 import { _getPatient } from '../../rest/patient.api'
-
+import deepOrange from '@material-ui/core/colors/deepOrange';
+import deepPurple from '@material-ui/core/colors/deepPurple';
 import { PatientInformation, PatientHistory, PatientVaccination } from 'components'
+import _ from 'lodash'
 
 function TabContainer(props) {
   return (
@@ -29,7 +31,15 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.paper,
-  }
+  },
+  orangeAvatar: {
+      color: '#fff',
+      backgroundColor: deepOrange[500],
+  },
+  purpleAvatar: {
+      color: '#fff',
+      backgroundColor: deepPurple[500],
+  },
 })
 
 class PatientDashboard extends React.Component {
@@ -63,17 +73,19 @@ class PatientDashboard extends React.Component {
       let patient = {
          id: this.state.patient.id,
          patient_name: this.state.patient.fullname,
-         details: this.state.patient.gender + ' | ' + this.state.patient.dob,
-         avatar: 'https://material-ui.com/static/images/avatar/1.jpg',
+         details: this.state.patient.gender + ' | ' + this.state.patient.dob
       }
 
+      let avatarClass = this.state.patient.gender === 'MALE' ? classes.purpleAvatar : classes.orangeAvatar
+
+      let genderChar = !_.isEmpty(this.state.patient.gender) ? this.state.patient.gender[0] : '-'
     return (
       <div className={classes.root}>
 
         <div>
           <Fragment key={patient.id}>
               <ListItem button>
-                <Avatar alt="Profile Picture" src={patient.avatar} />
+                <Avatar className={avatarClass}>{ genderChar || '-' }</Avatar>
                 <ListItemText primary={patient.patient_name} secondary={patient.details} />
               </ListItem>
           </Fragment>
