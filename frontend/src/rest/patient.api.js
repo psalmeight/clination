@@ -61,6 +61,16 @@ export let _updatePatient = (data, callback = null) => {
     })
 }
 
+export let _updatePatientPast = (data, callback = null) => {
+  patch('/api/v1/patient_past', data)
+    .then(response => {
+      if (callback) callback(response.data)
+    })
+    .catch(e => {
+      console.log('Error in _updatePatientPast', e)
+    })
+}
+
 export let _deletePatient = (patientId, callback = null) => {
   destroy(`/api/v1/patient/${patientId}`)
     .then(response => {

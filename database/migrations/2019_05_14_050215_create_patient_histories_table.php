@@ -29,8 +29,8 @@ class CreatePatientHistoriesTable extends Migration
             $table->string('init_pulse_rate')->nullable();
             $table->string('init_resp_rate')->nullable();
             $table->string('init_temp')->nullable();
-            $table->string('init_food_allergy')->nullable();
-            $table->string('init_drug_allergy')->nullable();
+            $table->string('medications')->nullable();
+            $table->string('diagnostics')->nullable();
 
 
             $table->integer('patient_id')->unsigned()->nullable();

@@ -270,26 +270,26 @@ class PatientHistoryForm extends React.Component {
                                         </Grid>
                                         <Grid item md={4} xs={12} style={{ paddingLeft: 5 }}>
                                             <TextField
-                                                id="init_food_allergy"
-                                                label="Food Allergy"
-                                                placeholder="Enter Food Allergy"
+                                                id="medications"
+                                                label="Medications"
+                                                placeholder="Enter Medications"
                                                 fullWidth
                                                 margin="dense"
                                                 variant="outlined"
-                                                onChange={value => this.handleChange('init_food_allergy', value)}
+                                                onChange={value => this.handleChange('medications', value)}
                                                 InputLabelProps={{
                                                         shrink: true,
                                                 }}
                                             />
 
                                             <TextField
-                                                id="init_drug_allergy"
-                                                label="Drug Allergy"
-                                                placeholder="Enter Drug Allergy"
+                                                id="diagnostics"
+                                                label="Diagnostics/Labs"
+                                                placeholder="Enter Diagnostics/Labs"
                                                 fullWidth
                                                 margin="dense"
                                                 variant="outlined"
-                                                onChange={value => this.handleChange('init_drug_allergy', value)}
+                                                onChange={value => this.handleChange('diagnostics', value)}
                                                 
                                                 InputLabelProps={{
                                                         shrink: true,

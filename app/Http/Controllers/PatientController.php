@@ -23,6 +23,12 @@ class PatientController extends Controller
     return response()->json(200);
   }
 
+  public function updatePatientPast(Request $request)
+  {
+    $this->func_updatePatientPast($request);
+    return response()->json(200);
+  }
+
   public function getPatients(Request $request)
   {
     $objList = $this->func_getPatients();

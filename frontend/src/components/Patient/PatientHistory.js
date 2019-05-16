@@ -15,6 +15,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { unstable_Box as Box } from '@material-ui/core/Box'
 
 import { ActionBar, PatientHistoryForm } from 'components'
 import { _getPatientHistoriesByPatient, _deletePatientHistory } from '../../rest/patient_history.api'
@@ -90,7 +91,7 @@ class PatientHistory extends React.Component {
 
       return (
          <div className={classes.root} style={{ padding: 10 }}>
-
+            
             <Paper elevation={2} style={{ padding: 20 }}>
                <Grid container>
                   <Grid item>
@@ -118,80 +119,98 @@ class PatientHistory extends React.Component {
                            <Typography className={classes.heading}><strong>{moment(record.visit_datetime).format("MM/DD/YYYY")} - {record.chief_complaint}</strong></Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
-                           <Grid container spacing={8}>
-                              <Paper style={{ width: '100%' }}>
-                                 <Grid item md={12}>
-                                       <Grid container>
-                                          <Grid item md={6} xs={12} style={{ paddingRight: 5 }}>
-                                             <Table>
-                                                <TableBody>
-                                                   <TableRow>
-                                                      <TableCell>
-                                                         <strong>Chief Complaint</strong>
-                                                      </TableCell>
-                                                      <TableCell style={{ textAlign: 'right' }}>{record.chief_complaint}</TableCell>
-                                                   </TableRow>
-                                                   <TableRow>
-                                                      <TableCell>
-                                                      <strong>History of Illness</strong>
-                                                      </TableCell>
-                                                      <TableCell style={{ textAlign: 'right' }}>{record.history_present_illness}</TableCell>
-                                                   </TableRow>
-                                                   <TableRow>
-                                                      <TableCell>
-                                                      <strong>Physical Exam</strong>
-                                                      </TableCell>
-                                                      <TableCell style={{ textAlign: 'right' }}>{record.physical_exam}</TableCell>
-                                                   </TableRow>
-                                                   <TableRow>
-                                                      <TableCell>
-                                                      <strong>Diagnosis</strong>
-                                                      </TableCell>
-                                                      <TableCell style={{ textAlign: 'right' }}>{record.diagnosis}</TableCell>
-                                                   </TableRow>
-                                                </TableBody>
-                                             </Table>
-                                          </Grid>
-                                          <Grid item md={6} xs={12} style={{ paddingLeft: 5 }}>
-                                             <Table>
-                                                <TableBody>
-                                                   <TableRow>
-                                                      <TableCell>
-                                                         <strong>Weight/Height</strong>
-                                                      </TableCell>
-                                                      <TableCell style={{ textAlign: 'right' }}>{record.init_weight || '--'} kg / {record.init_height || '--'} cm</TableCell>
-                                                   </TableRow>
-                                                   <TableRow>
-                                                      <TableCell>
-                                                      <strong>Temperature</strong>
-                                                      </TableCell>
-                                                      <TableCell style={{ textAlign: 'right' }}>{record.init_temp || '--'} C</TableCell>
-                                                   </TableRow>
-                                                   <TableRow>
-                                                      <TableCell>
-                                                      <strong>Pulse</strong>
-                                                      </TableCell>
-                                                      <TableCell style={{ textAlign: 'right' }}>{record.init_pulse_rate || '--'} bpm</TableCell>
-                                                   </TableRow>
-                                                   <TableRow>
-                                                      <TableCell>
-                                                      <strong>Respiratory</strong>
-                                                      </TableCell>
-                                                      <TableCell style={{ textAlign: 'right' }}>{record.init_resp_rate || '--'} bpm</TableCell>
-                                                   </TableRow>
-                                                   <TableRow>
-                                                      <TableCell>
-                                                      <strong>Respiratory</strong>
-                                                      </TableCell>
-                                                      <TableCell style={{ textAlign: 'right' }}>{record.init_resp_rate || '--'} bpm</TableCell>
-                                                   </TableRow>
-                                                </TableBody>
-                                             </Table>
-                                          </Grid>
-                                       </Grid>
+                           <Paper style={{ marginBottom: 10, width: '100%' }}>
+                              <Grid container display="block">
+                                 <Grid item md={6} xs={12} style={{ paddingRight: 5 }}>
+                                    <Table>
+                                       <TableBody>
+                                          <TableRow>
+                                             <TableCell>
+                                                <strong>Chief Complaint</strong>
+                                             </TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}>{record.chief_complaint}</TableCell>
+                                          </TableRow>
+                                          <TableRow>
+                                             <TableCell>
+                                             <strong>History of Illness</strong>
+                                             </TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}>{record.history_present_illness}</TableCell>
+                                          </TableRow>
+                                          <TableRow>
+                                             <TableCell>
+                                             <strong>Physical Exam</strong>
+                                             </TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}>{record.physical_exam}</TableCell>
+                                          </TableRow>
+                                          <TableRow>
+                                             <TableCell>
+                                             <strong>Diagnosis</strong>
+                                             </TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}>{record.diagnosis}</TableCell>
+                                          </TableRow>
+                                       </TableBody>
+                                    </Table>
                                  </Grid>
-                              </Paper>
-                           </Grid>
+                                 <Grid item md={6} xs={12} style={{ paddingLeft: 5 }}>
+                                    <Table>
+                                       <TableBody>
+                                          <TableRow>
+                                             <TableCell>
+                                                <strong>Weight/Height</strong>
+                                             </TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}>{record.init_weight || '--'} kg / {record.init_height || '--'} cm</TableCell>
+                                          </TableRow>
+                                          <TableRow>
+                                             <TableCell>
+                                             <strong>Temperature</strong>
+                                             </TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}>{record.init_temp || '--'} C</TableCell>
+                                          </TableRow>
+                                          <TableRow>
+                                             <TableCell>
+                                             <strong>Pulse</strong>
+                                             </TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}>{record.init_pulse_rate || '--'} bpm</TableCell>
+                                          </TableRow>
+                                          <TableRow>
+                                             <TableCell>
+                                             <strong>Respiratory</strong>
+                                             </TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}>{record.init_resp_rate || '--'} bpm</TableCell>
+                                          </TableRow>
+                                       </TableBody>
+                                    </Table>
+                                 </Grid>
+                              </Grid>
+                           </Paper>
+                           {/* <Paper style={{ marginBottom: 10, width: '100%' }}>
+                              <Grid container display="block">
+                                 <Grid item md={6} xs={12} style={{ paddingRight: 5 }}>
+                                    <Table>
+                                       <TableBody>
+                                          <TableRow>
+                                             <TableCell>
+                                                <strong>Medications</strong>
+                                             </TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}>{record.medications}</TableCell>
+                                          </TableRow>
+                                       </TableBody>
+                                    </Table>
+                                 </Grid>
+                                 <Grid item md={6} xs={12} style={{ paddingLeft: 5 }}>
+                                    <Table>
+                                       <TableBody>
+                                          <TableRow>
+                                             <TableCell>
+                                                <strong>Diagnostics</strong>
+                                             </TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}>{record.diagnostics || '--'}</TableCell>
+                                          </TableRow>
+                                       </TableBody>
+                                    </Table>
+                                 </Grid>
+                              </Grid>
+                           </Paper> */}
                         </ExpansionPanelDetails>
                         <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
                            <Button size="small" color="secondary" onClick={() => this.onDeleteData(true, record.id)}>

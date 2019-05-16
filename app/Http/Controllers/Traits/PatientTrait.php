@@ -48,6 +48,25 @@ trait PatientTrait
         $obj->gender = $request->gender;
         $obj->contact_no = $request->contact_no;
         $obj->dob = $request->dob;
+        $obj->family_history = $request->family_history;
+        $obj->personal_history = $request->personal_history;
+        $obj->allergies = $request->allergies;
+
+        $obj->save();
+        
+        return $obj->id;
+    }
+
+    public function func_updatePatientPast($request)
+    {
+        $obj = new Patient;
+
+        if(isset($request->patient_id) || !empty($request->patient_id))
+            $obj = Patient::find($request->patient_id);
+
+        $obj->family_history = $request->family_history;
+        $obj->personal_history = $request->personal_history;
+        $obj->allergies = $request->allergies;
 
         $obj->save();
         

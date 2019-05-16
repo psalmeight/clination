@@ -14,6 +14,7 @@ export { default as Appointments } from './Clinic/Appointments'
 export { default as PatientDashboard } from './Patient/PatientDashboard'
 export { default as PatientInformation } from './Patient/PatientInformation'
 export { default as PatientHistory } from './Patient/PatientHistory'
+export { default as PatientPastHistory } from './Patient/PatientPastHistory'
 export { default as PatientVaccination } from './Patient/PatientVaccination'
 export { default as PatientMedications } from './Patient/PatientMedications'
 

@@ -31,8 +31,8 @@ trait PatientHistoryTrait
         $obj->init_pulse_rate = $request->init_pulse_rate;
         $obj->init_resp_rate = $request->init_resp_rate;
         $obj->init_temp = $request->init_temp;
-        $obj->init_food_allergy = $request->init_food_allergy;
-        $obj->init_drug_allergy = $request->init_drug_allergy;
+        $obj->medications = $request->medications;
+        $obj->diagnostics = $request->diagnostics;
 
         $obj->save();
 

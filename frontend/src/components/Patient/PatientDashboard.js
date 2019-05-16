@@ -12,7 +12,7 @@ import Avatar from '@material-ui/core/Avatar';
 import { _getPatient } from '../../rest/patient.api'
 import deepOrange from '@material-ui/core/colors/deepOrange';
 import deepPurple from '@material-ui/core/colors/deepPurple';
-import { PatientInformation, PatientHistory, PatientVaccination } from 'components'
+import { PatientInformation, PatientHistory, PatientVaccination, PatientPastHistory } from 'components'
 import _ from 'lodash'
 import moment from 'moment'
 
@@ -94,6 +94,7 @@ class PatientDashboard extends React.Component {
               <Tabs value={value} onChange={this.handleChange}>
                 <Tab label="History" />
                 <Tab label="Vaccinations" />
+                <Tab label="Past History" />
                 <Tab label="Information" />
               </Tabs>
           </AppBar>
@@ -106,6 +107,13 @@ class PatientDashboard extends React.Component {
                 <PatientVaccination {...this.props} />
           </TabContainer>}
           {value === 2 && <TabContainer>
+              <PatientPastHistory 
+                  fetchPatient={this.fetchPatient} 
+                  patient={this.state.patient} 
+                  {...this.props} 
+                />
+          </TabContainer>}
+          {value === 3 && <TabContainer>
                 <PatientInformation 
                   fetchPatient={this.fetchPatient} 
                   patient={this.state.patient} 
