@@ -92,15 +92,24 @@ class PatientVaccination extends React.Component {
          <div className={classes.root} style={{ padding: 10 }}>
 
             <Paper elevation={2} style={{ padding: 20 }}>
-               <Typography variant="h6" style={{ marginBottom: 20 }}>
-                  Patient Vaccinations
-               </Typography>
 
-               <ActionBar style={{ marginBottom: 10 }}>
-                  <Button color="primary" onClick={() => this.openDataForm(true)}>
-                     Add New Vaccination Record
-                  </Button>
-               </ActionBar>
+               <Grid container>
+                  <Grid item>
+                     <Typography variant="h6" style={{ marginBottom: 20 }}>
+                        Patient Vaccinations
+                     </Typography>
+                  </Grid>
+                  <Grid item style={{ justifyContent: 'flex-end', textAlign: 'right' }}>
+                     <ActionBar style={{ marginBottom: 10 }}>
+                        <Button color="primary" onClick={() => this.openDataForm(true)}>
+                           Add New Vaccination Record
+                        </Button>
+                     </ActionBar>
+                  </Grid>
+               </Grid>
+
+
+
 
                {
                   _.map(this.state.data, (record, idx) => {
@@ -117,7 +126,8 @@ class PatientVaccination extends React.Component {
                         })
                      }
 
-                     return <ExpansionPanel>
+                     let expanded = idx == 0 ? true : null
+                     return <ExpansionPanel expanded={expanded}>
                         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
                            <Typography className={classes.heading}><strong>{moment(record.vaccination_date).format("MM/DD/YYYY")} - {vaccineString}</strong></Typography>
                         </ExpansionPanelSummary>

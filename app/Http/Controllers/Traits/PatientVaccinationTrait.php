@@ -39,7 +39,7 @@ trait PatientVaccinationTrait
 
     public function func_getPatientVaccinationsByPatient($patientID)
     {
-        $objectList = PatientVaccination::where('patient_id', $patientID)->get();
+        $objectList = PatientVaccination::where('patient_id', $patientID)->orderBy('created_at', 'DESC')->get();
         return $objectList;
     }
 

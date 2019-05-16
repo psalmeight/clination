@@ -47,7 +47,7 @@ trait PatientHistoryTrait
 
     public function func_getPatientHistoriesByPatient($patientID)
     {
-        $objectList = PatientHistory::where('patient_id', $patientID)->get();
+        $objectList = PatientHistory::where('patient_id', $patientID)->orderBy('created_at', 'DESC')->get();
         return $objectList;
     }
 
