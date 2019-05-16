@@ -3,7 +3,6 @@ import { get, post, destroy, patch } from '../rest'
 export let _getPatient = (patientID, callback = null) => {
   get('/api/v1/patient/' + patientID)
     .then(response => {
-      console.log(response)
       if (callback) callback(response.data)
     })
     .catch(e => {

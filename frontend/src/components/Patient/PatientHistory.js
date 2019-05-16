@@ -46,7 +46,9 @@ class PatientHistory extends React.Component {
       expanded: 0,
       data: [],
       openDataForm: false,
-      selectedDataID: ''
+      selectedDataID: '',
+      selectedData: {},
+      mode: 'add'
    }
 
    componentDidMount(){
@@ -72,7 +74,11 @@ class PatientHistory extends React.Component {
    }
 
    openDataForm = val => {
-      this.setState({ openDataForm: val })
+      this.setState({ mode: 'add', selectedData: {}, openDataForm: val })
+   }
+
+   onEditData = (val, data) => {
+      this.setState({ mode: 'edit', selectedData: data, openDataForm: val  })
    }
 
    onDeleteData = (val, dataID) => {
@@ -183,36 +189,11 @@ class PatientHistory extends React.Component {
                                  </Grid>
                               </Grid>
                            </Paper>
-                           {/* <Paper style={{ marginBottom: 10, width: '100%' }}>
-                              <Grid container display="block">
-                                 <Grid item md={6} xs={12} style={{ paddingRight: 5 }}>
-                                    <Table>
-                                       <TableBody>
-                                          <TableRow>
-                                             <TableCell>
-                                                <strong>Medications</strong>
-                                             </TableCell>
-                                             <TableCell style={{ textAlign: 'right' }}>{record.medications}</TableCell>
-                                          </TableRow>
-                                       </TableBody>
-                                    </Table>
-                                 </Grid>
-                                 <Grid item md={6} xs={12} style={{ paddingLeft: 5 }}>
-                                    <Table>
-                                       <TableBody>
-                                          <TableRow>
-                                             <TableCell>
-                                                <strong>Diagnostics</strong>
-                                             </TableCell>
-                                             <TableCell style={{ textAlign: 'right' }}>{record.diagnostics || '--'}</TableCell>
-                                          </TableRow>
-                                       </TableBody>
-                                    </Table>
-                                 </Grid>
-                              </Grid>
-                           </Paper> */}
                         </ExpansionPanelDetails>
                         <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
+                           <Button size="small" color="primary" onClick={() => this.onEditData(true, record)}>
+                              EDIT RECORD
+                           </Button>
                            <Button size="small" color="secondary" onClick={() => this.onDeleteData(true, record.id)}>
                               DELETE RECORD
                            </Button>
@@ -228,6 +209,8 @@ class PatientHistory extends React.Component {
                closeForm={() => this.openDataForm(false)} 
                refreshList={() => this.fetchData()}
                dataID={this.props.match.params.patientID}
+               mode={this.state.mode}
+               data={this.state.selectedData}
             />
 
             <CConfirm

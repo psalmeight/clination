@@ -45,7 +45,9 @@ class PatientVaccination extends React.Component {
       expanded: 0,
       data: [],
       openDataForm: false,
-      selectedDataID: ''
+      selectedDataID: '',
+      selectedData: {},
+      mode: 'add'
    }
 
    componentDidMount(){
@@ -71,7 +73,11 @@ class PatientVaccination extends React.Component {
    }
 
    openDataForm = val => {
-      this.setState({ openDataForm: val })
+      this.setState({ mode: 'add', selectedData: {}, openDataForm: val })
+   }
+
+   onEditData = (val, data) => {
+      this.setState({ mode: 'edit', selectedData: data, openDataForm: val  })
    }
 
    onDeleteData = (val, dataID) => {
@@ -194,6 +200,9 @@ class PatientVaccination extends React.Component {
                            </Grid>
                         </ExpansionPanelDetails>
                         <ExpansionPanelActions style={{ justifyContent: 'flex-start' }}>
+                           <Button size="small" color="primary" onClick={() => this.onEditData(true, record)}>
+                              EDIT RECORD
+                           </Button>
                            <Button size="small" color="secondary" onClick={() => this.onDeleteData(true, record.id)}>
                               DELETE RECORD
                            </Button>
@@ -208,6 +217,8 @@ class PatientVaccination extends React.Component {
                closeForm={() => this.openDataForm(false)} 
                refreshList={() => this.fetchData()}
                dataID={this.props.match.params.patientID}
+               mode={this.state.mode}
+               data={this.state.selectedData}
             />
 
             <CConfirm

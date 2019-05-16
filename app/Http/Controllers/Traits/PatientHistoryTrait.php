@@ -15,6 +15,9 @@ trait PatientHistoryTrait
     {
         $obj = new PatientHistory;
 
+        if(isset($request->patient_history_id) && !empty($request->patient_history_id))
+            $obj = PatientHistory::find($request->patient_history_id);
+            
         $patient = Patient::find($request->patient);
 
         $obj->patient_id = $patient->getKey();

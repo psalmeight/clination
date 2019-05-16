@@ -15,6 +15,9 @@ trait PatientVaccinationTrait
     {
         $obj = new PatientVaccination;
 
+        if(isset($request->patient_vaccination_id) && !empty($request->patient_vaccination_id))
+            $obj = PatientVaccination::find($request->patient_vaccination_id);
+
         $patient = Patient::find($request->patient);
 
         $obj->patient_id = $patient->getKey();
