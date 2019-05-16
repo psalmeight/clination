@@ -54,7 +54,7 @@ class PatientInformation extends React.Component {
    submitForm = () => {
       let form = this.state.form;
 
-      form['clinic'] = this.props.match.params.clinicID;
+      form['patient_id'] = this.props.match.params.patientID
 
       _updatePatient(form, () => {
          this.showPopup(false)
