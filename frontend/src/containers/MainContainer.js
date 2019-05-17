@@ -68,8 +68,11 @@ class MainContainer extends React.Component {
                     else
                         this.goTo('/clinics')
                 }
-                else if(data.status == 401) {
+                else if(data.status == 401 && data.status == 'Unauthorized') {
                     this.setState({ message: 'Invalid email or password', inProgress: false })
+                }
+                else if(data.status == 401 && data.status == 'Unverified') {
+                    this.setState({ message: 'Please check your email and click on the verification link', inProgress: false })
                 }
             })
         })

@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'hisd3tech@gmail.com'),
+        'name' => env('MAIL_FROM_NAME', 'CLINation'),
     ],
 
     /*
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => env('MAIL_USERNAME','postmaster@srv.hisd3.com'),
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => env('MAIL_PASSWORD','96b9e72ec83ad8b1eae6f1511de83db4-4a62b8e8-8cf6cfb3'),
 
     /*
     |--------------------------------------------------------------------------
