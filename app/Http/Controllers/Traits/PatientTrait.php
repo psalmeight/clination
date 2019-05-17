@@ -48,9 +48,11 @@ trait PatientTrait
         $obj->gender = $request->gender;
         $obj->contact_no = $request->contact_no;
         $obj->dob = $request->dob;
-        $obj->family_history = $request->family_history;
-        $obj->personal_history = $request->personal_history;
-        $obj->allergies = $request->allergies;
+
+        $obj->father_name = $request->father_name;
+        $obj->father_occupation = $request->father_occupation;
+        $obj->mother_name = $request->mother_name;
+        $obj->mother_occupation = $request->mother_occupation;
 
         $obj->save();
         

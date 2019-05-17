@@ -127,7 +127,7 @@ class PatientHistory extends React.Component {
                         <ExpansionPanelDetails>
                            <Paper style={{ marginBottom: 10, width: '100%' }}>
                               <Grid container display="block">
-                                 <Grid item md={6} xs={12} style={{ paddingRight: 5 }}>
+                                 <Grid item md={4} xs={12} style={{ paddingRight: 5 }}>
                                     <Table>
                                        <TableBody>
                                           <TableRow>
@@ -157,7 +157,7 @@ class PatientHistory extends React.Component {
                                        </TableBody>
                                     </Table>
                                  </Grid>
-                                 <Grid item md={6} xs={12} style={{ paddingLeft: 5 }}>
+                                 <Grid item md={4} xs={12} style={{ paddingLeft: 5 }}>
                                     <Table>
                                        <TableBody>
                                           <TableRow>
@@ -183,6 +183,24 @@ class PatientHistory extends React.Component {
                                              <strong>Respiratory</strong>
                                              </TableCell>
                                              <TableCell style={{ textAlign: 'right' }}>{record.init_resp_rate || '--'} bpm</TableCell>
+                                          </TableRow>
+                                       </TableBody>
+                                    </Table>
+                                 </Grid>
+                                 <Grid item md={4} xs={12} style={{ paddingLeft: 5 }}>
+                                    <Table>
+                                       <TableBody>
+                                          <TableRow>
+                                             <TableCell>
+                                                <strong>Medications</strong>
+                                             </TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}>{record.medications || '--'}</TableCell>
+                                          </TableRow>
+                                          <TableRow>
+                                             <TableCell>
+                                             <strong>Diagnostics/Labs</strong>
+                                             </TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}>{record.diagnostics || '--'}</TableCell>
                                           </TableRow>
                                        </TableBody>
                                     </Table>

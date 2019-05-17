@@ -212,12 +212,12 @@ class PatientInformation extends React.Component {
                   />
 
                   <TextField
-                        id="father_occuption"
+                        id="father_occupation"
                         label="Father Occupation"
                         placeholder="Enter Father Occupation"
-                        onChange={value => this.handleChange('father_occuption', value)}
+                        onChange={value => this.handleChange('father_occupation', value)}
                         fullWidth
-                        value={this.state.form.father_occuption}
+                        value={this.state.form.father_occupation}
                         margin="dense"
                         variant="outlined"
                         InputLabelProps={{
