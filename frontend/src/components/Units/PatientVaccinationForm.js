@@ -55,15 +55,19 @@ class PatientVaccinationForm extends React.Component {
   };
 
   showPopup = val => {
-    this.setState({ form: {}, vaccList: [], confirm: val });
+    this.setState({ confirm: val });
   };
 
   modalValidate = () => {
     if (this.props.mode === "edit") {
+      let form = _.clone(this.props.data);
+      let vaccList = _.clone(JSON.parse(this.props.data.vaccination_details))
+      
       this.setState({
-        form: this.props.data,
-        vaccList: JSON.parse(this.props.data.vaccination_details)
+        form,
+        vaccList
       })
+
     } else {
       this.setState({ form: {}, vaccList: [] });
     }
