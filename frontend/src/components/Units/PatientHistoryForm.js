@@ -44,8 +44,6 @@ const styles = theme => ({
   },
 })
 
-
-
 class PatientHistoryForm extends React.Component {
    state =  {
       form: {},
@@ -53,20 +51,20 @@ class PatientHistoryForm extends React.Component {
    }
 
    showPopup = val => {
-      this.setState({ form: {}, confirm: val })
+      this.setState({ confirm: val })
    }
 
    modalValidate = () => {
       if(this.props.mode === 'edit'){
-            this.setState({ form: this.props.data })
-      }
-      else {
-            this.setState({ form: {} })
+         let form = _.clone(this.props.data)
+         this.setState({ form })
+      } else {
+         this.setState({ form: {} })
       }
    }
 
-   submitForm = () => {
-      let form = this.state.form;
+   submitForm = () => {      
+      let form = _.clone(this.state.form);
 
       form['patient'] = this.props.dataID;
 
@@ -143,7 +141,7 @@ class PatientHistoryForm extends React.Component {
                                              id="chief_complaint"
                                              label="Chief Complaint"
                                              placeholder="Enter Chief Complaint"
-                                             value={this.state.form.chief_complaint}
+                                             value={this.state.form.chief_complaint || ''}
                                              fullWidth
                                              margin="dense"
                                              variant="outlined"
@@ -158,7 +156,7 @@ class PatientHistoryForm extends React.Component {
                                              id="history_present_illness"
                                              label="History of Illness"
                                              placeholder="Enter of Illness"
-                                             value={this.state.form.history_present_illness}
+                                             value={this.state.form.history_present_illness || ''}
                                              fullWidth
                                              margin="dense"
                                              variant="outlined"
@@ -174,7 +172,7 @@ class PatientHistoryForm extends React.Component {
                                              id="physical_exam"
                                              label="Physical Exam"
                                              placeholder="Enter Physical Exam"
-                                             value={this.state.form.physical_exam}
+                                             value={this.state.form.physical_exam || ''}
                                              fullWidth
                                              margin="dense"
                                              variant="outlined"

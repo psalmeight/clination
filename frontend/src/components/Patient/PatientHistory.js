@@ -202,7 +202,6 @@ class PatientHistory extends React.Component {
                   })
                }
             </Paper>
-
             
             <PatientHistoryForm 
                open={this.state.openDataForm} 

@@ -63,7 +63,7 @@ class PatientVaccinationForm extends React.Component {
       this.setState({
         form: this.props.data,
         vaccList: JSON.parse(this.props.data.vaccination_details)
-      });
+      })
     } else {
       this.setState({ form: {}, vaccList: [] });
     }
@@ -91,12 +91,11 @@ class PatientVaccinationForm extends React.Component {
     if (this.props.mode === "edit")
       form["patient_vaccination_id"] = this.state.form.id;
 
-    console.log(form);
-    //   _createPatientVaccination(form, () => {
-    //      this.showPopup(false)
-    //      this.props.closeForm()
-    //      this.props.refreshList()
-    //   })
+      _createPatientVaccination(form, () => {
+         this.showPopup(false)
+         this.props.closeForm()
+         this.props.refreshList()
+      })
   };
 
   handleDateChange = (field, e) => {
@@ -185,7 +184,7 @@ class PatientVaccinationForm extends React.Component {
                               ]
                             : []
                         }
-                        value={this.state.form.visit_datetime}
+                        value={this.state.form.visit_datetime || moment().format("MM/DD/YYYY")}
                         onChange={value =>
                           this.handleDateChange("visit_datetime", value)
                         }
@@ -241,7 +240,7 @@ class PatientVaccinationForm extends React.Component {
                         onChange={value =>
                           this.handleChange("vaccination_notes", value)
                         }
-                        value={this.state.form.vaccination_notes}
+                        value={this.state.form.vaccination_notes || ''}
                         InputLabelProps={{
                           shrink: true
                         }}

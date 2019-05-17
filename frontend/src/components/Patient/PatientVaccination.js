@@ -114,9 +114,6 @@ class PatientVaccination extends React.Component {
                   </Grid>
                </Grid>
 
-
-
-
                {
                   _.map(this.state.data, (record, idx) => {
 
