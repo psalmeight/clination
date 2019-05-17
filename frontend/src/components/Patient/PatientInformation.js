@@ -197,6 +197,64 @@ class PatientInformation extends React.Component {
                      <MenuItem value={'FEMALE'}>FEMALE</MenuItem>
                   </TextField>
 
+                  <TextField
+                        id="father_name"
+                        label="Father Name"
+                        placeholder="Enter Father Name"
+                        onChange={value => this.handleChange('father_name', value)}
+                        fullWidth
+                        value={this.state.form.father_name}
+                        margin="dense"
+                        variant="outlined"
+                        InputLabelProps={{
+                           shrink: true,
+                        }}
+                  />
+
+                  <TextField
+                        id="father_occuption"
+                        label="Father Occupation"
+                        placeholder="Enter Father Occupation"
+                        onChange={value => this.handleChange('father_occuption', value)}
+                        fullWidth
+                        value={this.state.form.father_occuption}
+                        margin="dense"
+                        variant="outlined"
+                        InputLabelProps={{
+                           shrink: true,
+                        }}
+                  />
+
+                  <TextField
+                        id="mother_name"
+                        label="Mother Name"
+                        placeholder="Enter Mother Name"
+                        onChange={value => this.handleChange('mother_name', value)}
+                        fullWidth
+                        value={this.state.form.mother_name}
+                        margin="dense"
+                        variant="outlined"
+                        InputLabelProps={{
+                           shrink: true,
+                        }}
+                  />
+
+
+
+                  <TextField
+                        id="mother_occupation"
+                        label="Mother Occupation"
+                        placeholder="Enter Mother Occupation"
+                        onChange={value => this.handleChange('mother_occupation', value)}
+                        fullWidth
+                        value={this.state.form.mother_occupation}
+                        margin="dense"
+                        variant="outlined"
+                        InputLabelProps={{
+                           shrink: true,
+                        }}
+                  />
+
                   <Grid container>
                         <Grid item md={6} xs={6}>
                            <Button variant="contained" color="primary" onClick={() => this.showPopup(true)} style={{ marginTop: 20 }}>

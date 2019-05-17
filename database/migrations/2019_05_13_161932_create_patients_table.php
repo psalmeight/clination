@@ -27,6 +27,12 @@ class CreatePatientsTable extends Migration
             $table->string('family_history')->nullable();
             $table->string('allergies')->nullable();
 
+            $table->string('father_name')->nullable();
+            $table->string('father_occupation')->nullable();
+            
+            $table->string('mother_name')->nullable();
+            $table->string('mother_occupation')->nullable();
+
             $table->string('gender')->nullable();
 
             $table->string('contact_no')->nullable();
