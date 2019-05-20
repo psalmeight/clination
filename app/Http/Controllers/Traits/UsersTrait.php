@@ -74,16 +74,16 @@ trait UsersTrait
       return array("status" => 200, "message" => "Successfully added");
    }
 
-   public function sendVerification($email, $firstname){
+   // public function sendVerification($email, $firstname){
 
-      $message_text = 'Please verify your CLINation account by clicking this link';
+   //    $message_text = 'Please verify your CLINation account by clicking this link';
 
-      Mail::send('email', ['message_text' => $message_text, 'name' =>  $firstname], function($message) use ($email) {
-         $message->to($email)->subject('CLINation account verification');
-      });
+   //    Mail::send('email', ['message_text' => $message_text, 'name' =>  $firstname], function($message) use ($email) {
+   //       $message->to($email)->subject('CLINation account verification');
+   //    });
 
-      return 'sent';
-   }
+   //    return 'sent';
+   // }
 
    public function func_getUsers()
    {

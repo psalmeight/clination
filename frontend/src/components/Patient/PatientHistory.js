@@ -94,7 +94,7 @@ class PatientHistory extends React.Component {
 
    render() {
       const { classes } = this.props
-
+      
       return (
          <div className={classes.root} style={{ padding: 10 }}>
             
@@ -134,25 +134,25 @@ class PatientHistory extends React.Component {
                                              <TableCell>
                                                 <strong>Chief Complaint</strong>
                                              </TableCell>
-                                             <TableCell style={{ textAlign: 'right' }}>{record.chief_complaint}</TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}><p style={{ whiteSpace: 'pre-line' }}>{record.chief_complaint || 'N/A'}</p></TableCell>
                                           </TableRow>
                                           <TableRow>
                                              <TableCell>
                                              <strong>History of Illness</strong>
                                              </TableCell>
-                                             <TableCell style={{ textAlign: 'right' }}>{record.history_present_illness}</TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}><p style={{ whiteSpace: 'pre-line' }}>{record.history_present_illness || 'N/A'}</p></TableCell>
                                           </TableRow>
                                           <TableRow>
                                              <TableCell>
                                              <strong>Physical Exam</strong>
                                              </TableCell>
-                                             <TableCell style={{ textAlign: 'right' }}>{record.physical_exam}</TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}><p style={{ whiteSpace: 'pre-line' }}>{record.physical_exam || 'N/A' }</p></TableCell>
                                           </TableRow>
                                           <TableRow>
                                              <TableCell>
                                              <strong>Diagnosis</strong>
                                              </TableCell>
-                                             <TableCell style={{ textAlign: 'right' }}>{record.diagnosis}</TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}><p style={{ whiteSpace: 'pre-line' }}>{record.diagnosis || 'N/A'}</p></TableCell>
                                           </TableRow>
                                        </TableBody>
                                     </Table>
@@ -194,13 +194,13 @@ class PatientHistory extends React.Component {
                                              <TableCell>
                                                 <strong>Medications</strong>
                                              </TableCell>
-                                             <TableCell style={{ textAlign: 'right' }}>{record.medications || '--'}</TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}><p style={{ whiteSpace: 'pre-line' }}>{record.medications || '--'}</p></TableCell>
                                           </TableRow>
                                           <TableRow>
                                              <TableCell>
                                              <strong>Diagnostics/Labs</strong>
                                              </TableCell>
-                                             <TableCell style={{ textAlign: 'right' }}>{record.diagnostics || '--'}</TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}><p style={{ whiteSpace: 'pre-line' }}>{record.diagnostics || '--'}</p></TableCell>
                                           </TableRow>
                                        </TableBody>
                                     </Table>

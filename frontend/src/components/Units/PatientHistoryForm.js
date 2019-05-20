@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import MenuItem from '@material-ui/core/MenuItem';
 import Paper from '@material-ui/core/Paper';
+import FormControl from '@material-ui/core/FormControl'
 import InputAdornment from '@material-ui/core/InputAdornment'
 
 import { CConfirm } from 'components'
@@ -15,8 +16,13 @@ import { _createPatientHistory } from '../../rest/patient_history.api'
 import { DatePicker } from "material-ui-pickers"
 import moment from 'moment'
 import _ from 'lodash'
+import { Editor } from 'react-draft-wysiwyg';
+import { EditorState, convertToRaw, ContentState } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import htmlToDraft from 'html-to-draftjs';
 
-
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import '../../styles/core.css'
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -45,9 +51,30 @@ const styles = theme => ({
 })
 
 class PatientHistoryForm extends React.Component {
-   state =  {
-      form: {},
-      confirm: false
+
+   constructor(props){
+
+      super(props);
+      // const html = '<p>Hey this <strong>editor</strong> rocks 😀</p>';
+      // const contentBlock = htmlToDraft(html);
+
+      // if (contentBlock) {
+      //    const contentState = ContentState.createFromBlockArray(contentBlock.contentBlocks);
+      //    const editorState = EditorState.createWithContent(contentState);
+      //    this.state = {
+      //       editorState,
+      //       form: {},
+      //       confirm: false
+      //    }
+      // }
+      // else {
+         
+      // }
+
+      this.state =  {
+         form: {},
+         confirm: false
+      }
    }
 
    showPopup = val => {
@@ -100,7 +127,18 @@ class PatientHistoryForm extends React.Component {
       })
    }
 
+   // onEditorStateChange = editorState => {
+   //    this.setState({
+   //      editorState
+   //    })
+   // }
+
+   onWYSChange = text => {
+      console.log(text)
+   }
    render() {
+      
+      const { editorState } = this.state
 
       return (
          <div>
@@ -144,6 +182,7 @@ class PatientHistoryForm extends React.Component {
                                              value={this.state.form.chief_complaint || ''}
                                              fullWidth
                                              margin="dense"
+                                             multiline
                                              variant="outlined"
                                              InputLabelProps={{
                                                    shrink: true,
@@ -158,6 +197,7 @@ class PatientHistoryForm extends React.Component {
                                              placeholder="Enter of Illness"
                                              value={this.state.form.history_present_illness || ''}
                                              fullWidth
+                                             multiline
                                              margin="dense"
                                              variant="outlined"
                                              onChange={value => this.handleChange('history_present_illness', value)}
@@ -174,6 +214,7 @@ class PatientHistoryForm extends React.Component {
                                              placeholder="Enter Physical Exam"
                                              value={this.state.form.physical_exam || ''}
                                              fullWidth
+                                             multiline
                                              margin="dense"
                                              variant="outlined"
                                              onChange={value => this.handleChange('physical_exam', value)}
@@ -190,6 +231,7 @@ class PatientHistoryForm extends React.Component {
                                              placeholder="Enter Diagnosis"
                                              value={this.state.form.diagnosis || ''}
                                              fullWidth
+                                             multiline
                                              margin="dense"
                                              variant="outlined"
                                              onChange={value => this.handleChange('diagnosis', value)}
@@ -297,6 +339,7 @@ class PatientHistoryForm extends React.Component {
                                              value={this.state.form.medications || ''}
                                              placeholder="Enter Medications"
                                              fullWidth
+                                             multiline
                                              margin="dense"
                                              variant="outlined"
                                              onChange={value => this.handleChange('medications', value)}
@@ -311,6 +354,7 @@ class PatientHistoryForm extends React.Component {
                                              value={this.state.form.diagnostics || ''}
                                              placeholder="Enter Diagnostics/Labs"
                                              fullWidth
+                                             multiline
                                              margin="dense"
                                              variant="outlined"
                                              onChange={value => this.handleChange('diagnostics', value)}
@@ -319,6 +363,17 @@ class PatientHistoryForm extends React.Component {
                                                       shrink: true,
                                              }}
                                           />
+
+{/* <Editor
+          editorState={editorState}
+         toolbarHidden
+          onEditorStateChange={this.onEditorStateChange}
+        />
+        <textarea
+          disabled
+          value={draftToHtml(convertToRaw(editorState.getCurrentContent()))}
+        /> */}
+                                          
                                        </Grid>
                                  </Grid>
 
