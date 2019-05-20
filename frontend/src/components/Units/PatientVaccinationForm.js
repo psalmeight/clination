@@ -241,6 +241,7 @@ class PatientVaccinationForm extends React.Component {
                         fullWidth
                         margin="dense"
                         variant="outlined"
+                        multiline
                         onChange={value =>
                           this.handleChange("vaccination_notes", value)
                         }

@@ -97,6 +97,7 @@ class PatientPastHistory extends React.Component {
                         placeholder="Enter Personal History"
                         onChange={value => this.handleChange('personal_history', value)}
                         fullWidth
+                        multiline
                         value={this.state.form.personal_history}
                         margin="dense"
                         variant="outlined"
@@ -111,6 +112,7 @@ class PatientPastHistory extends React.Component {
                         placeholder="Enter Family History"
                         onChange={value => this.handleChange('family_history', value)}
                         fullWidth
+                        multiline
                         value={this.state.form.family_history}
                         margin="dense"
                         variant="outlined"
@@ -125,6 +127,7 @@ class PatientPastHistory extends React.Component {
                         placeholder="Food/Drug Allergies"
                         onChange={value => this.handleChange('allergies', value)}
                         fullWidth
+                        multiline
                         value={this.state.form.allergies}
                         margin="dense"
                         variant="outlined"

@@ -154,7 +154,7 @@ class PatientVaccination extends React.Component {
                                                 <TableCell>
                                                 <strong>Vaccination Notes</strong>
                                                 </TableCell>
-                                                <TableCell style={{ textAlign: 'right' }}>{record.vaccination_notes}</TableCell>
+                                                <TableCell style={{ textAlign: 'right' }}><p style={{ whiteSpace: 'pre-line' }}>{record.vaccination_notes || 'N/A'}</p></TableCell>
                                              </TableRow>
                                              <TableRow>
                                                 <TableCell>
