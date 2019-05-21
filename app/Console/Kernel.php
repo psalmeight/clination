@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Storage;
 
 class Kernel extends ConsoleKernel
 {
@@ -24,9 +25,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
-        $schedule->command('backup:run --only-db')->hourly();
+        $schedule->command('backup:run --only-db')
+        ->everyMinute()
+        ->after(function () {
+            $contents = Storage::disk('local')->get('backup-temp/temp/db-dumps/postgresql-apgclination.sql');
+            Storage::disk('s3')->put('clination ' . date('Y-m-d H:i:s'), $contents);
+        });;
     }
 
     /**
