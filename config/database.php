@@ -63,6 +63,11 @@ return [
 
         'pgsql' => [
             'driver' => 'pgsql',
+            'dump' => [
+                'dump_binary_path' => '/usr/bin', // only the path, so without `mysqldump` or `pg_dump`
+                'use_single_transaction',
+                'timeout' => 60 * 5, // 5 minute timeout
+            ], 
             'host' => env('DB_HOST', '127.0.0.1'),
             'port' => env('DB_PORT', '5432'),
             'database' => env('DB_DATABASE', 'forge'),

@@ -57,14 +57,7 @@ return [
              * For a complete list of available customization options, see https://github.com/spatie/db-dumper
              */
             'databases' => [
-                'pgsql' => [
-                    'driver'    => 'pgsql',
-                    'dump' => [
-                       'dump_binary_path' => '/usr/bin', // only the path, so without `mysqldump` or `pg_dump`
-                       'use_single_transaction',
-                       'timeout' => 60 * 5, // 5 minute timeout
-                    ]  
-                ],
+                'pgsql'
             ],
         ],
 
