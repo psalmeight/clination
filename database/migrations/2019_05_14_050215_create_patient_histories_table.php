@@ -25,6 +25,7 @@ class CreatePatientHistoriesTable extends Migration
             //these data will be on a different table in the future
             $table->string('init_weight')->nullable();
             $table->string('init_height')->nullable();
+            $table->string('init_head_circumference')->nullable();
             $table->string('init_blood_pressure')->nullable();
             $table->string('init_pulse_rate')->nullable();
             $table->string('init_resp_rate')->nullable();

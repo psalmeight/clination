@@ -162,6 +162,22 @@ class PatientInformation extends React.Component {
                   />
 
                   <TextField
+                     id="address"
+                     label="Address"
+                     placeholder="Enter Address"
+                     fullWidth
+                     margin="dense"
+                     value={this.state.form.address}
+                     variant="outlined"
+                     onChange={value => this.handleChange('address', value)}
+                     required={true}
+                     InputLabelProps={{
+                           shrink: true,
+                     }}
+                     inputProps={{ autoCapitalize: true }}
+                  />
+
+                  <TextField
                         id="contact"
                         label="Contact Number"
                         placeholder="Enter Contact Number"

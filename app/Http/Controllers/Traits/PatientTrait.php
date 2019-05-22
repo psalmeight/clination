@@ -25,6 +25,7 @@ trait PatientTrait
         $obj->gender = $request->gender;
         $obj->contact_no = $request->contact_no;
         $obj->dob = $request->dob;
+        $obj->address = $request->address;
         $obj->user_id = $user->getKey();
         $obj->clinic_id = $clinic->getKey();
         $obj->owned_by = $clinic->user_id;
@@ -46,6 +47,7 @@ trait PatientTrait
         $obj->lastname = $request->lastname;
         $obj->fullname = $request->lastname . ', ' . $request->firstname . ' ' . $request->middlename;
         $obj->gender = $request->gender;
+        $obj->address = $request->address;
         $obj->contact_no = $request->contact_no;
         $obj->dob = $request->dob;
 

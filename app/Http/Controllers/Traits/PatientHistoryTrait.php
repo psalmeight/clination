@@ -30,6 +30,7 @@ trait PatientHistoryTrait
 
         $obj->init_weight = $request->init_weight;
         $obj->init_height = $request->init_height;
+        $obj->init_head_circumference = $request->init_head_circumference;
         $obj->init_blood_pressure = $request->init_blood_pressure;
         $obj->init_pulse_rate = $request->init_pulse_rate;
         $obj->init_resp_rate = $request->init_resp_rate;

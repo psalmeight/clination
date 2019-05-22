@@ -279,6 +279,23 @@ class PatientHistoryForm extends React.Component {
                                           />
 
                                           <TextField
+                                             id="init_head_circumference"
+                                             label="Head Circumference"
+                                             placeholder="Enter Head Circumference"
+                                             value={this.state.form.init_head_circumference || ''}
+                                             fullWidth
+                                             margin="dense"
+                                             variant="outlined"
+                                             onChange={value => this.handleChange('init_head_circumference', value)}
+                                             InputLabelProps={{
+                                                      shrink: true,
+                                             }}
+                                             InputProps={{
+                                                      endAdornment: <InputAdornment position="end">cm</InputAdornment>,
+                                             }}
+                                          />
+
+                                          <TextField
                                              id="init_temp"
                                              label="Temperature"
                                              placeholder="Enter Temperature"

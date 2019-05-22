@@ -168,6 +168,12 @@ class PatientHistory extends React.Component {
                                           </TableRow>
                                           <TableRow>
                                              <TableCell>
+                                                <strong>Head Circumference</strong>
+                                             </TableCell>
+                                             <TableCell style={{ textAlign: 'right' }}>{record.init_head_circumference || '--'} cm</TableCell>
+                                          </TableRow>
+                                          <TableRow>
+                                             <TableCell>
                                              <strong>Temperature</strong>
                                              </TableCell>
                                              <TableCell style={{ textAlign: 'right' }}>{record.init_temp || '--'} C</TableCell>
