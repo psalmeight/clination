@@ -25,7 +25,9 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('backup:run --only-db')->everyMinute();
+        $schedule->command('backup:run --only-db')->hourly()->after(function(){
+            shell_exec('cd /var/www/html/clination && php artisan acejordan:superbackup');
+        });
     }
 
     /**
