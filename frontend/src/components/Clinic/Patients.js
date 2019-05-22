@@ -148,10 +148,10 @@ class Patients extends React.Component {
                {
                   _.map(this.state.data, (record, idx) => {
                      let avatarClass = record.gender === 'M' ? classes.purpleAvatar : classes.orangeAvatar
-                     
+                     let genderChar = !_.isEmpty(record.gender) ? record.gender[0] : '--'
                      return <ListItem button style={{ paddingLeft: 0 }} onClick={() => this.patientSelect(record)}>
                         <ListItemIcon>
-                           <Avatar className={avatarClass}>{record.gender[0]}</Avatar>
+                           <Avatar className={avatarClass}>{genderChar}</Avatar>
                         </ListItemIcon>
                         <ListItemText primary={`${record.lastname}, ${record.firstname} ${record.middlename}`} />
                      </ListItem>

@@ -78,15 +78,15 @@ class PatientDashboard extends React.Component {
       }
 
       let avatarClass = this.state.patient.gender === 'MALE' ? classes.purpleAvatar : classes.orangeAvatar
-
-      let genderChar = !_.isEmpty(this.state.patient.gender) ? this.state.patient.gender[0] : '-'
+      let genderChar = !_.isEmpty(this.state.patient.gender) ? this.state.patient.gender[0] : '--'
+      
     return (
       <div className={classes.root}>
 
         <div>
           <Fragment key={patient.id}>
               <ListItem button>
-                <Avatar className={avatarClass}>{ genderChar || '-' }</Avatar>
+                <Avatar className={avatarClass}>{ genderChar || '--' }</Avatar>
                 <ListItemText primary={patient.patient_name} secondary={patient.details} />
               </ListItem>
           </Fragment>
