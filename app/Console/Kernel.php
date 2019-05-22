@@ -25,7 +25,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->exec('pg_dump -U postgres apgclination > /var/www/html/clination/storage/app/backup-temp/temp/db-dumps/apgclination.backup')->everyMinute();
+        $schedule->exec('PGPASSWORD="' . env('DB_PASSWORD') . '" pg_dump -U postgres apgclination > /var/www/html/clination/storage/app/backup-temp/temp/db-dumps/apgclination.backup')->everyMinute();
     }
 
     /**
