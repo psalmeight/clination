@@ -39,6 +39,6 @@ class Upload2S3 extends Command
     public function handle()
     {
         $contents = Storage::disk('local')->get('backup-temp/temp/db-dumps/postgresql-apgclination.sql');
-        Storage::disk('s3')->put('clination ' . date('Y-m-d H:i:s'), $contents);
+        Storage::disk('s3')->put('clination ' . date('Y-m-d H:i:s') . '.sql', $contents);
     }
 }
