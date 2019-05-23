@@ -115,6 +115,7 @@ class PatientHistory extends React.Component {
                </Grid>
 
                {
+                  !_.isEmpty(this.state.data) ? (
                   _.map(this.state.data, (record, idx) => {
 
                      let expanded = idx == 0 ? true : null
@@ -223,7 +224,7 @@ class PatientHistory extends React.Component {
                            </Button>
                         </ExpansionPanelActions>
                      </ExpansionPanel>
-                  })
+                  }) ) : <Typography style={{ color: 'rgb(169, 169, 169)' }} variant="h5">No patient history data</Typography>
                }
             </Paper>
             

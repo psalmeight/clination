@@ -79,20 +79,20 @@ trait PatientTrait
 
     public function func_getPatients($search)
     {
-        $objectList = Patient::orderBy('created_at')->get();
+        $objectList = Patient::orderBy('created_at')->orderBy('lastname', 'desc')->get();
 
         if(!empty($search))
-            $objectList = Patient::whereRaw("upper(fullname) like ?", ['%' . strtoupper($search) . '%'])->get();
+            $objectList = Patient::whereRaw("upper(fullname) like ?", ['%' . strtoupper($search) . '%'])->orderBy('lastname', 'desc')->get();
             
         return $objectList;
     }
 
     public function func_getPatientsByClinic($clinidID, $search)
     { 
-        $objectList = Patient::where('clinic_id', $clinidID)->get();
+        $objectList = Patient::where('clinic_id', $clinidID)->orderBy('lastname', 'desc')->get();
 
         if(!empty($search))
-            $objectList = Patient::whereRaw("clinic_id = ? and upper(fullname) like ?", [$clinidID, '%' . strtoupper($search) . '%'])->get();
+            $objectList = Patient::whereRaw("clinic_id = ? and upper(fullname) like ?", [$clinidID, '%' . strtoupper($search) . '%'])->orderBy('lastname', 'desc')->get();
         
         return $objectList;
     }

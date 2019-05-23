@@ -115,6 +115,7 @@ class PatientVaccination extends React.Component {
                </Grid>
 
                {
+                  !_.isEmpty(this.state.data) ? (
                   _.map(this.state.data, (record, idx) => {
 
                      let vaccinationRecord = record.vaccination_details ? JSON.parse(record.vaccination_details) : []
@@ -205,7 +206,7 @@ class PatientVaccination extends React.Component {
                            </Button>
                         </ExpansionPanelActions>
                      </ExpansionPanel>
-                  })
+                  })) : <Typography style={{ color: 'rgb(169, 169, 169)' }} variant="h5">No patient vaccinations data</Typography>
                }
             </Paper>
             
