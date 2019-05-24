@@ -8,6 +8,7 @@ use App\Models\Patient;
 use App\User;
 use Auth;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 trait PatientVaccinationTrait
 {
@@ -30,6 +31,10 @@ trait PatientVaccinationTrait
         $obj->vaccination_notes = $request->vaccination_notes;
 
         $obj->save();
+
+
+        $patient->last_visit_date = Carbon::today()->toDateString();
+        $patient->save();
 
         return $obj->id;
     }

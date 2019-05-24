@@ -8,6 +8,7 @@ use App\Models\Clinic;
 use App\User;
 use Auth;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 trait PatientTrait
 {
@@ -29,6 +30,8 @@ trait PatientTrait
         $obj->user_id = $user->getKey();
         $obj->clinic_id = $clinic->getKey();
         $obj->owned_by = $clinic->user_id;
+        $obj->first_visit_date = Carbon::today()->toDateString();
+        $obj->last_visit_date = Carbon::today()->toDateString();
 
         $obj->save();
         

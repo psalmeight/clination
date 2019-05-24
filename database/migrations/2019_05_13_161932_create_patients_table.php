@@ -48,6 +48,9 @@ class CreatePatientsTable extends Migration
                 ->references('id')->on('users')
                 ->onDelete('cascade');
 
+            $table->date('first_visit_date')->nullable();
+            $table->date('last_visit_date')->nullable();
+
             $table->timestamps();
             $table->softDeletes();
         });

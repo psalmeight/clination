@@ -137,6 +137,7 @@ class Patients extends React.Component {
                      <TableCell><Typography style={{ fontWeight: 'bold' }}>Fullname</Typography></TableCell>
                      <TableCell><Typography style={{ fontWeight: 'bold' }}>Gender</Typography></TableCell>
                      <TableCell><Typography style={{ fontWeight: 'bold' }}>DOB</Typography></TableCell>
+                     <TableCell><Typography style={{ fontWeight: 'bold' }}>Last Vist</Typography></TableCell>
                   </TableRow>
                </TableHead>
                <TableBody>
@@ -147,7 +148,8 @@ class Patients extends React.Component {
                         return <TableRow onClick={() => this.patientSelect(record)} style={{ cursor: 'pointer' }} hover>
                            <TableCell><Typography>{record.fullname}</Typography></TableCell>
                            <TableCell style={{ width: 100 }}><Typography>{record.gender}</Typography></TableCell>
-                           <TableCell><Typography>{moment(record.dob).format("MM/DD/YYYY")}</Typography></TableCell>
+                           <TableCell><Typography>{ !_.isEmpty(record.dob) ? moment(record.dob).format("MM/DD/YYYY") : '--' }</Typography></TableCell>
+                           <TableCell><Typography>{ !_.isEmpty(record.last_visit_date) ? moment(record.last_visit_date).format("MM/DD/YYYY") : '--' }</Typography></TableCell>
                         </TableRow>
                      })
                   }

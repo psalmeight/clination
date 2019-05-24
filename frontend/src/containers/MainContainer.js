@@ -141,9 +141,9 @@ class MainContainer extends React.Component {
                                 }
                             </Button>
 
-                            <Button fullWidth color="primary" onClick={() => this.goTo('/dashboard')} style={{ marginTop: 10 }}>
+                            {/* <Button fullWidth color="primary" onClick={() => this.goTo('/dashboard')} style={{ marginTop: 10 }}>
                                 Forgot password
-                            </Button>
+                            </Button> */}
                         </form>
                     </Grid>
                 </Grid>

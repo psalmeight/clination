@@ -8,6 +8,7 @@ use App\Models\Patient;
 use App\User;
 use Auth;
 use Illuminate\Support\Facades\Log;
+use Carbon\Carbon;
 
 trait PatientHistoryTrait
 {
@@ -39,6 +40,9 @@ trait PatientHistoryTrait
         $obj->diagnostics = $request->diagnostics;
 
         $obj->save();
+
+        $patient->last_visit_date = Carbon::today()->toDateString();
+        $patient->save();
 
         return $obj->id;
     }
